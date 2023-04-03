@@ -15,9 +15,8 @@ export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const [navigation, setNavigation] = useState([
-    { name: 'Home', href: '/', current: false },
     { name: 'App', href: '/app', current: false },
-    { name: 'Info', href: '/app/info', current: false }
+    { name: 'Home', href: '/app/home', current: false }
   ]);
 
   useEffect(() => {
@@ -43,7 +42,7 @@ export default function Header() {
     if (destroyCookie({}, 'token')) router.push('/');
   }
   return (
-    <Disclosure as="nav" className="bg-green-800 z-500">
+    <Disclosure as="nav" className="bg-primary-blue z-500">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

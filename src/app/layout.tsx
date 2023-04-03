@@ -8,7 +8,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <title>Matheus Camargo Dev</title>
         <link rel="icon" type="image/svg+xml" href="/PriceHouse.ico" />
       </head>
-      <body className="bg-green-800">{children}</body>
+      <body className="bg-dark-blue">{children}</body>
     </html>
   );
 }
