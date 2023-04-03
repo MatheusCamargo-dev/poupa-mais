@@ -20,6 +20,9 @@ module.exports = {
       const newUtilities = {
         '.bg-gradient-blue': {
           backgroundImage: 'linear-gradient(to bottom, #14B8A6, #87e8dd)'
+        },
+        '.bg-gradient-teal': {
+          backgroundImage: 'linear-gradient(to bottom, #00756C, #00C4B4)'
         }
       };
       addUtilities(newUtilities, {

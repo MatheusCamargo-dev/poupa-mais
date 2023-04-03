@@ -38,7 +38,7 @@ export default function Account() {
   return (
     <>
       <HeaderHome></HeaderHome>
-      <div className="flex min-h-full items-center bg-gradient-blue justify-center h-screen py-12 px-4 sm:px-6 lg:px-8">
+      <div className="flex min-h-full items-center bg-gradient-blue justify-center py-12 px-4 sm:px-6 lg:px-8">
         {typeForm == 'login' && (
           <Login
             email={email}

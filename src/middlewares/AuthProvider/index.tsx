@@ -39,7 +39,7 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
         const auth = await data.json();
         dispatch(setAuthenticated(auth.status));
         if (auth.status == 0) {
-          push('/');
+          push('/account?type=login');
           return;
         }
       };
