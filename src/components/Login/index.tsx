@@ -39,21 +39,21 @@ export default function Login(props: Login) {
     }
   }, [email]);
   return (
-    <div className="w-full max-w-md bg-zinc-900 p-10 rounded space-y-8">
+    <div className="w-full max-w-md bg-white p-10 rounded space-y-8">
       <div>
         <img
           className="mx-auto h-12 w-auto"
-          src="https://tailwindui.com/img/logos/mark.svg?color=green&shade=600"
+          src="/PriceHouse.ico"
           alt="Your Company"
         />
-        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-white">
+        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-black">
           Sign in to your account
         </h2>
-        <p className="mt-2 text-center text-sm text-white">
+        <p className="mt-2 text-center text-sm text-black">
           Or{' '}
           <a
             onClick={changeForm}
-            className="font-medium cursor-pointer text-green-600 hover:text-green-500"
+            className="font-medium cursor-pointer text-teal-500 hover:text-teal-400"
           >
             register a new account
           </a>
@@ -110,11 +110,11 @@ export default function Login(props: Login) {
               id="remember-me"
               name="remember-me"
               type="checkbox"
-              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+              className="h-4 w-4 rounded border-teal-300 text-teal-600 focus:ring-teal-600"
             />
             <label
               htmlFor="remember-me"
-              className="ml-2 block text-sm text-white"
+              className="ml-2 block text-sm text-black"
             >
               Remember me
             </label>
@@ -124,12 +124,12 @@ export default function Login(props: Login) {
         <div>
           <button
             type="submit"
-            className="group relative flex w-full justify-center rounded-md bg-green-600 py-2 px-3 text-sm font-semibold text-slate-700 hover:bg-green-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="group relative flex w-full justify-center rounded-md bg-teal-500 py-2 px-3 text-sm font-semibold text-slate-700 hover:bg-teal-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             disabled={isLoading}
           >
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
               <LockClosedIcon
-                className="h-5 w-5 text-slate-700 group-hover:text-white"
+                className="h-5 w-5 text-black group-hover:text-white"
                 aria-hidden="true"
               />
             </span>

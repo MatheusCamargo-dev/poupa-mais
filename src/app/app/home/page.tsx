@@ -1,3 +1,10 @@
+import HeaderHome from '@/components/HeaderHome';
+
 export default function Home() {
-  return <div className="h-full bg-gradient-blue">My home !!</div>;
+  return (
+    <>
+      <HeaderHome></HeaderHome>
+      <div className="h-full bg-gradient-blue">My home !!</div>;
+    </>
+  );
 }

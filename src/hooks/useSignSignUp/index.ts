@@ -1,5 +1,5 @@
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 import { signInRequest, signUpRequest } from '@/services/auth';
 
@@ -7,20 +7,23 @@ export const useSignInUp = () => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState('');
   const [loginText, setLoginText] = useState('Sign In');
-  const [typeForm, setTypeForm] = useState('login');
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
-
+  const searchParams = useSearchParams();
+  const type = searchParams.get('type');
+  const [typeForm, setTypeForm] = useState(type);
   function changeForm() {
     setIsLoading(false);
     setErrorMessage('');
     if (typeForm == 'login') {
-      setTypeForm('register');
+      router.push('/account?type=register');
     } else {
-      setTypeForm('login');
+      router.push('/account?type=login');
     }
   }
-
+  useEffect(() => {
+    setTypeForm(type);
+  }, [type]);
   function passwordIsValid(password: string, confirm_password: string) {
     if (!(password === confirm_password)) {
       setErrorMessage('different passwords!');

@@ -19,7 +19,7 @@ module.exports = {
     function ({ addUtilities }) {
       const newUtilities = {
         '.bg-gradient-blue': {
-          backgroundImage: 'linear-gradient(to bottom, #98b5eb, #cbd6e1)'
+          backgroundImage: 'linear-gradient(to bottom, #14B8A6, #87e8dd)'
         }
       };
       addUtilities(newUtilities, {
