@@ -12,7 +12,7 @@ export default function Register(props: Register) {
 
   return (
     <div className="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
-      <div className="bg-white px-8 py-8 rounded shadow-md bg-white p-8 text-black w-full">
+      <div className="bg-white px-8 py-8 rounded shadow-md p-8 text-black w-full">
         <h1 className="text-3xl text-center text-black font-bold tracking-tight ">
           Register
         </h1>
