@@ -1,14 +1,50 @@
 import { useForm } from 'react-hook-form';
 
+import ErrorMessage from '../ErrorMessage';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
 type Register = {
   changeForm: any;
   handleSignUp: any;
   errorMessage: string;
   isLoading: boolean;
 };
+const schema = z
+  .object({
+    fullname: z
+      .string({ required_error: 'Nome é obrigatório.' })
+      .min(2, 'O nome deve conter no mínimo 2 letras.'),
+    username: z
+      .string({ required_error: 'Usuário é obrigatório.' })
+      .min(2, 'O usuário deve conter no mínimo 2 letras.'),
+    email: z
+      .string({ required_error: 'Email é obrigatório.' })
+      .email('email invalido'),
+    password: z
+      .string({ required_error: 'Senha é obrigatório.' })
+      .min(6, 'A senha precisa ter no minímo 6 caracteres.'),
+    confirm_password: z.string()
+  })
+  .refine((fields) => fields.password === fields.confirm_password, {
+    path: ['confirm_password'],
+    message: 'As senhas precisam ser iguais'
+  });
+
+type FormPropsRegister = z.infer<typeof schema>;
+
 export default function Register(props: Register) {
   const { changeForm, handleSignUp, errorMessage, isLoading } = props;
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormPropsRegister>({
+    mode: 'all',
+    reValidateMode: 'onBlur',
+    resolver: zodResolver(schema)
+  });
 
   return (
     <>
@@ -23,31 +59,39 @@ export default function Register(props: Register) {
           >
             <div>
               <label htmlFor="fullname" className="text-teal-500">
-                Full Name:
+                Nome completo:
               </label>
               <input
                 {...register('fullname')}
                 type="text"
-                className="block border mt-1 border-grey w-full p-3 rounded mb-4"
+                className={` ${
+                  errors.fullname ? 'border-2 border-red-400' : 'border-0'
+                } block border border-grey w-full p-3 rounded`}
                 name="fullname"
                 autoComplete="nickname"
                 placeholder="Full Name"
-                required
               />
+              {errors.fullname && (
+                <ErrorMessage errorMessage={errors.fullname}></ErrorMessage>
+              )}
             </div>
             <div>
               <label htmlFor="username" className="text-teal-500">
-                Username:
+                Usuário:
               </label>
               <input
                 {...register('username')}
                 type="text"
-                className="block border mt-1 border-grey w-full p-3 rounded mb-4"
+                className={`${
+                  errors.username ? 'border-2 border-red-400' : 'border-0'
+                } block border border-grey w-full p-3 rounded`}
                 name="username"
                 autoComplete="username"
                 placeholder="Username"
-                required
               />
+              {errors.username && (
+                <ErrorMessage errorMessage={errors.username}></ErrorMessage>
+              )}
             </div>
             <div>
               <label htmlFor="email" className="text-teal-500">
@@ -56,12 +100,16 @@ export default function Register(props: Register) {
               <input
                 {...register('email')}
                 type="text"
-                className="block border mt-1 border-grey w-full p-3 rounded mb-4"
+                className={`${
+                  errors.email ? 'border-2 border-red-400' : 'border-0'
+                } block border border-grey w-full p-3 rounded`}
                 name="email"
                 autoComplete="email"
                 placeholder="Email"
-                required
               />
+              {errors.email && (
+                <ErrorMessage errorMessage={errors.email}></ErrorMessage>
+              )}
             </div>
             <div>
               <label htmlFor="password" className="text-teal-500">
@@ -70,12 +118,16 @@ export default function Register(props: Register) {
               <input
                 {...register('password')}
                 type="password"
-                className="block border mt-1 border-grey w-full p-3 rounded mb-4"
+                className={`${
+                  errors.password ? 'border-2 border-red-400' : 'border-0'
+                } block border border-grey w-full p-3 rounded`}
                 name="password"
                 autoComplete="current-password"
                 placeholder="Password"
-                required
               />
+              {errors.password && (
+                <ErrorMessage errorMessage={errors.password}></ErrorMessage>
+              )}
             </div>
             <div>
               <label htmlFor="confirm_password" className="text-teal-500">
@@ -84,12 +136,20 @@ export default function Register(props: Register) {
               <input
                 {...register('confirm_password')}
                 type="password"
-                className="block border mt-1 border-grey w-full p-3 rounded mb-4"
+                className={`${
+                  errors.confirm_password
+                    ? 'border-2 border-red-400'
+                    : 'border-0'
+                } block border border-grey w-full p-3 rounded`}
                 autoComplete="new-password"
                 name="confirm_password"
                 placeholder="Confirm Password"
-                required
               />
+              {errors.confirm_password && (
+                <ErrorMessage
+                  errorMessage={errors.confirm_password}
+                ></ErrorMessage>
+              )}
             </div>
             {errorMessage && (
               <div className=" d-flex p-2.5 rounded bg-red-500 text-white m-2.5 mt-10">

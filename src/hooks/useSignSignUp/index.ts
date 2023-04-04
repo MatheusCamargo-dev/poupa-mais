@@ -56,24 +56,24 @@ export const useSignInUp = () => {
   async function handleSignUp(data: any) {
     setIsLoading(true);
     const { password, confirm_password } = data;
-
+    console.log(data);
     if (!passwordIsValid(password, confirm_password)) {
       setIsLoading(false);
       return;
     }
 
-    const user = await signUpRequest(data);
-    setIsLoading(false);
-    if (user.status == 0) {
-      setErrorMessage(user.message);
-    }
+    // const user = await signUpRequest(data);
+    // setIsLoading(false);
+    // if (user.status == 0) {
+    //   setErrorMessage(user.message);
+    // }
 
-    if (user.status === 1) {
-      setErrorMessage('');
-      setEmail(user.email);
-      setTypeForm('login');
-      router.push('/');
-    }
+    // if (user.status === 1) {
+    //   setErrorMessage('');
+    //   setEmail(user.email);
+    //   setTypeForm('login');
+    //   router.push('/account?type=login');
+    // }
   }
 
   return {

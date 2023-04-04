@@ -18,9 +18,13 @@ const createUser = async (queryUser: any) => {
       return { status: 0, message: `Username already exists` };
     }
 
-    const salt = await bcryptjs.genSaltSync();
-    const cryptPassword = await bcryptjs.hashSync(password, salt);
+    console.log('pass');
+    console.log(password);
+    const salt = bcryptjs.genSaltSync();
+    const cryptPassword = bcryptjs.hashSync(password, salt);
 
+    console.log('crpy');
+    console.log(cryptPassword);
     const dataUser = { ...queryUser, cryptPassword };
     const user = new User(dataUser);
     if (await user.save()) {
