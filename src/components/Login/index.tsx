@@ -39,8 +39,8 @@ export default function Login(props: Login) {
     }
   }, [email]);
   return (
-    <div className="h-screen">
-      <div className="w-full max-w-md bg-white p-10 rounded space-y-8">
+    <div className="h-screen flex flex-col justify-center items-center">
+      <div className="w-full max-w-md bg-white p-8 sm:p-16 rounded space-y-8">
         <div>
           <img
             className="mx-auto h-12 w-auto"

@@ -1,5 +1,3 @@
-'use client';
-
 import Bundler from '@/components/Bundler';
 import ContentHome from '@/components/ContentHome';
 import FooterHome from '@/components/FooterHome';

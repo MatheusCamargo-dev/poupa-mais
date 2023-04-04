@@ -22,7 +22,10 @@ export default function FooterHome() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <FaLinkedinIn size={30} className="text-white" />
+                  <FaLinkedinIn
+                    size={30}
+                    className="text-white hover:text-blue-500"
+                  />
                 </a>
                 <a
                   className="btn-social"
@@ -30,7 +33,10 @@ export default function FooterHome() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <BsGithub size={30} className="text-white" />
+                  <BsGithub
+                    size={30}
+                    className="text-white hover:text-indigo-400"
+                  />
                 </a>
                 <a
                   className="btn-social"
@@ -38,7 +44,10 @@ export default function FooterHome() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <BsWhatsapp size={30} className="text-white" />
+                  <BsWhatsapp
+                    size={30}
+                    className="text-white hover:text-green-400"
+                  />
                 </a>
                 <a
                   className="btn-social"
@@ -46,7 +55,10 @@ export default function FooterHome() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <FaInstagram size={30} className="text-white" />
+                  <FaInstagram
+                    size={30}
+                    className="text-white hover:text-instagram"
+                  />
                 </a>
               </div>
             </div>

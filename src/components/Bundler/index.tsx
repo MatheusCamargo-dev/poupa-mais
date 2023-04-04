@@ -2,7 +2,7 @@ import StartNow from '../StartNow';
 
 export default function Bundler() {
   return (
-    <div className="bg-gradient-blue md:h-screen pt-24 pb-40 ">
+    <div className="bg-gradient-blue py-32 md:py-64">
       <div className="flex justify-center items-center mx-auto">
         <div className="max-w-7xl px-4 sm:px-6 lg:px-8 ml-4">
           <div className="lg:text-center">
@@ -15,7 +15,11 @@ export default function Bundler() {
             </p>
           </div>
         </div>
-        <img src="financas.png" alt="" className="h-64 w-64 mr-2" />
+        <img
+          src="financas.png"
+          alt=""
+          className="h-64 w-64 mr-2 lg:w-80 lg:h-80"
+        />
       </div>
       <StartNow></StartNow>
     </div>

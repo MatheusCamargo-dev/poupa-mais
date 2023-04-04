@@ -12,7 +12,8 @@ module.exports = {
       colors: {
         'dark-blue': '#1C2331',
         'primary-blue': '#003049',
-        'teal-light': '#00756C'
+        'teal-light': '#00756C',
+        instagram: ' #d92e7f'
       }
     }
   },
