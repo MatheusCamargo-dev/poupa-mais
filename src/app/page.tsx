@@ -2,6 +2,7 @@
 
 import Bundler from '@/components/Bundler';
 import ContentHome from '@/components/ContentHome';
+import FooterHome from '@/components/FooterHome';
 import HeaderHome from '@/components/HeaderHome';
 
 export default function Home() {
@@ -9,7 +10,9 @@ export default function Home() {
     <>
       <HeaderHome></HeaderHome>
       <Bundler></Bundler>
+      <div className="bg-teal-light w-100 h-8"></div>
       <ContentHome></ContentHome>
+      <FooterHome></FooterHome>
     </>
   );
 }

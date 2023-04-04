@@ -2,7 +2,7 @@ import StartNow from '../StartNow';
 
 export default function Bundler() {
   return (
-    <div className="bg-gradient-blue pt-24 pb-40 ">
+    <div className="bg-gradient-blue md:h-screen pt-24 pb-40 ">
       <div className="flex justify-center items-center mx-auto">
         <div className="max-w-7xl px-4 sm:px-6 lg:px-8 ml-4">
           <div className="lg:text-center">

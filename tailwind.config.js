@@ -11,7 +11,8 @@ module.exports = {
     extend: {
       colors: {
         'dark-blue': '#1C2331',
-        'primary-blue': '#003049'
+        'primary-blue': '#003049',
+        'teal-light': '#00756C'
       }
     }
   },
@@ -22,7 +23,7 @@ module.exports = {
           backgroundImage: 'linear-gradient(to bottom, #14B8A6, #87e8dd)'
         },
         '.bg-gradient-teal': {
-          backgroundImage: 'linear-gradient(to bottom, #00756C, #00C4B4)'
+          backgroundImage: 'linear-gradient(to bottom, #00C4B4, #00756C)'
         }
       };
       addUtilities(newUtilities, {
