@@ -18,14 +18,10 @@ const createUser = async (queryUser: any) => {
       return { status: 0, message: `Username already exists` };
     }
 
-    console.log('pass');
-    console.log(password);
     const salt = bcryptjs.genSaltSync();
     const cryptPassword = bcryptjs.hashSync(password, salt);
 
-    console.log('crpy');
-    console.log(cryptPassword);
-    const dataUser = { ...queryUser, cryptPassword };
+    const dataUser = { ...queryUser, password: cryptPassword };
     const user = new User(dataUser);
     if (await user.save()) {
       return { status: 1, email, message: `Created with success` };
