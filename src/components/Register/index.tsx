@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-import ErrorMessage from '../ErrorMessage';
+import FormInput from '../FormInput';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -57,102 +57,53 @@ export default function Register(props: Register) {
             className="mt-5 space-y-4"
             onSubmit={handleSubmit(handleSignUp)}
           >
-            <div>
-              <label htmlFor="fullname" className="text-teal-500">
-                Nome completo:
-              </label>
-              <input
-                {...register('fullname')}
-                type="text"
-                className={` ${
-                  errors.fullname ? 'border-2 border-red-400' : 'border-0'
-                } block border border-grey w-full p-3 rounded`}
-                name="fullname"
-                autoComplete="nickname"
-                placeholder="Full Name"
-              />
-              {errors.fullname && (
-                <ErrorMessage errorMessage={errors.fullname}></ErrorMessage>
-              )}
-            </div>
-            <div>
-              <label htmlFor="username" className="text-teal-500">
-                Usuário:
-              </label>
-              <input
-                {...register('username')}
-                type="text"
-                className={`${
-                  errors.username ? 'border-2 border-red-400' : 'border-0'
-                } block border border-grey w-full p-3 rounded`}
-                name="username"
-                autoComplete="username"
-                placeholder="Username"
-              />
-              {errors.username && (
-                <ErrorMessage errorMessage={errors.username}></ErrorMessage>
-              )}
-            </div>
-            <div>
-              <label htmlFor="email" className="text-teal-500">
-                Email:
-              </label>
-              <input
-                {...register('email')}
-                type="text"
-                className={`${
-                  errors.email ? 'border-2 border-red-400' : 'border-0'
-                } block border border-grey w-full p-3 rounded`}
-                name="email"
-                autoComplete="email"
-                placeholder="Email"
-              />
-              {errors.email && (
-                <ErrorMessage errorMessage={errors.email}></ErrorMessage>
-              )}
-            </div>
-            <div>
-              <label htmlFor="password" className="text-teal-500">
-                Password:
-              </label>
-              <input
-                {...register('password')}
-                type="password"
-                className={`${
-                  errors.password ? 'border-2 border-red-400' : 'border-0'
-                } block border border-grey w-full p-3 rounded`}
-                name="password"
-                autoComplete="current-password"
-                placeholder="Password"
-              />
-              {errors.password && (
-                <ErrorMessage errorMessage={errors.password}></ErrorMessage>
-              )}
-            </div>
-            <div>
-              <label htmlFor="confirm_password" className="text-teal-500">
-                Confirm Password:
-              </label>
-              <input
-                {...register('confirm_password')}
-                type="password"
-                className={`${
-                  errors.confirm_password
-                    ? 'border-2 border-red-400'
-                    : 'border-0'
-                } block border border-grey w-full p-3 rounded`}
-                autoComplete="new-password"
-                name="confirm_password"
-                placeholder="Confirm Password"
-              />
-              {errors.confirm_password && (
-                <ErrorMessage
-                  errorMessage={errors.confirm_password}
-                ></ErrorMessage>
-              )}
-            </div>
+            <FormInput
+              label="Nome completo:"
+              name="fullname"
+              placeholder="Full Name"
+              autoComplete="nickname"
+              type="text"
+              register={register}
+              error={errors.fullname}
+            />
+            <FormInput
+              label="Usuário:"
+              name="username"
+              placeholder="Username"
+              type="text"
+              register={register}
+              error={errors.username}
+            />
+            <FormInput
+              label="Email:"
+              name="email"
+              placeholder="Email"
+              autoComplete="email"
+              type="text"
+              register={register}
+              error={errors.email}
+            />
+            <FormInput
+              label="Senha:"
+              name="password"
+              placeholder="password"
+              autoComplete="new-password"
+              type="password"
+              register={register}
+              error={errors.password}
+            />
+            <FormInput
+              label="Repita a senha:"
+              name="confirm_password"
+              placeholder="Confirme a senha"
+              autoComplete="current-password"
+              type="password"
+              register={register}
+              error={errors.confirm_password}
+            />
+
             {errorMessage && (
-              <div className=" d-flex p-2.5 rounded bg-red-500 text-white m-2.5 mt-10">
+              <div className=" p-2.5 w-full rounded bg-red-500 text-white mt-10">
                 <p>{errorMessage}</p>
               </div>
             )}

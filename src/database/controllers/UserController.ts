@@ -10,12 +10,12 @@ const createUser = async (queryUser: any) => {
 
     const alreadyEmail = await User.findOne({ email });
     if (alreadyEmail) {
-      return { status: 0, message: `Email already exists` };
+      return { status: 0, message: `Email já cadastrado` };
     }
 
     const alreadyName = await User.findOne({ username });
     if (alreadyName) {
-      return { status: 0, message: `Username already exists` };
+      return { status: 0, message: `Usuário já cadastrado` };
     }
 
     const salt = bcryptjs.genSaltSync();

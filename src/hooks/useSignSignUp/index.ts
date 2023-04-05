@@ -60,7 +60,6 @@ export const useSignInUp = () => {
       setIsLoading(false);
       return;
     }
-
     const user = await signUpRequest(data);
     setIsLoading(false);
     if (user.status == 0) {

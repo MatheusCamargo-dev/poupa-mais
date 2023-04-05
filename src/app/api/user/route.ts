@@ -7,8 +7,6 @@ export async function POST(request: Request) {
   try {
     const res = await request.json();
     const { fullname, username, password, email } = res.date;
-    console.log('api');
-    console.log(res.date);
     const user = await userController.createUser({
       fullname,
       username,
