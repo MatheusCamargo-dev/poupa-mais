@@ -1,44 +1,48 @@
-import React from 'react';
+'use client';
+import React, { InputHTMLAttributes, forwardRef } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 import ErrorMessage from '../ErrorMessage';
 
-type InputProps = {
+interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  label: string;
+  label?: string;
+  value?: string;
   placeholder: string;
   autoComplete?: string;
   type: string;
   error?: any;
-  register: any;
-};
+  className: string;
+  defaultValue?: string;
+}
 
-const FormInput: React.FC<InputProps> = ({
-  name,
-  label,
-  placeholder,
-  autoComplete,
-  type,
-  error,
-  register
-}) => {
+// export default FormInput;
+
+const FormInput = forwardRef<HTMLInputElement, FormInputProps>((props, ref) => {
+  const { register } = useFormContext();
+
   return (
-    <div>
-      <label htmlFor={name} className="text-teal-500">
-        {label}
-      </label>
+    <div key={props.name} className="space-y-1">
+      {props.label && (
+        <label htmlFor={props.name} className="text-teal-500">
+          {props.label}
+        </label>
+      )}
       <input
-        {...register(name)}
-        type={type}
+        type={props.type}
+        autoComplete={props.autoComplete}
+        placeholder={props.placeholder}
+        value={props.value}
+        defaultValue={props.defaultValue}
+        {...register(props.name)}
         className={`${
-          error ? 'border-2 border-red-400' : 'border-1'
-        } block border border-grey w-full p-3 rounded`}
-        name={name}
-        autoComplete={autoComplete}
-        placeholder={placeholder}
+          props.error ? 'border-2 border-red-400 outline-none' : 'border-1'
+        } ${props.className}`}
+        ref={ref}
       />
-      {error && <ErrorMessage errorMessage={error}></ErrorMessage>}
+      {props.error && <ErrorMessage errorMessage={props.error}></ErrorMessage>}
     </div>
   );
-};
-
+});
+FormInput.displayName = 'FormInput';
 export default FormInput;

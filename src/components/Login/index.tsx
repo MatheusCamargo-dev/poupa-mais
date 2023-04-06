@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useForm, FormProvider } from 'react-hook-form';
 
 import ErrorMessage from '../ErrorMessage';
+import FormInput from '../FormInput';
 
 import { LockClosedIcon } from '@heroicons/react/24/outline';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -34,30 +35,30 @@ export default function Login(props: Login) {
     isLoading,
     email
   } = props;
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors }
-  } = useForm<FormPropsLogin>({
+  const formProps = useForm<FormPropsLogin>({
     mode: 'all',
     reValidateMode: 'onBlur',
     resolver: zodResolver(schema)
   });
 
-  const inputEmail = useRef<HTMLInputElement>(null);
-  const inputPassword = useRef<HTMLInputElement>(null);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors }
+  } = formProps;
 
   useEffect(() => {
-    if (email && inputEmail.current && inputPassword.current) {
-      inputEmail.current.value = email;
-      inputPassword.current.focus();
-      setValue('email', email);
+    const input = document.querySelector(
+      'input[name="password"]'
+    ) as HTMLInputElement;
+    if (input && email.length > 0) {
+      input.focus();
     }
-  }, [email]);
+  }, []);
   return (
     <div className="h-screen flex flex-col justify-center items-center">
-      <div className="w-full max-w-md bg-white p-8 sm:p-16 rounded space-y-8">
+      <div className="w-full max-w-md bg-white p-8 sm:p-16 rounded space-y-7">
         <div>
           <img
             className="mx-auto h-12 w-auto"
@@ -77,100 +78,76 @@ export default function Login(props: Login) {
             </a>
           </p>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(handleSignIn)}>
-          <div className="space-y-2 rounded-md shadow-sm">
-            <div>
-              <label htmlFor="email-address" className="sr-only">
-                Email address
-              </label>
-              <input
+        <FormProvider {...formProps}>
+          <form
+            className="mt-8 space-y-5"
+            onSubmit={handleSubmit(handleSignIn)}
+          >
+            <div className="space-y-2 rounded-md shadow-sm">
+              <FormInput
                 {...register('email')}
-                id="email-address"
-                name="email"
                 type="email"
                 autoComplete="email"
-                ref={inputEmail}
-                onChange={(e) => setValue('email', e.target.value)}
+                onChange={(e: any) => setValue('email', e.target.value)}
                 defaultValue={email}
-                className={`relative block w-full ${
-                  errors.email
-                    ? 'border-2 border-red-400 focus:ring-red-400'
-                    : 'border-0'
-                } rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset
-                 ring-gray-300 p-1.5 placeholder:text-gray-400 focus:z-10 focus:ring-2
-                 focus:ring-inset sm:text-sm sm:leading-6`}
+                className={`rounded-md border ring-gray-300 ring-1 border-grey-300 py-1.5 text-gray-900
+                  p-1.5 placeholder:text-gray-400 focus:z-10
+                  sm:text-sm sm:leading-6 relative block w-full rounded-md`}
                 placeholder="Email address"
+                error={errors.email}
               />
-              {errors.email && (
-                <ErrorMessage errorMessage={errors.email}></ErrorMessage>
-              )}
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
+              <FormInput
                 {...register('password')}
-                id="password"
-                name="password"
                 type="password"
                 autoComplete="current-password"
-                ref={inputPassword}
-                onChange={(e) => setValue('password', e.target.value)}
-                className={`relative block w-full rounded-md ${
-                  errors.password
-                    ? 'border-2 border-red-400 focus:ring-red-400'
-                    : 'border-0'
-                }
-                  py-1.5 p-1.5 text-gray-900 ring-1 ring-inset
-                   ring-gray-300 placeholder:text-gray-400
-                    focus:z-10 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6`}
+                onChange={(e: any) => setValue('password', e.target.value)}
+                className={`rounded-md border ring-gray-300 ring-1 border-grey-300 py-1.5 text-gray-900
+                  p-1.5 placeholder:text-gray-400 focus:z-10
+                  sm:text-sm sm:leading-6 relative block w-full rounded-md`}
                 placeholder="Password"
+                error={errors.password}
               />
-              {errors.password && (
-                <ErrorMessage errorMessage={errors.password}></ErrorMessage>
+              {errorMessage && (
+                <ErrorMessage
+                  errorMessage={{ message: errorMessage }}
+                ></ErrorMessage>
               )}
             </div>
-          </div>
-          {errorMessage && (
-            <div className=" d-flex p-1.5 rounded bg-red-500 text-white m-2.5 mt-10">
-              <p>{errorMessage}</p>
-            </div>
-          )}
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 rounded border-teal-300 text-teal-600 focus:ring-teal-600"
-              />
-              <label
-                htmlFor="remember-me"
-                className="ml-2 block text-sm text-black"
-              >
-                Remember me
-              </label>
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="group relative flex w-full justify-center rounded-md bg-teal-500 py-2 px-3 text-sm font-semibold text-slate-700 hover:bg-teal-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              disabled={isLoading}
-            >
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <LockClosedIcon
-                  className="h-5 w-5 text-black group-hover:text-white"
-                  aria-hidden="true"
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <input
+                  id="remember-me"
+                  name="remember-me"
+                  type="checkbox"
+                  className="h-4 w-4 rounded border-teal-300 text-teal-600 focus:ring-teal-600"
                 />
-              </span>
-              {loginText}
-            </button>
-          </div>
-        </form>
+                <label
+                  htmlFor="remember-me"
+                  className="ml-2 block text-sm text-black"
+                >
+                  Remember me
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="group relative flex w-full justify-center rounded-md bg-teal-500 py-2 px-3 text-sm font-semibold text-slate-700 hover:bg-teal-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                disabled={isLoading}
+              >
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                  <LockClosedIcon
+                    className="h-5 w-5 text-black group-hover:text-white"
+                    aria-hidden="true"
+                  />
+                </span>
+                {loginText}
+              </button>
+            </div>
+          </form>
+        </FormProvider>
       </div>
     </div>
   );
