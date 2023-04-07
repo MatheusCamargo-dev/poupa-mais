@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import incomeController from '@/database/controllers/IncomeController';
+import expenseController from '@/database/controllers/ExpenseController';
 import tokenController from '@/database/controllers/TokenController';
 
 export async function POST(request: Request) {
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     if (res.status == 1) {
       const query = await request.json();
       const data = { user: res.userData?.id, ...query };
-      const income = await incomeController.store(data);
+      const income = await expenseController.store(data);
       if (income) {
         return NextResponse.json({
           status: 1,
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       }
       // const user = await userController.showUser();
     }
-    return NextResponse.json({ status: 0, message: 'Failed to add a income' });
+    return NextResponse.json({ status: 0, message: 'Failed to add a expanse' });
   } catch (e) {
     console.error(e);
     return NextResponse.error();
@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
     if (res.status == 1) {
       const id = res.userData?.id;
       if (id) {
-        const data = await incomeController.show(id);
+        const data = await expenseController.show(id);
         return NextResponse.json({ status: 1, data });
       }
     }
@@ -64,7 +64,7 @@ export async function DELETE(request: NextRequest) {
     const userId = res.userData?.id;
     if (res.status == 1 && userId) {
       const { id } = await request.json();
-      const data = await incomeController.deleteById(id, userId);
+      const data = await expenseController.deleteById(id, userId);
       return NextResponse.json({ status: 1, data });
     }
     return NextResponse.json(res);
@@ -85,7 +85,7 @@ export async function PUT(request: Request) {
     const userId = res.userData?.id;
     if (res.status == 1 && userId) {
       const body = await request.json();
-      const income = await incomeController.updateIncome(
+      const income = await expenseController.updateExpense(
         userId,
         body.income,
         body.data
@@ -99,7 +99,7 @@ export async function PUT(request: Request) {
     }
     return NextResponse.json({
       status: 0,
-      message: 'Failed to update a income'
+      message: 'Failed to update a expense'
     });
   } catch (e) {
     console.error(e);

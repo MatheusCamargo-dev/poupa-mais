@@ -1,5 +1,5 @@
 import database from '../MongoConnect';
-import { Income } from '../schemas/IncomeSchema';
+import { Expense } from '../schemas/ExpenseSchema';
 const store = async (query: any) => {
   try {
     if (!database.connect()) return false;
@@ -10,7 +10,7 @@ const store = async (query: any) => {
     // Obtém a string no formato ISODate
     const isoDate = dateObj.toISOString();
 
-    const income = new Income({
+    const expense = new Expense({
       title,
       amount,
       category,
@@ -18,55 +18,54 @@ const store = async (query: any) => {
       description,
       user
     });
-    console.log(income);
-    if (await income.save()) {
+    if (await expense.save()) {
       return { status: 1, message: `Created with success` };
     }
   } catch (e) {
-    throw new Error('Error in create income');
+    throw new Error('Error in create expense');
   }
 };
 
 const show = async (id: string) => {
   try {
     if (!database.connect()) return false;
-    const data = await Income.find({ user: id }).sort({ createdAt: -1 });
+    const data = await Expense.find({ user: id }).sort({ createdAt: -1 });
     return data;
   } catch (e) {
-    throw new Error('Error in show income');
+    throw new Error('Error in show expense');
   }
 };
 
 const deleteById = async (id: string, user: string) => {
   try {
     if (!database.connect()) return false;
-    const income = await Income.find({ user, _id: id });
-    if (income) {
-      const data = await Income.findByIdAndDelete(id);
+    const expense = await Expense.find({ user, _id: id });
+    if (expense) {
+      const data = await Expense.findByIdAndDelete(id);
       return data;
     }
   } catch (e) {
-    throw new Error('Error in delete income');
+    throw new Error('Error in delete expense');
   }
 };
 
-const updateIncome = async (user: string, id: string, query: any) => {
+const updateExpense = async (user: string, id: string, query: any) => {
   try {
     if (!database.connect()) return false;
 
-    const income = await Income.find({ user, _id: id });
+    const expense = await Expense.find({ user, _id: id });
 
     const dateObj = new Date(query.date);
 
     const isoDate = dateObj.toISOString();
 
     const data = { data: isoDate, ...query };
-    if (income) {
-      const update = await Income.findByIdAndUpdate(id, data);
+    if (expense) {
+      const update = await Expense.findByIdAndUpdate(id, data);
       return update;
     }
   } catch (e) {
-    throw new Error('Error in update income');
+    throw new Error('Error in update expense');
   }
 };
 
@@ -75,11 +74,11 @@ const updateIncome = async (user: string, id: string, query: any) => {
 // Update: Model.updateOne(), Model.updateMany(), Model.findOneAndUpdate(), Model.findByIdAndUpdate()
 // Delete: Model.deleteOne(), Model.deleteMany(), Model.findOneAndDelete(), Model.findByIdAndDelete()
 
-const incomeController = {
+const expenseController = {
   store,
   show,
   deleteById,
-  updateIncome
+  updateExpense
 };
 
-export default incomeController;
+export default expenseController;
