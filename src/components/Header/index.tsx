@@ -1,10 +1,9 @@
 'use client';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Fragment, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { FiLogOut } from 'react-icons/fi';
 
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { destroyCookie } from 'nookies';
 
 function classNames(...classes: string[]) {
@@ -15,8 +14,9 @@ export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const [navigation, setNavigation] = useState([
-    { name: 'App', href: '/app', current: false },
-    { name: 'Home', href: '/app/home', current: false }
+    { name: 'Dashboard', href: '/app', current: false },
+    { name: 'Rendimentos', href: '/app/incomes', current: false },
+    { name: 'Despesas', href: '/app/expenses', current: false }
   ]);
 
   useEffect(() => {
@@ -42,160 +42,91 @@ export default function Header() {
     if (destroyCookie({}, 'token')) router.push('/');
   }
   return (
-    <Disclosure as="nav" className="bg-primary-blue z-500">
-      {({ open }) => (
-        <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="/PriceHouse.ico"
-                    alt="Your Company"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="/PriceHouse.ico"
-                    alt="Your Company"
-                  />
-                </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
-                    {navigation?.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? 'bg-gray-900 text-white'
-                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium'
-                        )}
-                        onClick={() => currentPage(item.name)}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://github.com/MatheusCamargo-dev.png"
-                        alt=""
-                      />
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700'
-                            )}
-                          >
-                            Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700'
-                            )}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            onClick={signOut}
-                            className={classNames(
-                              active ? 'bg-gray-100' : '',
-                              'cursor-pointer block px-4 py-2 text-sm text-gray-700'
-                            )}
-                          >
-                            Sign out
-                          </a>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              </div>
+    <div className="min-h-screen bg-primary-blue">
+      <div className="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 hover:bg-primary-blue hover:shadow-lg">
+        <div className="flex h-screen flex-col justify-between pt-2 pb-6">
+          <div>
+            <div className="w-max p-2.5 flex items-center space-x-3">
+              <img
+                className=" h-8 w-auto lg:block"
+                src="/PriceHouse.ico"
+                alt="Your Company"
+              />
+              <h1 className="font-roboto text-2xl font-bold text-teal-400">
+                {' '}
+                Poupa Mais
+              </h1>
             </div>
-          </div>
-
-          <Disclosure.Panel className="sm:hidden">
-            {({ close }) => (
-              <div className="space-y-1 px-2 pt-2 pb-3 flex flex-col">
-                {navigation.map((item) => (
+            <ul className="mt-6 space-y-2 tracking-wide">
+              {navigation?.map((item) => (
+                <li
+                  className={classNames(
+                    item.current
+                      ? 'bg-gray-900 relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white'
+                      : 'bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-300 hover:text-white',
+                    'rounded-md px-3 py-2 text-sm font-medium min-w-max'
+                  )}
+                  key={item.name}
+                >
+                  <svg
+                    className="-ml-1 h-6 w-6"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z"
+                      className="fill-current text-cyan-400 dark:fill-slate-600"
+                    ></path>
+                    <path
+                      d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z"
+                      className="fill-current text-cyan-200 group-hover:text-cyan-300"
+                    ></path>
+                    <path
+                      d="M13 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1Z"
+                      className="fill-current group-hover:text-sky-300"
+                    ></path>
+                  </svg>
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={classNames(
-                      item.current
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      'rounded-md px-3 py-2 text-sm font-medium ui-close:rotate-90 ui-close:transform'
-                    )}
-                    onClick={() => {
-                      currentPage(item.name);
-                      close();
-                    }}
+                    onClick={() => currentPage(item.name)}
                     aria-current={item.current ? 'page' : undefined}
                   >
                     {item.name}
                   </Link>
-                ))}
-              </div>
-            )}
-          </Disclosure.Panel>
-        </>
-      )}
-    </Disclosure>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="w-max -mb-3">
+            <Link
+              href="/app/account"
+              className="flex px-3 space-x-3 cursor-pointer"
+            >
+              <img
+                className="h-8 w-8 rounded-full"
+                src="https://github.com/MatheusCamargo-dev.png"
+                alt=""
+              />{' '}
+              <span className=" text-white text-semibold text-lg hover:text-teal-500">
+                Matheus Camargo
+              </span>
+            </Link>
+            <a
+              onClick={signOut}
+              className="gbg group flex items-center space-x-4 rounded-full px-4 py-3 cursor-pointer text-gray-300 hover:text-white
+            "
+            >
+              <FiLogOut
+                size={30}
+                className="group group-hover:text-red-200"
+              ></FiLogOut>
+              <span className="group-hover:text-red-200">Sair</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

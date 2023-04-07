@@ -13,7 +13,17 @@ module.exports = {
         'dark-blue': '#1C2331',
         'primary-blue': '#003049',
         'teal-light': '#00756C',
+        transaction: '#726A8C',
         instagram: ' #d92e7f'
+      }
+    }
+  },
+  modules: {
+    // outras camadas do Tailwind
+    components: {
+      // outras classes personalizadas
+      '.sidebar': {
+        transition: 'all .4s ease-in-out'
       }
     }
   },
@@ -25,6 +35,9 @@ module.exports = {
         },
         '.bg-gradient-teal': {
           backgroundImage: 'linear-gradient(to bottom, #00C4B4, #00756C)'
+        },
+        '.bg-gradient-dark-blue': {
+          backgroundImage: 'linear-gradient(to bottom, #1A3051 , #171F3F )'
         }
       };
       addUtilities(newUtilities, {
