@@ -41,11 +41,18 @@ const createToken = async (queryUser: any) => {
 
 const validToken = async (token: string) => {
   try {
-    const userData = jwt.verify(
-      token,
-      process.env.TOKEN_SECRET as string
-    ) as Token;
-    return { status: 1, userData };
+    const auth = jwt.verify(token, process.env.TOKEN_SECRET as string) as Token;
+
+    if (!database.connect()) return false;
+    const user = await User.findById(auth.id);
+    if (user) {
+      const userData = {
+        id: user.id,
+        fullname: user.fullname,
+        email: user.email
+      };
+      return { status: 1, userData };
+    }
   } catch (e) {
     return { status: 0, message: e };
   }

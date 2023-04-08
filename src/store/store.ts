@@ -1,10 +1,12 @@
 'use client';
 import { authReducer } from '@/features/Auth';
+import { userReducer } from '@/features/User';
 import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({
   reducer: {
-    Auth: authReducer
+    Auth: authReducer,
+    User: userReducer
   }
 });
 

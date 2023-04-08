@@ -7,6 +7,7 @@ import AppLoading from '../../components/AppLoading';
 import Header from '../../components/Sidebar';
 
 import { setAuthenticated } from '@/features/Auth';
+import { setUser } from '@/features/User';
 import { useStoreSelector } from '@/hooks/useStoreSelector';
 import { apiClient } from '@/services/api-client';
 
@@ -42,6 +43,7 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
           push('/account?type=login');
           return;
         }
+        dispatch(setUser(auth.userData));
       };
       token();
     }

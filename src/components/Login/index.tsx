@@ -90,7 +90,7 @@ export default function Login(props: Login) {
                 autoComplete="email"
                 onChange={(e: any) => setValue('email', e.target.value)}
                 defaultValue={email}
-                className={`rounded-md border ring-gray-300 ring-1 border-grey-300 py-1.5 text-gray-900
+                className={`border ring-gray-300 ring-1 border-grey-300 py-1.5 text-gray-900
                   p-1.5 placeholder:text-gray-400 focus:z-10
                   sm:text-sm sm:leading-6 relative block w-full rounded-md`}
                 placeholder="Email address"
@@ -100,8 +100,7 @@ export default function Login(props: Login) {
                 {...register('password')}
                 type="password"
                 autoComplete="current-password"
-                onChange={(e: any) => setValue('password', e.target.value)}
-                className={`rounded-md border ring-gray-300 ring-1 border-grey-300 py-1.5 text-gray-900
+                className={` border ring-gray-300 ring-1 border-grey-300 py-1.5 text-gray-900
                   p-1.5 placeholder:text-gray-400 focus:z-10
                   sm:text-sm sm:leading-6 relative block w-full rounded-md`}
                 placeholder="Password"

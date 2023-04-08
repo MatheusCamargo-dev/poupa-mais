@@ -6,13 +6,20 @@ import History from '@/components/History';
 import Salary from '@/components/Salary';
 import Transactions from '@/components/Transactions';
 
+import { useStoreSelector } from '@/hooks/useStoreSelector';
+
 export default function App() {
+  const user = useStoreSelector((state: any) => state.User);
+
+  console.log('user');
+  console.log(user);
+
   return (
     <div className="h-full w-full">
       <div className=" mx-auto container h-max my-10">
         <div className="flex flex-col pb-5 px-2">
           <h1 className="text-2xl text-white font-bold">
-            Bem vindo novamente, Matheus 👋
+            Bem vindo novamente, {user.fullname} 👋
           </h1>
           <span className="text-xl text-zinc-400">
             Confira seus rendimentos

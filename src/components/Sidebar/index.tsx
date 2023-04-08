@@ -4,6 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 
+import { useStoreSelector } from '@/hooks/useStoreSelector';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import { destroyCookie } from 'nookies';
 
@@ -14,6 +15,7 @@ function classNames(...classes: string[]) {
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
+  const user = useStoreSelector((state: any) => state.User);
   const [navigation, setNavigation] = useState([
     { name: 'Dashboard', href: '/app', current: false },
     { name: 'Rendimentos', href: '/app/incomes', current: false },
@@ -112,7 +114,7 @@ export default function Sidebar() {
                   alt=""
                 />{' '}
                 <span className=" text-white text-semibold text-lg hover:text-teal-500">
-                  Matheus Camargo
+                  {user.fullname}
                 </span>
               </Link>
               <a
