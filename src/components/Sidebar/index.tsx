@@ -45,7 +45,7 @@ export default function Sidebar() {
   return (
     <>
       <div className="min-h-screen hidden sm:block bg-primary-blue">
-        <div className="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 hover:bg-primary-blue hover:shadow-lg">
+        <div className="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r border-dark-blue hover:w-56 hover:bg-primary-blue hover:shadow-lg">
           <div className="flex h-screen flex-col justify-between pt-2 pb-6">
             <div>
               <div className="w-max p-2.5 flex items-center space-x-3">
