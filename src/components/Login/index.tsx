@@ -53,9 +53,10 @@ export default function Login(props: Login) {
       'input[name="password"]'
     ) as HTMLInputElement;
     if (input && email.length > 0) {
+      setValue('email', email);
       input.focus();
     }
-  }, []);
+  }, [email]);
   return (
     <div className="h-screen flex flex-col justify-center items-center">
       <div className="w-full max-w-md bg-white p-8 sm:p-16 rounded space-y-7">
@@ -88,8 +89,6 @@ export default function Login(props: Login) {
                 {...register('email')}
                 type="email"
                 autoComplete="email"
-                onChange={(e: any) => setValue('email', e.target.value)}
-                defaultValue={email}
                 className={`border ring-gray-300 ring-1 border-grey-300 py-1.5 text-gray-900
                   p-1.5 placeholder:text-gray-400 focus:z-10
                   sm:text-sm sm:leading-6 relative block w-full rounded-md`}

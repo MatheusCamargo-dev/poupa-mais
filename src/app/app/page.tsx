@@ -11,9 +11,6 @@ import { useStoreSelector } from '@/hooks/useStoreSelector';
 export default function App() {
   const user = useStoreSelector((state: any) => state.User);
 
-  console.log('user');
-  console.log(user);
-
   return (
     <div className="h-full w-full">
       <div className=" mx-auto container h-max my-10">

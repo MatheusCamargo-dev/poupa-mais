@@ -26,7 +26,9 @@ const schema = z
       ),
     username: z
       .string({ required_error: 'Usuário é obrigatório.' })
-      .min(3, 'O usuário deve conter no mínimo 3 letras.'),
+      .min(3, 'O usuário deve conter no mínimo 3 caracteres.')
+      .max(16, 'O usuário deve conter no máximo 16 caracteres.')
+      .trim(),
     email: z
       .string({ required_error: 'Email é obrigatório.' })
       .email('email invalido')

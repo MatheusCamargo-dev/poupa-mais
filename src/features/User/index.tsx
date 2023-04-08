@@ -5,11 +5,13 @@ import { PayloadAction } from '@reduxjs/toolkit/dist/createAction';
 interface UserState {
   id: string;
   fullname: string;
+  username: string;
   email: string;
 }
 const initialState: UserState = {
   id: '',
   fullname: '',
+  username: '',
   email: ''
 };
 
@@ -21,6 +23,7 @@ export const userSlice = createSlice({
       state.id = action.payload.id;
       state.fullname = action.payload.fullname;
       state.email = action.payload.email;
+      state.username = action.payload.username;
     }
   }
 });

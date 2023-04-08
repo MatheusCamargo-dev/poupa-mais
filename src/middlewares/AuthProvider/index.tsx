@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect, useMemo } from 'react';
+import { ReactNode, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import AppLoading from '../../components/AppLoading';
@@ -33,18 +33,21 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
     return isAuthenticated;
   }, [isAuthenticated]);
 
+  const token = useCallback(async () => {
+    const data = await apiClient('http://localhost:3000/api/token', 'POST');
+    const auth = await data.json();
+    dispatch(setAuthenticated(auth.status));
+    if (auth.status == 0) {
+      push('/account?type=login');
+      return;
+    }
+    dispatch(setUser(auth.userData));
+  }, [dispatch]);
+
   useEffect(() => {
+    console.log('is auth');
+    console.log(authenticated);
     if (authenticated == 0) {
-      const token = async () => {
-        const data = await apiClient('http://localhost:3000/api/token', 'POST');
-        const auth = await data.json();
-        dispatch(setAuthenticated(auth.status));
-        if (auth.status == 0) {
-          push('/account?type=login');
-          return;
-        }
-        dispatch(setUser(auth.userData));
-      };
       token();
     }
   }, [authenticated]);

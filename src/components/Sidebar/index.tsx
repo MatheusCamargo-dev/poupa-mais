@@ -3,7 +3,9 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { FiLogOut } from 'react-icons/fi';
+import { useDispatch } from 'react-redux';
 
+import { setAuthenticated } from '@/features/Auth';
 import { useStoreSelector } from '@/hooks/useStoreSelector';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import { destroyCookie } from 'nookies';
@@ -16,6 +18,7 @@ export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const user = useStoreSelector((state: any) => state.User);
+  const dispatch = useDispatch();
   const [navigation, setNavigation] = useState([
     { name: 'Dashboard', href: '/app', current: false },
     { name: 'Rendimentos', href: '/app/incomes', current: false },
@@ -42,7 +45,10 @@ export default function Sidebar() {
   }
 
   async function signOut() {
-    if (destroyCookie({}, 'token')) router.push('/');
+    if (destroyCookie({}, 'token')) {
+      dispatch(setAuthenticated(0));
+      router.push('/');
+    }
   }
   return (
     <>
@@ -103,19 +109,24 @@ export default function Sidebar() {
               </ul>
             </div>
 
-            <div className="w-max -mb-3">
+            <div className="w-max -mb-3 items-center">
               <Link
                 href="/app/account"
-                className="flex px-3 space-x-3 cursor-pointer"
+                className="flex px-3 space-x-3 cursor-pointer  w-56 items-center"
               >
                 <img
                   className="h-8 w-8 rounded-full"
                   src="https://github.com/MatheusCamargo-dev.png"
                   alt=""
                 />{' '}
-                <span className=" text-white text-semibold text-lg hover:text-teal-500">
-                  {user.fullname}
-                </span>
+                <div className="flex flex-col justify-center">
+                  <span className=" text-white text-semibold text-lg hover:text-teal-500 break-all">
+                    {user.fullname}
+                  </span>
+                  <span className=" text-zinc-400 text-semibold text-lg break-all">
+                    #{user.username}
+                  </span>
+                </div>
               </Link>
               <a
                 onClick={signOut}
