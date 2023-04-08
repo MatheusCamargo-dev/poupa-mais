@@ -4,7 +4,7 @@ import { ReactNode, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import AppLoading from '../../components/AppLoading';
-import Header from '../../components/Header';
+import Header from '../../components/Sidebar';
 
 import { setAuthenticated } from '@/features/Auth';
 import { useStoreSelector } from '@/hooks/useStoreSelector';
