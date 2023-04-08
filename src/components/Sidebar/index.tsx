@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { FiLogOut } from 'react-icons/fi';
+import { GiPayMoney, GiReceiveMoney } from 'react-icons/gi';
+import { MdDashboard } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 
 import { setAuthenticated } from '@/features/Auth';
@@ -17,12 +19,27 @@ function classNames(...classes: string[]) {
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
-  const user = useStoreSelector((state: any) => state.User);
+  const user = useStoreSelector((store) => store.User);
   const dispatch = useDispatch();
   const [navigation, setNavigation] = useState([
-    { name: 'Dashboard', href: '/app', current: false },
-    { name: 'Rendimentos', href: '/app/incomes', current: false },
-    { name: 'Despesas', href: '/app/expenses', current: false }
+    {
+      name: 'Dashboard',
+      href: '/app',
+      icon: <MdDashboard size={25} />,
+      current: false
+    },
+    {
+      name: 'Rendimentos',
+      href: '/app/incomes',
+      icon: <GiReceiveMoney size={25} />,
+      current: false
+    },
+    {
+      name: 'Despesas',
+      href: '/app/expenses',
+      icon: <GiPayMoney size={25} />,
+      current: false
+    }
   ]);
 
   useEffect(() => {
@@ -73,29 +90,12 @@ export default function Sidebar() {
                     className={classNames(
                       item.current
                         ? 'bg-gray-900 relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white'
-                        : 'bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-300 hover:text-white',
+                        : 'bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-300 hover:text-teal-500 ',
                       'rounded-md px-3 py-2 text-sm font-medium min-w-max'
                     )}
                     key={item.name}
                   >
-                    <svg
-                      className="-ml-1 h-6 w-6"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                    >
-                      <path
-                        d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z"
-                        className="fill-current text-cyan-400 dark:fill-slate-600"
-                      ></path>
-                      <path
-                        d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z"
-                        className="fill-current text-cyan-200 group-hover:text-cyan-300"
-                      ></path>
-                      <path
-                        d="M13 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1Z"
-                        className="fill-current group-hover:text-sky-300"
-                      ></path>
-                    </svg>
+                    {item.icon}
                     <Link
                       key={item.name}
                       href={item.href}
@@ -135,14 +135,15 @@ export default function Sidebar() {
               >
                 <FiLogOut
                   size={30}
-                  className="group group-hover:text-red-200"
+                  className="group group-hover:text-red-400"
                 ></FiLogOut>
-                <span className="group-hover:text-red-200">Sair</span>
+                <span className="group-hover:text-red-400">Sair</span>
               </a>
             </div>
           </div>
         </div>
       </div>
+
       <div className="sidebar end right-2 fixed m-2 to-transparent p-2 sm:hidden border-2 bg-teal-500 border-white rounded-md">
         <Bars3Icon className="h-6 w-6 text-white" aria-hidden="true" />
       </div>

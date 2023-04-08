@@ -1,4 +1,3 @@
-// import apiServer from '@/services/api-back-end';
 'use client';
 
 import Expense from '@/components/Expense';
@@ -9,7 +8,7 @@ import Transactions from '@/components/Transactions';
 import { useStoreSelector } from '@/hooks/useStoreSelector';
 
 export default function App() {
-  const user = useStoreSelector((state: any) => state.User);
+  const user = useStoreSelector((store) => store.User);
 
   return (
     <div className="h-full w-full">
@@ -22,7 +21,7 @@ export default function App() {
             Confira seus rendimentos
           </span>
         </div>
-        <div className="flex flex-col rounded-md p-5 border-2 border-zinc-500 bg-gradient-dark-blue pb-32 w-full">
+        <div className="flex flex-col rounded-md p-6 border-2 border-zinc-400 bg-gradient-dark-blue pb-32 w-full">
           <h1 className="text-teal-400 tracking-tight text-4xl font-semibold">
             Todas as transações
           </h1>

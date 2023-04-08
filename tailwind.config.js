@@ -16,6 +16,9 @@ module.exports = {
         transaction: '#726A8C',
         instagram: ' #d92e7f'
       }
+    },
+    fontFamily: {
+      sans: ['Roboto', 'sans-serif']
     }
   },
   plugins: [

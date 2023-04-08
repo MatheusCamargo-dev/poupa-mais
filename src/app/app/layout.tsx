@@ -10,7 +10,7 @@ interface AppLayoutProps {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   return (
-    <div className="rounded flex h-screen bg-dark-blue">
+    <div className="rounded flex font-sans bg-dark-blue">
       <Provider store={store}>
         <AuthProvider child={children} />
       </Provider>
