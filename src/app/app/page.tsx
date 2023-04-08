@@ -3,7 +3,7 @@
 export default function App() {
   return (
     <div className="h-full w-full">
-      <div className="container mx-auto h-max my-10">
+      <div className=" mx-12 h-max my-10">
         <div className="flex flex-col pb-5 px-2">
           <h1 className="text-2xl text-white font-bold">
             Bem vindo novamente, Matheus 👋
@@ -12,7 +12,7 @@ export default function App() {
             Confira seus rendimentos
           </span>
         </div>
-        <div className="flex flex-col rounded-md p-5 border-2 border-zinc-500 bg-gradient-dark-blue pb-64 w-full">
+        <div className="flex flex-col rounded-md p-5 border-2 border-zinc-500 bg-gradient-dark-blue pb-32 w-full">
           <h1 className="text-teal-400 tracking-tight text-4xl font-semibold">
             Todas as transações
           </h1>

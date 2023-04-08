@@ -10,7 +10,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Header() {
+export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const [navigation, setNavigation] = useState([

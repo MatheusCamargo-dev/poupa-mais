@@ -18,15 +18,6 @@ module.exports = {
       }
     }
   },
-  modules: {
-    // outras camadas do Tailwind
-    components: {
-      // outras classes personalizadas
-      '.sidebar': {
-        transition: 'all .4s ease-in-out'
-      }
-    }
-  },
   plugins: [
     function ({ addUtilities }) {
       const newUtilities = {
@@ -38,6 +29,9 @@ module.exports = {
         },
         '.bg-gradient-dark-blue': {
           backgroundImage: 'linear-gradient(to bottom, #1A3051 , #171F3F )'
+        },
+        '.sidebar': {
+          transition: 'all .2s ease-in-out'
         }
       };
       addUtilities(newUtilities, {
