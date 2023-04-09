@@ -1,8 +1,14 @@
 'use client';
 import React, { InputHTMLAttributes, forwardRef } from 'react';
-import { useFormContext } from 'react-hook-form';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import { useFormContext, Controller } from 'react-hook-form';
 
 import ErrorMessage from '../ErrorMessage';
+
+import pt from 'date-fns/locale/es';
+import { CurrencyInput, Currencies, Locales } from 'input-currency-react';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 interface InputTransactionsProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -20,8 +26,79 @@ interface InputTransactionsProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
   (props, ref) => {
-    const { register } = useFormContext();
+    const { register, setValue, control, watch } = useFormContext();
+    registerLocale('pt', pt);
 
+    const switchInput = (name: string) => {
+      switch (name) {
+        case 'amount': {
+          return (
+            <Controller
+              name="amount"
+              control={control}
+              defaultValue="0,00"
+              render={({ field }) => (
+                <CurrencyInput
+                  {...register(props.name)}
+                  value={field.value}
+                  ref={null}
+                  options={{
+                    precision: 2,
+                    style: 'currency',
+                    allowNegative: true,
+                    alwaysNegative: false,
+                    locale: Locales['Portuguese (Brazil)'], // Format Type
+                    i18nCurrency: Currencies['Brazilian Real'] // Symbol
+                  }}
+                  onChangeEvent={(inputElement, maskedValue, value) => {
+                    console.log(value);
+                    setValue(props.name, value);
+                    console.log(watch('amount'));
+                  }}
+                  prefix="R$"
+                  placeholder="R$"
+                  className="block border-zinc-500 border-2 p-1 rounded-md"
+                />
+              )}
+            />
+          );
+        }
+        case 'date': {
+          return (
+            <Controller
+              name="date"
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  {...register('date')}
+                  placeholderText="Selecione uma data"
+                  onChange={(date) => field.onChange(date)}
+                  selected={field.value}
+                  locale="pt"
+                  className="block border-zinc-500 border-2 p-1 rounded-md"
+                  ref={field.ref}
+                />
+              )}
+            />
+          );
+        }
+
+        default: {
+          return (
+            <input
+              type={props.type}
+              autoComplete={props.autoComplete}
+              placeholder={props.placeholder}
+              value={props.value}
+              defaultValue={props.defaultValue}
+              {...register(props.name)}
+              className={'block border-zinc-500 border-2 p-1 rounded-md'}
+              ref={ref}
+            />
+          );
+        }
+      }
+    };
     return (
       <div key={props.name} className="space-y-1 text-2xl">
         {props.label && (
@@ -29,16 +106,8 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
             {props.label}
           </label>
         )}
-        <input
-          type={props.type}
-          autoComplete={props.autoComplete}
-          placeholder={props.placeholder}
-          value={props.value}
-          defaultValue={props.defaultValue}
-          {...register(props.name)}
-          className={'block border-zinc-500 border-2 p-1 rounded-md'}
-          ref={ref}
-        />
+        {switchInput(props.name)}
+
         {props.error && (
           <ErrorMessage errorMessage={props.error}></ErrorMessage>
         )}

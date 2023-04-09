@@ -45,8 +45,6 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log('is auth');
-    console.log(authenticated);
     if (authenticated == 0) {
       token();
     }

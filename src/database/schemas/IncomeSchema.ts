@@ -13,5 +13,5 @@ const IncomeSchema = new Schema(
 );
 
 const Income = mongoose.model('Income', IncomeSchema);
-
+export type IncomeProps = typeof Income;
 export { Income };

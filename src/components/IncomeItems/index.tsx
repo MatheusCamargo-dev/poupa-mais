@@ -1,46 +1,47 @@
-import { FaCommentDots } from 'react-icons/fa';
-import { GiHealthNormal } from 'react-icons/gi';
-import { MdDateRange } from 'react-icons/md';
-import { TbTrashFilled } from 'react-icons/tb';
+'use client';
+import { useCallback, useEffect, useState } from 'react';
 
-import { toBRL } from '@/functions/toBRL';
+import IncomeItem from '../IncomeItem';
 
-interface Income {
-  income: string;
-  value: number;
+import { apiClient } from '@/services/api-client';
+
+interface IncomeProps {
+  title: string;
+  date: string;
+  type: string;
+  amount: number;
+  category: string;
+  description: string;
+  _id: string;
 }
-export default function IncomeItems(props: Income) {
-  const { income, value } = props;
+export default function IncomeItems() {
+  const [incomes, setIncomes] = useState([]);
+  const getIncomes = useCallback(async () => {
+    const data = await apiClient(
+      'http://localhost:3000/api/transactions/income/',
+      'GET'
+    );
+    const json = await data.json();
+    setIncomes(json.data);
+  }, []);
+  useEffect(() => {
+    getIncomes();
+  }, []);
   return (
-    <div className="flex flex-col sm:w-full mt-5">
-      <div className="flex justify-between w-full p-3 px-5 border-2 hover:bg-zinc-300 mx-auto border-zinc-500  rounded-2xl bg-zinc-50">
-        <div className="flex items-center space-x-8">
-          <GiHealthNormal
-            size={35}
-            className="text-transaction"
-          ></GiHealthNormal>
-          <div className="flex flex-col ml-2 space-y-2 text-transaction text-lg">
-            <span className="font-semibold md:text-xl">{income}</span>
-            <div className="flex md:flex-row flex-col space-x-1 md:whitespace-nowrap">
-              <span>{toBRL(value)}</span>
-              <span className="flex items-center">
-                <MdDateRange />
-                19/10/2003
-              </span>
-              <span className="flex items-center gap-1">
-                <FaCommentDots />
-                Limpeza nos dentes
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="sm:flex hidden items-center sm:mr-5 md:bg-transaction md:p-4 rounded-full text-white">
-          <TbTrashFilled
-            size={30}
-            className="text-transaction md:text-white "
-          ></TbTrashFilled>
-        </div>
-      </div>
+    <div className="flex flex-col sm:w-full space-y-4 mt-5">
+      {incomes?.length > 0 &&
+        incomes.map((income: IncomeProps, index) => {
+          return (
+            <IncomeItem
+              value={income.amount}
+              income={income.title}
+              id={income._id}
+              comment={income.description}
+              date={income.date}
+              key={index}
+            />
+          );
+        })}
     </div>
   );
 }

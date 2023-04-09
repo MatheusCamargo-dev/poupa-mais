@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import InputTransactions from '../InputTransactions';
@@ -16,18 +17,20 @@ const schema = z
       .min(3, 'O Título deve conter no mínimo 3 caracteres.')
       .max(30, 'O Título deve conter no máximo 30 caracteres.')
       .trim(),
-    amount: z.coerce
-      .number({
+    category: z.string().nonempty(),
+    amount: z
+      .string({
         errorMap: () => {
-          return { message: 'Informe um número valido.' };
+          return { message: 'Informe um número.' };
         }
       })
       .min(1, 'Informe um valor'),
-    date: z
-      .string({ required_error: 'Data é obrigatório.' })
-      .min(1, 'Informe uma data.'),
-    description: z.string().optional(),
-    category: z.string()
+    date: z.date({
+      errorMap: () => {
+        return { message: 'Informe uma data valida.' };
+      }
+    }),
+    description: z.string().optional()
   })
   .refine((fields) => fields.category !== 'selecione', {
     path: ['category'],
@@ -42,6 +45,7 @@ export default function FormIncome() {
     resolver: zodResolver(schema)
   });
 
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -49,6 +53,7 @@ export default function FormIncome() {
   } = formProps;
 
   async function handleIncome(data: any) {
+    setIsLoading(true);
     const body = { type: data.category, ...data };
     const r = await apiClient(
       'http://localhost:3000/api/transactions/income/',
@@ -56,6 +61,7 @@ export default function FormIncome() {
       body
     );
     const income = await r.json();
+    setIsLoading(false);
     console.log(income);
   }
 
@@ -97,7 +103,6 @@ export default function FormIncome() {
           ]}
           error={errors.category}
         />
-
         <TextAreaTransactions
           {...register('description')}
           label="Descrição:"
@@ -105,12 +110,12 @@ export default function FormIncome() {
           autoComplete=""
           error={errors.description}
         />
-
         <button
           type="submit"
+          disabled={isLoading}
           className="group relative flex w-full text-md justify-center rounded-3xl bg-teal-500 py-2 px-3 font-semibold text-slate-700 hover:bg-teal-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-          + Adicionar rendimento
+          {isLoading ? 'Aguarde..' : '+ Adicionar rendimento'}
         </button>
       </form>
     </FormProvider>

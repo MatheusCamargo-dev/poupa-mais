@@ -14,8 +14,8 @@ export default function Incomes() {
             <TotIncome value={10000}></TotIncome>
           </div>
           <div className="flex sm:flex-row flex-col sm:space-x-8 mt-5">
-            <FormIncome></FormIncome>
-            <IncomeItems value={326542} income="Ida ao dentista"></IncomeItems>
+            <FormIncome />
+            <IncomeItems></IncomeItems>
           </div>
         </div>
       </div>
