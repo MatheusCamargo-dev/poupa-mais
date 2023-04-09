@@ -2,47 +2,108 @@
 import { useForm, FormProvider } from 'react-hook-form';
 
 import InputTransactions from '../InputTransactions';
+import SelectTransactions from '../SelectTransactions';
+import TextAreaTransactions from '../TextAreaTransactions';
 
+import { apiClient } from '@/services/api-client';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z
+  .object({
+    title: z
+      .string({ required_error: 'Título é obrigatório.' })
+      .min(3, 'O Título deve conter no mínimo 3 caracteres.')
+      .max(30, 'O Título deve conter no máximo 30 caracteres.')
+      .trim(),
+    amount: z.coerce
+      .number({
+        errorMap: () => {
+          return { message: 'Informe um número valido.' };
+        }
+      })
+      .min(1, 'Informe um valor'),
+    date: z
+      .string({ required_error: 'Data é obrigatório.' })
+      .min(1, 'Informe uma data.'),
+    description: z.string().optional(),
+    category: z.string()
+  })
+  .refine((fields) => fields.category !== 'selecione', {
+    path: ['category'],
+    message: 'Por favor, selecione uma opção'
+  });
+
+type FormPropsRegister = z.infer<typeof schema>;
 export default function FormIncome() {
-  const formProps = useForm();
+  const formProps = useForm<FormPropsRegister>({
+    mode: 'all',
+    reValidateMode: 'onBlur',
+    resolver: zodResolver(schema)
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = formProps;
+
+  async function handleIncome(data: any) {
+    const body = { type: data.category, ...data };
+    const r = await apiClient(
+      'http://localhost:3000/api/transactions/income/',
+      'POST',
+      body
+    );
+    const income = await r.json();
+    console.log(income);
+  }
 
   return (
     <FormProvider {...formProps}>
-      <form className=" space-y-4 w-max">
+      <form className=" space-y-4 w-max" onSubmit={handleSubmit(handleIncome)}>
         <InputTransactions
-          name="title"
+          {...register('title')}
           label="Titulo:"
           placeholder="Titulo do rendimento"
           autoComplete="title"
           type="text"
+          error={errors.title}
         />
         <InputTransactions
-          name="amount"
+          {...register('amount')}
           label="Valor:"
           placeholder="Valor do rendimento"
           type="text"
+          error={errors.amount}
         />
         <InputTransactions
-          name="date"
+          {...register('date')}
           label="Data:"
           placeholder="Data do rendimento"
           autoComplete="date"
           type="date"
+          error={errors.date}
         />
-        <InputTransactions
-          name="type"
-          label="Selecione a opcao"
-          placeholder=""
-          autoComplete=""
-          type="select"
+        <SelectTransactions
+          {...register('category')}
+          label="Selecione uma categoria:"
+          options={[
+            'Freelancer',
+            'Investimento',
+            'Vendas',
+            'Apostas',
+            'Salário'
+          ]}
+          error={errors.category}
         />
 
-        <InputTransactions
-          name="type"
-          label="Descricao:"
-          placeholder="Uma breve descricao"
+        <TextAreaTransactions
+          {...register('description')}
+          label="Descrição:"
+          placeholder="Uma breve descrição"
           autoComplete=""
-          type="textarea"
+          error={errors.description}
         />
 
         <button

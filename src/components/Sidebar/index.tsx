@@ -89,20 +89,21 @@ export default function Sidebar() {
                   <li
                     className={classNames(
                       item.current
-                        ? 'bg-gray-900 relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white'
-                        : 'bg group flex items-center space-x-4 rounded-full px-4 py-3 text-gray-300 hover:text-teal-500 ',
+                        ? 'bg-gray-900 relative bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white'
+                        : 'bg group rounded-full px-4 py-3 text-gray-300 hover:text-teal-500 ',
                       'rounded-md px-3 py-2 text-sm font-medium min-w-max'
                     )}
                     key={item.name}
                   >
-                    {item.icon}
                     <Link
                       key={item.name}
                       href={item.href}
                       onClick={() => currentPage(item.name)}
+                      className="flex items-center space-x-4 "
                       aria-current={item.current ? 'page' : undefined}
                     >
-                      {item.name}
+                      {item.icon}
+                      <span>{item.name}</span>
                     </Link>
                   </li>
                 ))}

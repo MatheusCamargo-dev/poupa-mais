@@ -12,9 +12,10 @@ export async function POST(request: Request) {
 
     const res = await tokenController.validToken(token);
 
-    if (res.status == 1) {
+    if (res && res.status == 1) {
       const query = await request.json();
-      const data = { user: res.userData?.id, ...query };
+      const { date } = query;
+      const data = { user: res.userData?.id, ...date };
       const income = await incomeController.store(data);
       if (income) {
         return NextResponse.json({
@@ -39,7 +40,7 @@ export async function GET(request: NextRequest) {
     }
 
     const res = await tokenController.validToken(token);
-    if (res.status == 1) {
+    if (res && res.status == 1) {
       const id = res.userData?.id;
       if (id) {
         const data = await incomeController.show(id);
@@ -61,8 +62,8 @@ export async function DELETE(request: NextRequest) {
     }
 
     const res = await tokenController.validToken(token);
-    const userId = res.userData?.id;
-    if (res.status == 1 && userId) {
+    if (res && res.status == 1) {
+      const userId = res.userData?.id;
       const { id } = await request.json();
       const data = await incomeController.deleteById(id, userId);
       return NextResponse.json({ status: 1, data });
@@ -82,8 +83,8 @@ export async function PUT(request: Request) {
     }
 
     const res = await tokenController.validToken(token);
-    const userId = res.userData?.id;
-    if (res.status == 1 && userId) {
+    if (res && res.status == 1) {
+      const userId = res.userData?.id;
       const body = await request.json();
       const income = await incomeController.updateIncome(
         userId,
