@@ -1,11 +1,13 @@
 'use client';
 import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
 import InputTransactions from '../InputTransactions';
 import SelectTransactions from '../SelectTransactions';
 import TextAreaTransactions from '../TextAreaTransactions';
 
+import { incrementIncomes } from '@/features/Incomes';
 import { apiClient } from '@/services/api-client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -46,8 +48,10 @@ export default function FormIncome() {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors }
   } = formProps;
@@ -60,14 +64,20 @@ export default function FormIncome() {
       'POST',
       body
     );
-    const income = await r.json();
+    const {
+      data: { income }
+    } = await r.json();
+    reset();
     setIsLoading(false);
-    console.log(income);
+    dispatch(incrementIncomes(income));
   }
 
   return (
     <FormProvider {...formProps}>
-      <form className=" space-y-4 w-max" onSubmit={handleSubmit(handleIncome)}>
+      <form
+        className=" space-y-4 md:w-max"
+        onSubmit={handleSubmit(handleIncome)}
+      >
         <InputTransactions
           {...register('title')}
           label="Titulo:"
@@ -110,13 +120,15 @@ export default function FormIncome() {
           autoComplete=""
           error={errors.description}
         />
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="group relative flex w-full text-md justify-center rounded-3xl bg-teal-500 py-2 px-3 font-semibold text-slate-700 hover:bg-teal-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          {isLoading ? 'Aguarde..' : '+ Adicionar rendimento'}
-        </button>
+        <div className="flex justify-center md:justify-start">
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="group relative flex md:w-full text-md justify-center rounded-3xl bg-teal-500 py-2 px-3 font-semibold text-slate-700 hover:bg-teal-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            {isLoading ? 'Aguarde..' : '+ Adicionar rendimento'}
+          </button>
+        </div>
       </form>
     </FormProvider>
   );

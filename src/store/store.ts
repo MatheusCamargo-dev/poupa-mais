@@ -1,12 +1,14 @@
 'use client';
 import { authReducer } from '@/features/Auth';
+import { incomesReducer } from '@/features/Incomes';
 import { userReducer } from '@/features/User';
 import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({
   reducer: {
     Auth: authReducer,
-    User: userReducer
+    User: userReducer,
+    Incomes: incomesReducer
   }
 });
 

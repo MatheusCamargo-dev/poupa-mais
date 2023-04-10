@@ -26,7 +26,7 @@ interface InputTransactionsProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
   (props, ref) => {
-    const { register, setValue, control, watch } = useFormContext();
+    const { register, setValue, control } = useFormContext();
     registerLocale('pt', pt);
 
     const switchInput = (name: string) => {
@@ -51,9 +51,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
                     i18nCurrency: Currencies['Brazilian Real'] // Symbol
                   }}
                   onChangeEvent={(inputElement, maskedValue, value) => {
-                    console.log(value);
                     setValue(props.name, value);
-                    console.log(watch('amount'));
                   }}
                   prefix="R$"
                   placeholder="R$"
@@ -71,12 +69,13 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
               render={({ field }) => (
                 <DatePicker
                   {...register('date')}
+                  isClearable={false}
                   placeholderText="Selecione uma data"
                   onChange={(date) => field.onChange(date)}
                   selected={field.value}
                   locale="pt"
+                  dateFormat={'dd/MM/yyyy'}
                   className="block border-zinc-500 border-2 p-1 rounded-md"
-                  ref={field.ref}
                 />
               )}
             />

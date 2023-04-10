@@ -19,11 +19,9 @@ export async function POST(request: Request) {
       const income = await incomeController.store(data);
       if (income) {
         return NextResponse.json({
-          status: 1,
-          message: 'created with success!'
+          data: income
         });
       }
-      // const user = await userController.showUser();
     }
     return NextResponse.json({ status: 0, message: 'Failed to add a income' });
   } catch (e) {
@@ -64,8 +62,8 @@ export async function DELETE(request: NextRequest) {
     const res = await tokenController.validToken(token);
     if (res && res.status == 1) {
       const userId = res.userData?.id;
-      const { id } = await request.json();
-      const data = await incomeController.deleteById(id, userId);
+      const { date } = await request.json();
+      const data = await incomeController.deleteById(date, userId);
       return NextResponse.json({ status: 1, data });
     }
     return NextResponse.json(res);

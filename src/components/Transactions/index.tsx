@@ -18,7 +18,7 @@ export default function Transactions() {
       </div>
       <div className="flex flex-col border-2 w-full sm:w-max sm:mx-auto border-zinc-300  rounded-md bg-zinc-300">
         <ContentTotValue
-          msg="Total de despesas"
+          msg="Saldo total"
           type="balance"
           value={10000}
         ></ContentTotValue>

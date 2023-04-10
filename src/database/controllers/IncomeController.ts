@@ -18,9 +18,8 @@ const store = async (query: any) => {
       description,
       user
     });
-    console.log(income);
     if (await income.save()) {
-      return { status: 1, message: `Created with success` };
+      return { status: 1, message: `Created with success`, income };
     }
   } catch (e) {
     throw new Error('Error in create income');

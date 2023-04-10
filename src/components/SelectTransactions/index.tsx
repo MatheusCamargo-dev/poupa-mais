@@ -29,7 +29,7 @@ const SelectTransactions = forwardRef<
       )}
       <select
         {...register(`${props.name}`)}
-        className={'block border-zinc-500 border-2 w-full p-1 rounded-md'}
+        className={'block border-zinc-500 border-2 md:w-full p-1 rounded-md'}
         ref={ref}
       >
         <option value={'selecione'}>Selecione uma opção</option>
