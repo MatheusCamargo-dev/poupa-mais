@@ -7,7 +7,7 @@ import InputTransactions from '../InputTransactions';
 import SelectTransactions from '../SelectTransactions';
 import TextAreaTransactions from '../TextAreaTransactions';
 
-import { incrementexpenses } from '@/features/Expenses';
+import { incrementExpenses } from '@/features/Expenses';
 import { apiClient } from '@/services/api-client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -40,7 +40,7 @@ const schema = z
   });
 
 type FormPropsRegister = z.infer<typeof schema>;
-export default function FormIncome() {
+export default function FormExpense() {
   const formProps = useForm<FormPropsRegister>({
     mode: 'all',
     reValidateMode: 'onBlur',
@@ -69,7 +69,7 @@ export default function FormIncome() {
     } = await r.json();
     reset();
     setIsLoading(false);
-    dispatch(incrementexpenses(expense));
+    dispatch(incrementExpenses(expense));
   }
 
   return (
@@ -81,7 +81,7 @@ export default function FormIncome() {
         <InputTransactions
           {...register('title')}
           label="Titulo:"
-          placeholder="Titulo do rendimento"
+          placeholder="Titulo da despesa"
           autoComplete="title"
           type="text"
           error={errors.title}
@@ -89,14 +89,14 @@ export default function FormIncome() {
         <InputTransactions
           {...register('amount')}
           label="Valor:"
-          placeholder="Valor do rendimento"
+          placeholder="Valor da despesa"
           type="text"
           error={errors.amount}
         />
         <InputTransactions
           {...register('date')}
           label="Data:"
-          placeholder="Data do rendimento"
+          placeholder="Data da despesa"
           autoComplete="date"
           type="date"
           error={errors.date}
@@ -126,7 +126,7 @@ export default function FormIncome() {
             disabled={isLoading}
             className="group relative flex md:w-full text-md justify-center rounded-3xl bg-teal-500 py-2 px-3 font-semibold text-slate-700 hover:bg-teal-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            {isLoading ? 'Aguarde..' : '+ Adicionar rendimento'}
+            {isLoading ? 'Aguarde..' : '+ Adicionar despesa'}
           </button>
         </div>
       </form>

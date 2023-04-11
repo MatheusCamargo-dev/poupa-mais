@@ -5,7 +5,7 @@ import { MdDateRange } from 'react-icons/md';
 import { TbTrashFilled } from 'react-icons/tb';
 import { useDispatch } from 'react-redux';
 
-import { deleteIncomes } from '@/features/Incomes';
+import { deleteExpenses } from '@/features/Expenses';
 import { formatDateISOToBR } from '@/functions/formatDateISO';
 import { toBRL } from '@/functions/toBRL';
 import { apiClient } from '@/services/api-client';
@@ -22,13 +22,13 @@ export default function ExpenseItem(props: IncomeItem) {
   const deleteItem = useCallback(async (id: any) => {
     const body = id;
     const response = await apiClient(
-      'http://localhost:3000/api/transactions/income/',
+      'http://localhost:3000/api/transactions/expense/',
       'DELETE',
       body
     );
     const { data } = await response.json();
     if (data) {
-      dispatch(deleteIncomes(data));
+      dispatch(deleteExpenses(data));
     }
   }, []);
   return (

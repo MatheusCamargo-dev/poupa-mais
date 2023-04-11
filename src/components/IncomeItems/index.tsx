@@ -29,13 +29,12 @@ export default function IncomeItems() {
     dispatch(setIncomes(json.data));
   }, [dispatch]);
   useEffect(() => {
-    console.log(incomes);
-    if (incomes.length === 0) return;
+    if (incomes?.[0]?.title !== '') return;
     getIncomes();
-  }, [getIncomes]);
+  }, [incomes]);
   return (
     <div className="flex flex-col sm:w-full space-y-4 mt-5">
-      {incomes?.length > 0 &&
+      {incomes?.[0]?.title !== '' &&
         incomes.map((income: IncomeProps, index) => {
           return (
             <IncomeItem

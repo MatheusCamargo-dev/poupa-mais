@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import ExpenseItem from '../ExpenseItem';
 
-import { setexpenses } from '@/features/Expenses';
+import { setExpenses } from '@/features/Expenses';
 import { useStoreSelector } from '@/hooks/useStoreSelector';
 import { apiClient } from '@/services/api-client';
 
@@ -17,7 +17,7 @@ export interface ExpenseProps {
   description: string;
   _id: string;
 }
-export default function IncomeItems() {
+export default function ExpenseItems() {
   const { expenses } = useStoreSelector((store) => store.Expenses);
   const dispatch = useDispatch();
   const getExpenses = useCallback(async () => {
@@ -25,17 +25,17 @@ export default function IncomeItems() {
       'http://localhost:3000/api/transactions/expense/',
       'GET'
     );
+    console.log('api');
     const json = await data.json();
-    dispatch(setexpenses(json.data));
+    dispatch(setExpenses(json.data));
   }, [dispatch]);
   useEffect(() => {
-    console.log(expenses);
-    if (expenses.length === 0) return;
+    if (expenses?.[0]?.title !== '') return;
     getExpenses();
-  }, [getExpenses]);
+  }, [expenses]);
   return (
     <div className="flex flex-col sm:w-full space-y-4 mt-5">
-      {expenses?.length > 0 &&
+      {expenses?.[0]?.title !== '' &&
         expenses.map((income: ExpenseProps, index) => {
           return (
             <ExpenseItem

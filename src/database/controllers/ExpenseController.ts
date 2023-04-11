@@ -19,7 +19,7 @@ const store = async (query: any) => {
       user
     });
     if (await expense.save()) {
-      return { status: 1, message: `Created with success` };
+      return { status: 1, message: `Created with success`, expense };
     }
   } catch (e) {
     throw new Error('Error in create expense');

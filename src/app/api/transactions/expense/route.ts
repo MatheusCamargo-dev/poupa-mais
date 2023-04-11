@@ -12,17 +12,17 @@ export async function POST(request: Request) {
 
     const res = await tokenController.validToken(token);
 
-    if (res.status == 1) {
+    if (res && res.status == 1) {
       const query = await request.json();
-      const data = { user: res.userData?.id, ...query };
-      const income = await expenseController.store(data);
-      if (income) {
+      const { date } = query;
+      const data = { user: res.userData?.id, ...date };
+      const expense = await expenseController.store(data);
+      console.log(expense);
+      if (expense) {
         return NextResponse.json({
-          status: 1,
-          message: 'created with success!'
+          data: expense
         });
       }
-      // const user = await userController.showUser();
     }
     return NextResponse.json({ status: 0, message: 'Failed to add a expanse' });
   } catch (e) {
@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
     }
 
     const res = await tokenController.validToken(token);
-    if (res.status == 1) {
+    if (res && res.status == 1) {
       const id = res.userData?.id;
       if (id) {
         const data = await expenseController.show(id);
@@ -61,10 +61,10 @@ export async function DELETE(request: NextRequest) {
     }
 
     const res = await tokenController.validToken(token);
-    const userId = res.userData?.id;
-    if (res.status == 1 && userId) {
-      const { id } = await request.json();
-      const data = await expenseController.deleteById(id, userId);
+    if (res && res.status == 1) {
+      const userId = res.userData?.id;
+      const { date } = await request.json();
+      const data = await expenseController.deleteById(date, userId);
       return NextResponse.json({ status: 1, data });
     }
     return NextResponse.json(res);
@@ -82,8 +82,8 @@ export async function PUT(request: Request) {
     }
 
     const res = await tokenController.validToken(token);
-    const userId = res.userData?.id;
-    if (res.status == 1 && userId) {
+    if (res && res.status == 1) {
+      const userId = res.userData?.id;
       const body = await request.json();
       const income = await expenseController.updateExpense(
         userId,

@@ -35,7 +35,7 @@ export const expensesSlice = createSlice({
   name: 'expense',
   initialState,
   reducers: {
-    setexpenses: (
+    setExpenses: (
       state: ExpensesStates,
       action: PayloadAction<ExpenseStates[]>
     ) => {
@@ -45,7 +45,7 @@ export const expensesSlice = createSlice({
         0
       );
     },
-    incrementexpenses: (
+    incrementExpenses: (
       state: ExpensesStates,
       action: PayloadAction<ExpenseStates>
     ) => {
@@ -64,6 +64,6 @@ export const expensesSlice = createSlice({
   }
 });
 
-export const { setexpenses, incrementexpenses, deleteExpenses } =
+export const { setExpenses, incrementExpenses, deleteExpenses } =
   expensesSlice.actions;
 export const expensesReducer = expensesSlice.reducer;
