@@ -17,7 +17,6 @@ export async function POST(request: Request) {
       const { date } = query;
       const data = { user: res.userData?.id, ...date };
       const expense = await expenseController.store(data);
-      console.log(expense);
       if (expense) {
         return NextResponse.json({
           data: expense
