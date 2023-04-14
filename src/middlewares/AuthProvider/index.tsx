@@ -7,6 +7,8 @@ import AppLoading from '../../components/AppLoading';
 import Header from '../../components/Sidebar';
 
 import { setAuthenticated } from '@/features/Auth';
+import { setExpenses } from '@/features/Expenses';
+import { setIncomes } from '@/features/Incomes';
 import { setUser } from '@/features/User';
 import { useStoreSelector } from '@/hooks/useStoreSelector';
 import { apiClient } from '@/services/api-client';
@@ -33,6 +35,24 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
     return isAuthenticated;
   }, [isAuthenticated]);
 
+  const getIncomes = useCallback(async () => {
+    const data = await apiClient(
+      'http://localhost:3000/api/transactions/income/',
+      'GET'
+    );
+    const json = await data.json();
+    dispatch(setIncomes(json.data));
+  }, [dispatch]);
+
+  const getExpenses = useCallback(async () => {
+    const data = await apiClient(
+      'http://localhost:3000/api/transactions/expense/',
+      'GET'
+    );
+    const json = await data.json();
+    dispatch(setExpenses(json.data));
+  }, [dispatch]);
+
   const token = useCallback(async () => {
     const data = await apiClient('http://localhost:3000/api/token', 'POST');
     const auth = await data.json();
@@ -41,6 +61,8 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
       push('/account?type=login');
       return;
     }
+    await getIncomes();
+    await getExpenses();
     dispatch(setUser(auth.userData));
   }, [dispatch]);
 

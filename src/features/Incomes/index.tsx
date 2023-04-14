@@ -40,7 +40,7 @@ export const incomesSlice = createSlice({
       action: PayloadAction<IncomeStates[]>
     ) => {
       state.incomes = action.payload;
-      state.totIncome = action.payload.reduce(
+      state.totIncome = action.payload?.reduce(
         (acc, income) => acc + income.amount,
         0
       );

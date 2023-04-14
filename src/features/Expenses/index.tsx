@@ -40,7 +40,7 @@ export const expensesSlice = createSlice({
       action: PayloadAction<ExpenseStates[]>
     ) => {
       state.expenses = action.payload;
-      state.totExpenses = action.payload.reduce(
+      state.totExpenses = action.payload?.reduce(
         (acc, expense) => acc + expense.amount,
         0
       );
