@@ -14,11 +14,7 @@ export interface IncomeProps {
   _id: string;
 }
 export default function IncomeItems() {
-  const incomes = useStoreSelector((store) => store.Incomes.incomes);
-  // useEffect(() => {
-  //   if (incomes?.[0]?.title !== '') return;
-  //   getIncomes();
-  // }, [incomes]);
+  const { incomes } = useStoreSelector((store) => store.Incomes);
   return (
     <div className="flex flex-col sm:w-full space-y-4 mt-5">
       {incomes?.[0]?.title !== '' &&
