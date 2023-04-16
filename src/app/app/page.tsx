@@ -4,19 +4,14 @@ import Expense from '@/components/Expense';
 import History from '@/components/History';
 import Salary from '@/components/Salary';
 import Transactions from '@/components/Transactions';
-
-import { useStoreSelector } from '@/hooks/useStoreSelector';
+import Welcome from '@/components/Welcome';
 
 export default function App() {
-  const user = useStoreSelector((store) => store.User);
-
   return (
     <div className="h-full w-full">
       <div className=" mx-10 lg:mx-auto lg:container h-max my-10">
         <div className="flex flex-col pb-5 px-2">
-          <h1 className="text-2xl text-white font-bold">
-            Bem vindo novamente, {user.fullname} 👋
-          </h1>
+          <Welcome />
           <span className="text-xl text-zinc-400">
             Confira seus rendimentos
           </span>

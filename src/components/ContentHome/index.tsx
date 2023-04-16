@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import StartNow from '../StartNow';
 
 export default function ContentHome() {
@@ -7,7 +9,7 @@ export default function ContentHome() {
         preview test gadjgdagdshj
       </h1>
       <div className="mt-16 flex flex-col md:flex-row">
-        <img src="/cell.png" alt="" />
+        <Image width={500} height={500} src="/cell.png" alt="" />
         <div className="flex flex-col  ml-32 mb-16 w-50 justify-center">
           <h1 className="text-4xl font-bold tracking-tight">
             preview test gadjgdagdshj.

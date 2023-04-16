@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
     }
 
     const res = await tokenController.validToken(token);
-    if (res.status == 1) {
+    if (res && res.status == 1) {
       const user = await userController.showUser();
       return NextResponse.json(user);
     }

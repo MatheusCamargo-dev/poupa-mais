@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import StartNow from '../StartNow';
 
 export default function Bundler() {
@@ -15,8 +17,10 @@ export default function Bundler() {
             </p>
           </div>
         </div>
-        <img
-          src="financas.png"
+        <Image
+          width={300}
+          height={300}
+          src="/financas.png"
           alt=""
           className="h-64 w-64 mr-2 lg:w-80 lg:h-80"
         />

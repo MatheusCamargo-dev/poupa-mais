@@ -1,3 +1,4 @@
+'use client';
 import { toBRL } from '@/functions/toBRL';
 import { useStoreSelector } from '@/hooks/useStoreSelector';
 

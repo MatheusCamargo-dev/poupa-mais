@@ -1,4 +1,3 @@
-'use client';
 import ExpenseItems from '@/components/ExpenseItems';
 import FormExpense from '@/components/FormExpense';
 import TotExpense from '@/components/TotExpense';

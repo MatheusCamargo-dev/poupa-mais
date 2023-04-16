@@ -20,13 +20,12 @@ export default function History() {
   const { incomes } = useStoreSelector((store) => store.Incomes);
   const [finances, setFinances] = useState<TransactionProps[]>([]);
 
-  // pega os 3 documentos mais recentes
   useEffect(() => {
     if (expenses.length > 0 && incomes.length > 0) {
       const merged = expenses.concat(incomes);
       const sorted = merged.sort((a: TransactionProps, b: TransactionProps) => {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
-      }); // ordena os documentos por data de forma decrescente
+      });
       const recent = sorted.slice(0, 3);
       setFinances(recent);
     }

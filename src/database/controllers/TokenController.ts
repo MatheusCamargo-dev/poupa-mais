@@ -14,17 +14,17 @@ const createToken = async (queryUser: any) => {
     const { email = '', password = '' } = queryUser;
 
     if (!email || !password) {
-      return { status: 0, message: 'invalid values' };
+      return { status: 0, message: 'Valores inválidos' };
     }
 
     if (!database.connect()) return false;
     const user = await User.findOne({ email });
     if (!user) {
-      return { status: 0, message: `User doesn't exists` };
+      return { status: 0, message: `Usuário não encontrado` };
     }
 
     if (!(await bcryptjs.compare(password, user.password))) {
-      return { status: 0, message: `Invalid password` };
+      return { status: 0, message: `Senha inválida` };
     }
 
     const { id } = user;
@@ -35,7 +35,10 @@ const createToken = async (queryUser: any) => {
       return { status: 1, token };
     }
   } catch (e) {
-    return { status: 0, message: 'error in server' };
+    return {
+      status: 0,
+      message: 'Ocorreu algum erro, tente novamente mais tarde.'
+    };
   }
 };
 

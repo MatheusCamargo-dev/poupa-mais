@@ -1,4 +1,3 @@
-'use client';
 import FormIncome from '@/components/FormIncome';
 import IncomeItems from '@/components/IncomeItems';
 import TotIncome from '@/components/TotIncome';

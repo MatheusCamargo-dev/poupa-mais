@@ -10,8 +10,8 @@ export default function Transactions() {
         <TotIncome flex="col"></TotIncome>
         <TotExpense flex="col"></TotExpense>
       </div>
-      <div className="flex flex-col border-2 w-full sm:w-max sm:mx-auto border-zinc-300  rounded-md bg-zinc-300">
-        <ContentTotValue></ContentTotValue>
+      <div className="flex flex-col border-2 w-full sm:w-max sm:mx-auto border-zinc-300  rounded-md bg-white">
+        <ContentTotValue />
       </div>
     </div>
   );
