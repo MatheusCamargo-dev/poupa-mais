@@ -18,14 +18,15 @@ export default function ExpenseItems() {
   return (
     <div className="flex flex-col sm:w-full space-y-4 mt-5">
       {expenses?.[0]?.title !== '' &&
-        expenses.map((income: ExpenseProps, index) => {
+        expenses.map((expense: ExpenseProps, index) => {
           return (
             <ExpenseItem
-              value={income.amount}
-              income={income.title}
-              id={income._id}
-              comment={income.description}
-              date={income.date}
+              value={expense.amount}
+              category={expense.category}
+              expense={expense.title}
+              id={expense._id}
+              comment={expense.description}
+              date={expense.date}
               key={index}
             />
           );

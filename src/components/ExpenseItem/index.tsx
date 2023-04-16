@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { FaCommentDots } from 'react-icons/fa';
-import { GiHealthNormal } from 'react-icons/gi';
 import { MdDateRange } from 'react-icons/md';
 import { TbTrashFilled } from 'react-icons/tb';
 import { useDispatch } from 'react-redux';
@@ -9,14 +8,17 @@ import { deleteExpenses } from '@/features/Expenses';
 import { formatDateISOToBR } from '@/functions/formatDateISO';
 import { toBRL } from '@/functions/toBRL';
 import { apiClient } from '@/services/api-client';
+import { ExpenseCategory } from '@/store/expenseCategory';
 
 interface IncomeItem {
   id: string;
   value: number;
-  income: string;
+  expense: string;
   comment?: string;
   date: string;
+  category: any;
 }
+
 export default function ExpenseItem(props: IncomeItem) {
   const dispatch = useDispatch();
   const deleteItem = useCallback(async (id: any) => {
@@ -34,9 +36,10 @@ export default function ExpenseItem(props: IncomeItem) {
   return (
     <div className="flex justify-between w-full p-3 px-5 border-2 hover:bg-zinc-300 mx-auto border-zinc-500  rounded-2xl bg-zinc-50">
       <div className="flex items-center space-x-8">
-        <GiHealthNormal size={35} className="text-transaction"></GiHealthNormal>
+        {props.category && ExpenseCategory[props.category]}
+        {/* <GiHealthNormal size={35} className="text-transaction"></GiHealthNormal> */}
         <div className="flex flex-col ml-2 space-y-2 text-transaction text-lg">
-          <span className="font-semibold md:text-xl">{props.income}</span>
+          <span className="font-semibold md:text-xl">{props.expense}</span>
           <div className="flex md:flex-row flex-col md:space-x-4 md:whitespace-nowrap">
             <span>{toBRL(props.value)}</span>
             <span className="flex items-center">

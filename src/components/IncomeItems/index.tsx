@@ -22,6 +22,7 @@ export default function IncomeItems() {
           return (
             <IncomeItem
               value={income.amount}
+              category={income.category}
               income={income.title}
               id={income._id}
               comment={income.description}

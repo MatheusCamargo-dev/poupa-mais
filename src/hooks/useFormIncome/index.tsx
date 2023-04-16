@@ -27,7 +27,10 @@ const schema = z
         return { message: 'Informe uma data valida.' };
       }
     }),
-    description: z.string().optional()
+    description: z
+      .string({ required_error: 'Uma breve descrição' })
+      .min(5, 'Informe uma breve descrição de pelo menos 5 caracteres.')
+      .max(35, 'A descrição não pode ultrapassar 35 caracteres.')
   })
   .refine((fields) => fields.category !== 'selecione', {
     path: ['category'],

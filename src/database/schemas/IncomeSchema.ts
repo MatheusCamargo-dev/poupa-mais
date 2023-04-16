@@ -6,7 +6,7 @@ const IncomeSchema = new Schema(
     type: { type: String, default: 'income' },
     date: { type: Date, required: true, trim: true },
     category: { type: String, required: true, trim: true },
-    description: { type: String, required: true, trim: true, maxLength: 100 },
+    description: { type: String, required: true, trim: true, maxLength: 35 },
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true }
   },
   { timestamps: true }

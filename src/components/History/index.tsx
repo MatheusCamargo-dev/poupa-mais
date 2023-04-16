@@ -21,7 +21,7 @@ export default function History() {
   const [finances, setFinances] = useState<TransactionProps[]>([]);
 
   useEffect(() => {
-    if (expenses.length > 0 && incomes.length > 0) {
+    if (expenses.length > 0 || incomes.length > 0) {
       const merged = expenses.concat(incomes);
       const sorted = merged.sort((a: TransactionProps, b: TransactionProps) => {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -41,20 +41,17 @@ export default function History() {
             return finance.type == 'income' ? (
               <Income
                 key={finance._id}
-                income={finance.description}
+                income={finance.title}
                 value={finance.amount}
               ></Income>
             ) : (
               <Expense
                 key={finance._id}
-                expense={finance.description}
+                expense={finance.title}
                 value={finance.amount}
               ></Expense>
             );
           })}
-        {/* <Expense expense="Consulta no dentista" value={-200}></Expense>
-        <Expense expense="Viagem" value={-1250}></Expense>
-        <Income income="Freelance" value={3250}></Income> */}
       </div>
     </>
   );

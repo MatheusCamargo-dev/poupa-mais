@@ -7,6 +7,7 @@ import SelectTransactions from '../SelectTransactions';
 import TextAreaTransactions from '../TextAreaTransactions';
 
 import { useFormExpense } from '@/hooks/useFormExpense';
+import { ExpenseCategoryOptions } from '@/store/expenseCategory';
 
 export default function FormExpense() {
   const {
@@ -49,16 +50,7 @@ export default function FormExpense() {
         <SelectTransactions
           {...register('category')}
           label="Selecione uma categoria:"
-          options={[
-            'Moradia',
-            'Alimentação',
-            'Assinaturas',
-            'Transporte',
-            'Saúde',
-            'Educação',
-            'Dívidas',
-            'Transações'
-          ]}
+          options={ExpenseCategoryOptions}
           error={errors.category}
         />
         <TextAreaTransactions
