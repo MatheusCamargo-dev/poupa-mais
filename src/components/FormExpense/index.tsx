@@ -64,7 +64,7 @@ export default function FormExpense() {
           <button
             type="submit"
             disabled={isLoading}
-            className="group relative flex md:w-full text-md justify-center rounded-3xl bg-teal-500 py-2 px-3 font-semibold text-slate-700 hover:bg-teal-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="group relative flex md:w-full text-md justify-center rounded-3xl bg-red-600 py-2 px-3 font-semibold text-slate-300 hover:bg-red-700 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             {isLoading ? 'Aguarde..' : '+ Adicionar despesa'}
           </button>

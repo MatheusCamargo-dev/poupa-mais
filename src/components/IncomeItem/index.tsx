@@ -37,7 +37,10 @@ export default function IncomeItem(props: IncomeItem) {
       <div className="flex items-center space-x-8">
         {props.category && IncomeCategory[props.category]}
         <div className="flex flex-col ml-2 space-y-2 text-transaction text-lg">
-          <span className="font-semibold md:text-xl">{props.income}</span>
+          <div className="flex items-center gap-2">
+            <div className="rounded-full w-3 h-3 bg-green-500"></div>
+            <span className="font-semibold md:text-xl">{props.income}</span>
+          </div>
           <div className="flex md:flex-row flex-col md:space-x-4 md:whitespace-nowrap">
             <span>{toBRL(props.value)}</span>
             <span className="flex items-center">

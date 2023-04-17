@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux';
 
 import { setAuthenticated } from '@/features/Auth';
 import { useStoreSelector } from '@/hooks/useStoreSelector';
-import { Bars3Icon } from '@heroicons/react/24/outline';
 import { destroyCookie } from 'nookies';
 
 function classNames(...classes: string[]) {
@@ -69,7 +68,7 @@ export default function Sidebar() {
   }
   return (
     <>
-      <div className="min-h-screen hidden sm:block bg-primary-blue">
+      <div className="min-h-screen sm:block bg-primary-blue">
         <div className="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r border-dark-blue hover:w-56 hover:bg-primary-blue hover:shadow-lg">
           <div className="flex h-screen flex-col justify-between pt-2 pb-6">
             <div>
@@ -143,10 +142,6 @@ export default function Sidebar() {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="sidebar end right-2 fixed m-2 to-transparent p-2 sm:hidden border-2 bg-teal-500 border-white rounded-md">
-        <Bars3Icon className="h-6 w-6 text-white" aria-hidden="true" />
       </div>
     </>
   );

@@ -37,9 +37,11 @@ export default function ExpenseItem(props: IncomeItem) {
     <div className="flex justify-between w-full p-3 px-5 border-2 hover:bg-zinc-300 mx-auto border-zinc-500  rounded-2xl bg-zinc-50">
       <div className="flex items-center space-x-8">
         {props.category && ExpenseCategory[props.category]}
-        {/* <GiHealthNormal size={35} className="text-transaction"></GiHealthNormal> */}
         <div className="flex flex-col ml-2 space-y-2 text-transaction text-lg">
-          <span className="font-semibold md:text-xl">{props.expense}</span>
+          <div className="flex items-center gap-2">
+            <div className="rounded-full w-3 h-3 bg-red-500"></div>
+            <span className="font-semibold md:text-xl">{props.expense}</span>
+          </div>
           <div className="flex md:flex-row flex-col md:space-x-4 md:whitespace-nowrap">
             <span>{toBRL(props.value)}</span>
             <span className="flex items-center">

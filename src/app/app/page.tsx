@@ -9,7 +9,7 @@ import Welcome from '@/components/Welcome';
 export default function App() {
   return (
     <div className="h-full w-full">
-      <div className=" mx-10 lg:mx-auto lg:container h-max my-10">
+      <div className=" md:mx-10 lg:mx-auto lg:container h-max my-10">
         <div className="flex flex-col pb-5 px-2">
           <Welcome />
           <span className="text-xl text-zinc-400">
@@ -24,8 +24,8 @@ export default function App() {
             <Transactions />
             <div className="flex flex-col w-full">
               <History />
-              <Salary min={1200} max={7000}></Salary>
-              <Expense min={120} max={3000}></Expense>
+              <Salary></Salary>
+              <Expense></Expense>
             </div>
           </div>
         </div>

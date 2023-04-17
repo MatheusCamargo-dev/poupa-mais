@@ -1,26 +1,25 @@
 import { toBRL } from '@/functions/toBRL';
+import { useStoreSelector } from '@/hooks/useStoreSelector';
 
-interface Expense {
-  min: number;
-  max: number;
-}
-
-export default function Expense(props: Expense) {
-  const { min, max } = props;
+export default function Expense() {
+  const { expenses } = useStoreSelector((store) => store.Expenses);
+  const amounts = expenses.map((item) => item.amount);
+  const minAmount = Math.min(...amounts);
+  const maxAmount = Math.max(...amounts);
   return (
     <>
       <div className="text-violet-300 flex justify-between text-xl items-center">
-        <span>Minímo</span>
-        <span className="text-3xl font-semibold">Despesa</span>
-        <span>Máximo</span>
+        <span>Miníma</span>
+        <span className="text-3xl font-semibold">Despesas</span>
+        <span>Máxima</span>
       </div>
       <div className="flex flex-col py-4 space-y-2">
         <div className="flex justify-between w-full p-3 border-2 mx-auto border-zinc-500  rounded-2xl bg-zinc-100">
           <span className="text-md md:text-2xl font-bold whitespace-nowrap text-transaction">
-            {toBRL(min)}
+            {toBRL(minAmount)}
           </span>
           <span className="text-md md:text-2xl font-bold whitespace-nowrap text-transaction">
-            {toBRL(max)}
+            {toBRL(maxAmount)}
           </span>
         </div>
       </div>
