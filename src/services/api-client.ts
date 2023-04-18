@@ -24,7 +24,7 @@ export async function apiClient(
 
   if (data) {
     options.body = JSON.stringify({
-      date: data
+      data
     });
   }
 
