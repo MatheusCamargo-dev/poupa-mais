@@ -1,24 +1,38 @@
 'use client';
-import { apiClient } from '@/services/api-client';
+import { Parser } from 'xml2js';
 
 export default function OFXReader() {
-  const handleFileChange = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
-      try {
-        const response = await apiClient(
-          'http://localhost:3000/api/transactions/ofx/',
-          'POST',
-          formData
-        );
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {
-        console.error(error);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      for (let i = 0; i < files?.length; i++) {
+        const file = files[i];
+        console.log(file);
+        if (file) {
+          const reader = new FileReader();
+          const { name } = file;
+          const ext = name.substring(name.lastIndexOf('.') + 1).toLowerCase();
+          const isOFX = ext == 'ofx';
+          console.log(isOFX);
+          reader.onload = (event) => {
+            const ofx = event.target?.result;
+            console.log('aaaaaq');
+            if (ofx && isOFX) {
+              console.log('aq');
+              const parser = new Parser({
+                explicitArray: false,
+                mergeAttrs: true
+              });
+
+              parser.parseString(ofx, (err, result) => {
+                if (err) console.error(err);
+                console.log(result);
+              });
+            }
+          };
+
+          reader.readAsText(file);
+        }
       }
     }
   };

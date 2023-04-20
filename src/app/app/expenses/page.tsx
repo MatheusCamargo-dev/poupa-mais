@@ -18,7 +18,7 @@ export default function Expenses() {
             <FormExpense />
             <ExpenseItems></ExpenseItems>
           </div>
-          {/* <OFXReader /> */}
+          <OFXReader />
         </div>
       </div>
     </div>
