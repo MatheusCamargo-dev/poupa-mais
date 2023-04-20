@@ -23,8 +23,8 @@ export async function OPTIONS(request: any) {
 export async function POST(request: any) {
   try {
     await corsHandler(request);
-    const res = await request.json();
-    const { email, password } = res.date;
+    const { data } = await request.json();
+    const { email, password } = data;
     const auth = await tokenController.createToken({ email, password });
     return NextResponse.json(auth);
   } catch (e) {

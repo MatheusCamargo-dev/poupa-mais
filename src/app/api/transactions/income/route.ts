@@ -13,10 +13,9 @@ export async function POST(request: Request) {
     const res = await tokenController.validToken(token);
 
     if (res && res.status == 1) {
-      const query = await request.json();
-      const { date } = query;
-      const data = { user: res.userData?.id, ...date };
-      const income = await incomeController.store(data);
+      const { data } = await request.json();
+      const query = { user: res.userData?.id, ...data };
+      const income = await incomeController.store(query);
       if (income) {
         return NextResponse.json({
           data: income
@@ -62,9 +61,9 @@ export async function DELETE(request: NextRequest) {
     const res = await tokenController.validToken(token);
     if (res && res.status == 1) {
       const userId = res.userData?.id;
-      const { date } = await request.json();
-      const data = await incomeController.deleteById(date, userId);
-      return NextResponse.json({ status: 1, data });
+      const { data } = await request.json();
+      const deleted = await incomeController.deleteById(data, userId);
+      return NextResponse.json({ status: 1, data: deleted });
     }
     return NextResponse.json(res);
   } catch (e) {

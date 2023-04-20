@@ -40,13 +40,13 @@ export default function History() {
           finances.map((finance) => {
             return finance.type == 'income' ? (
               <Income
-                key={finance._id}
+                key={crypto.randomUUID()}
                 income={finance.title}
                 value={finance.amount}
               ></Income>
             ) : (
               <Expense
-                key={finance._id}
+                key={crypto.randomUUID()}
                 expense={finance.title}
                 value={finance.amount}
               ></Expense>

@@ -33,9 +33,9 @@ const SelectTransactions = forwardRef<
         ref={ref}
       >
         <option value={'selecione'}>Selecione uma opção</option>
-        {props.options.map((option, index) => {
+        {props.options.map((option) => {
           return (
-            <option key={index} value={option}>
+            <option key={crypto.randomUUID()} value={option}>
               {option}
             </option>
           );

@@ -18,7 +18,7 @@ export default function ExpenseItems() {
   return (
     <div className="flex flex-col sm:w-full space-y-4 mt-5">
       {expenses?.[0]?.title !== '' &&
-        expenses.map((expense: ExpenseProps, index) => {
+        expenses.map((expense: ExpenseProps) => {
           return (
             <ExpenseItem
               value={expense.amount}
@@ -27,7 +27,7 @@ export default function ExpenseItems() {
               id={expense._id}
               comment={expense.description}
               date={expense.date}
-              key={index}
+              key={expense._id}
             />
           );
         })}

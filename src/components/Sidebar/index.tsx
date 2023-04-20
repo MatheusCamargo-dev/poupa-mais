@@ -61,10 +61,10 @@ export default function Sidebar() {
   }
 
   async function signOut() {
-    if (destroyCookie({}, 'token')) {
-      dispatch(setAuthenticated(0));
-      router.push('/');
-    }
+    await destroyCookie({}, 'token');
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    dispatch(setAuthenticated(0));
+    router.push('/');
   }
   return (
     <>
@@ -95,7 +95,6 @@ export default function Sidebar() {
                     key={item.name}
                   >
                     <Link
-                      key={item.name}
                       href={item.href}
                       onClick={() => currentPage(item.name)}
                       className="flex items-center space-x-4 "

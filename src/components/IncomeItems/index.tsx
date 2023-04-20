@@ -18,7 +18,7 @@ export default function IncomeItems() {
   return (
     <div className="flex flex-col sm:w-full space-y-4 mt-5">
       {incomes?.[0]?.title !== '' &&
-        incomes.map((income: IncomeProps, index) => {
+        incomes.map((income: IncomeProps) => {
           return (
             <IncomeItem
               value={income.amount}
@@ -27,7 +27,7 @@ export default function IncomeItems() {
               id={income._id}
               comment={income.description}
               date={income.date}
-              key={index}
+              key={income._id}
             />
           );
         })}
