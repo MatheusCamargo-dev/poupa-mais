@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 import { GiPayMoney, GiReceiveMoney } from 'react-icons/gi';
 import { MdDashboard } from 'react-icons/md';
+import { TbFileImport } from 'react-icons/tb';
 import { useDispatch } from 'react-redux';
 
 import { setAuthenticated } from '@/features/Auth';
@@ -37,6 +38,12 @@ export default function Sidebar() {
       name: 'Despesas',
       href: '/app/expenses',
       icon: <GiPayMoney size={25} />,
+      current: false
+    },
+    {
+      name: 'Importações',
+      href: '/app/importations',
+      icon: <TbFileImport size={25} />,
       current: false
     }
   ]);

@@ -1,48 +1,35 @@
 'use client';
-import { Parser } from 'xml2js';
+import { CiImport } from 'react-icons/ci';
+
+import TransactionItems from '../TransactionItems';
+
+import { useOFXReader } from '@/hooks/useOFXReader';
 
 export default function OFXReader() {
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files) {
-      for (let i = 0; i < files?.length; i++) {
-        const file = files[i];
-        console.log(file);
-        if (file) {
-          const reader = new FileReader();
-          const { name } = file;
-          const ext = name.substring(name.lastIndexOf('.') + 1).toLowerCase();
-          const isOFX = ext == 'ofx';
-          console.log(isOFX);
-          reader.onload = (event) => {
-            const ofx = event.target?.result;
-            console.log('aaaaaq');
-            if (ofx && isOFX) {
-              console.log('aq');
-              const parser = new Parser({
-                explicitArray: false,
-                mergeAttrs: true
-              });
+  const { handleFileChange, transactions, hiddenFileInput, handleClick } =
+    useOFXReader();
 
-              parser.parseString(ofx, (err, result) => {
-                if (err) console.error(err);
-                console.log(result);
-              });
-            }
-          };
-
-          reader.readAsText(file);
-        }
-      }
-    }
-  };
   return (
-    <div className="mt-5">
-      <input
-        type="file"
-        className="rounded-md bg-green-300"
-        onChange={handleFileChange}
-      ></input>
+    <div className="flex pt-8 space-x-4">
+      <div className="bg-white border-2 rounded-2xl border-zinc-300 w-1/4 px-6 py-8 h-max space-y-4">
+        <h1 className="text-3xl font-bold whitespace-nowrap">
+          OFX - Transações
+        </h1>
+        <input
+          type="file"
+          className="hidden"
+          onChange={handleFileChange}
+          accept=".ofx"
+          ref={hiddenFileInput}
+        ></input>
+        <button
+          className=" bg-teal-400 hover:bg-teal-500 h-12 rounded-3xl text-white px-8 whitespace-nowrap flex items-center gap-2"
+          onClick={handleClick}
+        >
+          Importar arquivo OFX <CiImport size={25} className="" />
+        </button>
+      </div>
+      <TransactionItems transactions={transactions} />
     </div>
   );
 }

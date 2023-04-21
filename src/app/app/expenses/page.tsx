@@ -1,6 +1,5 @@
 import ExpenseItems from '@/components/ExpenseItems';
 import FormExpense from '@/components/FormExpense';
-import OFXReader from '@/components/OFXReader';
 import TotExpense from '@/components/TotExpense';
 
 export default function Expenses() {
@@ -18,7 +17,6 @@ export default function Expenses() {
             <FormExpense />
             <ExpenseItems></ExpenseItems>
           </div>
-          <OFXReader />
         </div>
       </div>
     </div>
