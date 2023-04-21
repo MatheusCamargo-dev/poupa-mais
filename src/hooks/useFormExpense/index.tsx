@@ -57,17 +57,14 @@ export const useFormExpense = () => {
   async function handleExpense(data: any) {
     setIsLoading(true);
     const body = { type: data.category, ...data };
-    const r = await apiClient(
-      'http://localhost:3000/api/transactions/expense/',
-      'POST',
-      body
-    );
+    const r = await apiClient('transactions/expense/', 'POST', body);
     const {
       data: { expense }
     } = await r.json();
     reset();
     setIsLoading(false);
     dispatch(incrementExpenses(expense));
+    return expense;
   }
 
   return {

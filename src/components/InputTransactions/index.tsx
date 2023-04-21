@@ -55,7 +55,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
                   }}
                   prefix="R$"
                   placeholder="R$"
-                  className="block border-zinc-500 border-2 p-1 rounded-md"
+                  className="block border-zinc-500 border-2 p-1 rounded-md w-full"
                 />
               )}
             />
@@ -75,7 +75,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
                   selected={field.value}
                   locale="pt"
                   dateFormat={'dd/MM/yyyy'}
-                  className="block border-zinc-500 border-2 p-1 rounded-md"
+                  className="block border-zinc-500 border-2 p-1 rounded-md w-full"
                 />
               )}
             />
@@ -91,7 +91,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
               value={props.value}
               defaultValue={props.defaultValue}
               {...register(props.name)}
-              className={'block border-zinc-500 border-2 p-1 rounded-md'}
+              className={'block border-zinc-500 border-2 p-1 rounded-md w-full'}
               ref={ref}
             />
           );

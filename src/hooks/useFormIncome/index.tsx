@@ -58,17 +58,14 @@ export const useFormIncome = () => {
   async function handleIncome(data: any) {
     setIsLoading(true);
     const body = { type: data.category, ...data };
-    const r = await apiClient(
-      'http://localhost:3000/api/transactions/income/',
-      'POST',
-      body
-    );
+    const r = await apiClient('transactions/income/', 'POST', body);
     const {
       data: { income }
     } = await r.json();
     reset();
     setIsLoading(false);
     dispatch(incrementIncomes(income));
+    return income;
   }
 
   return {

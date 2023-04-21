@@ -2,7 +2,7 @@ import { NextPageContext } from 'next';
 
 import { parseCookies } from 'nookies';
 export async function apiClient(
-  url: string,
+  endpoint: string,
   method = 'GET',
   data?: BodyInit | undefined,
   ctx: Pick<NextPageContext, 'req'> | undefined = undefined
@@ -27,6 +27,6 @@ export async function apiClient(
       data
     });
   }
-
+  const url = 'http://localhost:3000/api/' + endpoint;
   return fetch(url, options);
 }

@@ -36,25 +36,19 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
   }, [isAuthenticated]);
 
   const getIncomes = useCallback(async () => {
-    const data = await apiClient(
-      'http://localhost:3000/api/transactions/income/',
-      'GET'
-    );
+    const data = await apiClient('transactions/income/', 'GET');
     const json = await data.json();
     dispatch(setIncomes(json.data));
   }, [dispatch]);
 
   const getExpenses = useCallback(async () => {
-    const data = await apiClient(
-      'http://localhost:3000/api/transactions/expense/',
-      'GET'
-    );
+    const data = await apiClient('transactions/expense/', 'GET');
     const json = await data.json();
     dispatch(setExpenses(json.data));
   }, [dispatch]);
 
   const token = useCallback(async () => {
-    const data = await apiClient('http://localhost:3000/api/token', 'POST');
+    const data = await apiClient('token', 'POST');
     const auth = await data.json();
     dispatch(setAuthenticated(auth.status));
     if (auth.status == 0) {

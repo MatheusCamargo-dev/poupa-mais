@@ -22,11 +22,7 @@ export default function IncomeItem(props: IncomeItem) {
   const dispatch = useDispatch();
   const deleteItem = useCallback(async (id: any) => {
     const body = id;
-    const response = await apiClient(
-      'http://localhost:3000/api/transactions/income/',
-      'DELETE',
-      body
-    );
+    const response = await apiClient('transactions/income/', 'DELETE', body);
     const { data } = await response.json();
     if (data) {
       dispatch(deleteIncomes(data));

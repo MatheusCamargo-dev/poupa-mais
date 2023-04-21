@@ -85,7 +85,7 @@ export const useOFXReader = () => {
         sliceDate.slice(4, 6) +
         '-' +
         sliceDate.slice(6, 8);
-      const type = transaction.TRNTYPE == 'DEBIT' ? 'expense' : 'income';
+      const type = transaction.TRNTYPE == 'CREDIT' ? 'income' : 'expense';
       const amount = Math.abs(parseInt(transaction.TRNAMT));
       return {
         _id: transaction.FITID,

@@ -34,7 +34,9 @@ const TextAreaTransactions = forwardRef<
       <textarea
         placeholder={props.placeholder}
         {...register(props.name)}
-        className={'block border-zinc-500 border-2 p-1 text-md rounded-md'}
+        className={
+          'block border-zinc-500 border-2 p-1 text-md rounded-md w-full'
+        }
         rows={3}
         cols={28}
         ref={ref}

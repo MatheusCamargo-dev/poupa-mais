@@ -25,7 +25,7 @@ export default function Account() {
   } = useSignInUp();
   useEffect(() => {
     const token = async () => {
-      const data = await apiClient('http://localhost:3000/api/token', 'POST');
+      const data = await apiClient('token', 'POST');
       const auth = await data.json();
       if (auth.status == 1) {
         push('/app');
