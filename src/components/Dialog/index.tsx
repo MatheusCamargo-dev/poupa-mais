@@ -10,12 +10,14 @@ type DialogProps = {
   loading: boolean;
   indicator?: string;
   action?: string;
+  hoverColor?: string;
 };
 
 function Dialog(props: DialogProps) {
   const {
     children,
-    color = 'bg-red',
+    color = 'bg-teal-200',
+    hoverColor = 'hover:bg-teal-300',
     handleCloseDialog,
     size = 'w-1/3',
     handleSubmit,
@@ -31,7 +33,7 @@ function Dialog(props: DialogProps) {
       <span className="absolute top-0 right-0 p-4">
         <button
           onClick={handleCloseDialog}
-          className={`focus:outline-none focus:border-none hover:${color}-700
+          className={`focus:outline-none focus:border-none hover:bg-red-700
           p-2 rounded-full inline-flex items-center`}
         >
           <svg
@@ -103,9 +105,9 @@ function Dialog(props: DialogProps) {
               <button
                 type="button"
                 className={`mt-3 w-full inline-flex justify-center rounded-md
-                border border-gray-300 shadow-sm px-4 py-2 bg-teal-200 text-base
-                font-medium text-gray-700 hover:bg-teal-300
-                sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm w-1/`}
+                border border-gray-300 shadow-sm px-4 py-2 ${color} text-base
+                font-medium text-gray-700 ${hoverColor}
+                sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm`}
                 onClick={handleSubmit}
                 disabled={loading}
               >

@@ -76,6 +76,7 @@ export default function IncomeItem(props: IncomeItem) {
     }
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [alertDialogOpen, setAlertDialogOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -84,10 +85,12 @@ export default function IncomeItem(props: IncomeItem) {
 
   const dispatch = useDispatch();
   const deleteItem = useCallback(async (id: any) => {
+    setIsLoading(true);
     const body = id;
     const response = await apiClient('transactions/income/', 'DELETE', body);
     const { data } = await response.json();
     if (data) {
+      setIsLoading(false);
       dispatch(deleteIncomes(data));
     }
   }, []);
@@ -138,12 +141,12 @@ export default function IncomeItem(props: IncomeItem) {
         </div>
       </div>
       <div
-        onClick={() => deleteItem(props._id)}
+        onClick={() => setAlertDialogOpen(true)}
         className="sm:flex hidden items-center sm:mr-5 md:bg-transaction md:p-4 rounded-full text-white"
       >
         <TbTrashFilled
           size={30}
-          className="text-transaction md:text-white "
+          className="text-transaction md:text-white bg-red-"
         ></TbTrashFilled>
       </div>
       {isDialogOpen && (
@@ -196,6 +199,22 @@ export default function IncomeItem(props: IncomeItem) {
               />
             </form>
           </FormProvider>
+        </Dialog>
+      )}
+      {alertDialogOpen && (
+        <Dialog
+          handleCloseDialog={() => setAlertDialogOpen(false)}
+          title={`Remover rendimento`}
+          handleSubmit={() => deleteItem(props._id)}
+          loading={isLoading}
+          indicator="bg-green-500"
+          action="Confirmar"
+          key={crypto.randomUUID()}
+        >
+          <div className="flex flex-col space-y-2">
+            <span className="text-xl font-semibold">{props.title}</span>
+            Você realmente deseja excluir esse rendimento?
+          </div>
         </Dialog>
       )}
     </div>
