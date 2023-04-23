@@ -35,16 +35,18 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
     return isAuthenticated;
   }, [isAuthenticated]);
 
-  const getIncomes = useCallback(async () => {
-    const data = await apiClient('transactions/income/', 'GET');
-    const json = await data.json();
-    dispatch(setIncomes(json.data));
-  }, [dispatch]);
+  const getTransactions = useCallback(async () => {
+    const [responseIncome, responseExpense] = await Promise.all([
+      apiClient('transactions/income/', 'GET'),
+      apiClient('transactions/expense/', 'GET')
+    ]);
 
-  const getExpenses = useCallback(async () => {
-    const data = await apiClient('transactions/expense/', 'GET');
-    const json = await data.json();
-    dispatch(setExpenses(json.data));
+    const [incomes, expense] = await Promise.all([
+      responseIncome.json(),
+      responseExpense.json()
+    ]);
+    dispatch(setIncomes(incomes.data));
+    dispatch(setExpenses(expense.data));
   }, [dispatch]);
 
   const token = useCallback(async () => {
@@ -55,8 +57,7 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
       push('/account?type=login');
       return;
     }
-    await getIncomes();
-    await getExpenses();
+    await getTransactions();
     dispatch(setUser(auth.userData));
   }, [dispatch]);
 
