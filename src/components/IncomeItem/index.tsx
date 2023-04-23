@@ -142,11 +142,11 @@ export default function IncomeItem(props: IncomeItem) {
       </div>
       <div
         onClick={() => setAlertDialogOpen(true)}
-        className="sm:flex hidden items-center sm:mr-5 md:bg-transaction md:p-4 rounded-full text-white"
+        className="sm:flex hidden items-center sm:mr-5 md:bg-black-blue md:p-4 rounded-full text-white"
       >
         <TbTrashFilled
           size={30}
-          className="text-transaction md:text-white bg-red-"
+          className="text-transaction md:text-white hover:text-red-400"
         ></TbTrashFilled>
       </div>
       {isDialogOpen && (
@@ -207,7 +207,9 @@ export default function IncomeItem(props: IncomeItem) {
           title={`Remover rendimento`}
           handleSubmit={() => deleteItem(props._id)}
           loading={isLoading}
-          indicator="bg-green-500"
+          indicator="bg-red-500"
+          color="bg-red-400"
+          hoverColor="hover:bg-red-500"
           action="Confirmar"
           key={crypto.randomUUID()}
         >

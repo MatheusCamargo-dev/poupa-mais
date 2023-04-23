@@ -79,6 +79,7 @@ export default function ExpenseItem(props: ExpenseItem) {
     }
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [alertDialogOpen, setAlertDialogOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -95,8 +96,6 @@ export default function ExpenseItem(props: ExpenseItem) {
     }
   }, []);
 
-  const { handleCloseDialog, handleOpenDialog, isDialogOpen } =
-    useTransactionItem(props);
   const expenseUpdate = async (data: any) => {
     setIsLoading(true);
     const r = await apiClient('transactions/expense', 'PUT', data);
@@ -117,6 +116,9 @@ export default function ExpenseItem(props: ExpenseItem) {
       dispatch(updateExpense(update));
     }
   };
+
+  const { handleCloseDialog, handleOpenDialog, isDialogOpen } =
+    useTransactionItem(props);
   return (
     <div className="flex justify-between w-full p-3 px-5 border-2 hover:bg-zinc-300 mx-auto border-zinc-500  rounded-2xl bg-zinc-50">
       <div className="flex items-center space-x-8" onClick={handleOpenDialog}>
@@ -140,12 +142,12 @@ export default function ExpenseItem(props: ExpenseItem) {
         </div>
       </div>
       <div
-        onClick={() => deleteItem(props._id)}
-        className="sm:flex hidden items-center sm:mr-5 md:bg-transaction md:p-4 rounded-full text-white"
+        onClick={() => setAlertDialogOpen(true)}
+        className="sm:flex hidden items-center sm:mr-5 md:bg-black-blue md:p-4 rounded-full text-white"
       >
         <TbTrashFilled
           size={30}
-          className="text-transaction md:text-white "
+          className="text-transaction md:text-white hover:text-red-400"
         ></TbTrashFilled>
       </div>
       {isDialogOpen && (
@@ -198,6 +200,24 @@ export default function ExpenseItem(props: ExpenseItem) {
               />
             </form>
           </FormProvider>
+        </Dialog>
+      )}
+      {alertDialogOpen && (
+        <Dialog
+          handleCloseDialog={() => setAlertDialogOpen(false)}
+          title={`Remover despesa`}
+          handleSubmit={() => deleteItem(props._id)}
+          loading={isLoading}
+          indicator="bg-red-500"
+          color="bg-red-400"
+          hoverColor="hover:bg-red-500"
+          action="Confirmar"
+          key={crypto.randomUUID()}
+        >
+          <div className="flex flex-col space-y-2">
+            <span className="text-xl font-semibold">{props.title}</span>
+            Você realmente deseja excluir essa despesa?
+          </div>
         </Dialog>
       )}
     </div>
