@@ -21,11 +21,11 @@ export default function IncomeItems() {
         incomes.map((income: IncomeProps) => {
           return (
             <IncomeItem
-              value={income.amount}
+              amount={income.amount}
               category={income.category}
-              income={income.title}
-              id={income._id}
-              comment={income.description}
+              title={income.title}
+              _id={income._id}
+              description={income.description}
               date={income.date}
               key={income._id}
             />

@@ -8,7 +8,8 @@ type DialogProps = {
   size?: string;
   title: string;
   loading: boolean;
-  indicator: string;
+  indicator?: string;
+  action?: string;
 };
 
 function Dialog(props: DialogProps) {
@@ -20,7 +21,8 @@ function Dialog(props: DialogProps) {
     handleSubmit,
     title,
     loading,
-    indicator
+    indicator,
+    action = 'Adicionar'
   } = props;
 
   const hidden = loading ? 'hidden' : '';
@@ -77,12 +79,14 @@ function Dialog(props: DialogProps) {
           >
             <div
               className="relative px-8 pt-5 bg-white w-full flex-col flex
-            rounded-lg"
+            rounded-lg space-x-4"
             >
               <div className="text-2xl font-semibold flex items-center gap-2">
-                <div
-                  className={`${indicator} rounded-full w-3 h-3 mr-2 md:mr-0`}
-                />
+                {indicator && (
+                  <div
+                    className={`${indicator} rounded-full w-3 h-3 mr-2 md:mr-0`}
+                  />
+                )}
                 {title}
               </div>
               {CloseIcon()}
@@ -105,10 +109,11 @@ function Dialog(props: DialogProps) {
                 onClick={handleSubmit}
                 disabled={loading}
               >
-                {loading ? 'Aguarde' : 'Adicionar'}
+                {loading ? 'Aguarde' : action}
               </button>
               <button
                 type="button"
+                disabled={loading}
                 className={`${
                   loading && hidden
                 } mt-3 w-full inline-flex justify-center rounded-md

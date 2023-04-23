@@ -32,7 +32,7 @@ const schema = z
   });
 type FormPropsRegister = z.infer<typeof schema>;
 
-export const useTransactionItem = (props: TransactionProps) => {
+export const useTransactionItem = (props: TransactionProps | any) => {
   const { handleIncome, isLoading: incomeLoading } = useFormIncome();
   const { handleExpense, isLoading: expenseLoading } = useFormExpense();
   const [isHidden, setIsHidden] = useState<boolean>(false);

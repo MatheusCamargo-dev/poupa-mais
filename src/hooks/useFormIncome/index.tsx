@@ -12,7 +12,7 @@ const schema = z
     title: z
       .string({ required_error: 'Título é obrigatório.' })
       .min(3, 'O Título deve conter no mínimo 3 caracteres.')
-      .max(30, 'O Título deve conter no máximo 30 caracteres.')
+      .max(50, 'O Título deve conter no máximo 50 caracteres.')
       .trim(),
     category: z.string().nonempty(),
     amount: z

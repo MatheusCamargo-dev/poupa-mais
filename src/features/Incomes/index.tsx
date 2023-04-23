@@ -2,14 +2,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit/dist/createAction';
 
-interface IncomeStates {
+export interface IncomeStates {
+  _id: string;
   title: string;
   date: string;
   type: string;
   amount: number;
   category: string;
   description: string;
-  _id: string;
 }
 
 interface IncomesStates {
@@ -52,6 +52,22 @@ export const incomesSlice = createSlice({
       state.incomes.push(action.payload);
       state.totIncome = state.totIncome + action.payload.amount;
     },
+    updateIncome: (
+      state: IncomesStates,
+      action: PayloadAction<IncomeStates>
+    ) => {
+      const update = action.payload;
+      state.incomes = state.incomes.map((income) => {
+        if (income._id == update._id) {
+          return update;
+        }
+        return income;
+      });
+      state.totIncome = state.incomes.reduce(
+        (acc, income) => acc + income.amount,
+        0
+      );
+    },
     deleteIncomes: (
       state: IncomesStates,
       action: PayloadAction<IncomeStates>
@@ -64,6 +80,6 @@ export const incomesSlice = createSlice({
   }
 });
 
-export const { setIncomes, incrementIncomes, deleteIncomes } =
+export const { setIncomes, incrementIncomes, deleteIncomes, updateIncome } =
   incomesSlice.actions;
 export const incomesReducer = incomesSlice.reducer;

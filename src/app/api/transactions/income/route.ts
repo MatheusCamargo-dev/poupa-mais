@@ -83,15 +83,12 @@ export async function PUT(request: Request) {
     if (res && res.status == 1) {
       const userId = res.userData?.id;
       const body = await request.json();
-      const income = await incomeController.updateIncome(
-        userId,
-        body.income,
-        body.data
-      );
+      const income = await incomeController.updateIncome(userId, body.data);
       if (income) {
         return NextResponse.json({
           status: 1,
-          message: 'created with success!'
+          message: 'Updated with success!',
+          income
         });
       }
     }
