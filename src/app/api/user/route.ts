@@ -5,8 +5,8 @@ import userController from '@/database/controllers/UserController';
 
 export async function POST(request: Request) {
   try {
-    const res = await request.json();
-    const { fullname, username, password, email } = res.date;
+    const { data } = await request.json();
+    const { fullname, username, password, email } = data;
     const user = await userController.createUser({
       fullname,
       username,
