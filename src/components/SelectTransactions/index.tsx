@@ -10,6 +10,7 @@ interface SelectTransactionsProps
   label?: string;
   error?: any;
   options: Array<string>;
+  disableDefaultOption?: boolean;
 }
 
 // export default SelectTransactions;
@@ -32,7 +33,9 @@ const SelectTransactions = forwardRef<
         className={'block border-zinc-500 border-2 md:w-full p-1 rounded-md'}
         ref={ref}
       >
-        <option value={'selecione'}>Selecione uma opção</option>
+        {!props.disableDefaultOption && (
+          <option value={'selecione'}>Selecione uma opção</option>
+        )}
         {props.options.map((option) => {
           return (
             <option key={crypto.randomUUID()} value={option}>

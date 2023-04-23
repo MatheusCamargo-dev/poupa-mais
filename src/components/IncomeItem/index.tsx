@@ -59,10 +59,10 @@ const schema = z
     message: 'Por favor, selecione uma opção'
   });
 
-type FormPropsRegister = z.infer<typeof schema>;
+type FormPropsUpdate = z.infer<typeof schema>;
 
 export default function IncomeItem(props: IncomeItem) {
-  const formProps = useForm<FormPropsRegister>({
+  const formProps = useForm<FormPropsUpdate>({
     reValidateMode: 'onSubmit',
     resolver: zodResolver(schema),
     defaultValues: {
@@ -185,6 +185,7 @@ export default function IncomeItem(props: IncomeItem) {
                 label="Selecione uma categoria:"
                 options={IncomeCategoryOptions}
                 error={errors.category}
+                disableDefaultOption={true}
               />
               <TextAreaTransactions
                 {...register('description')}

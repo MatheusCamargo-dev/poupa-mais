@@ -49,11 +49,11 @@ const deleteById = async (id: string, user: string) => {
   }
 };
 
-const updateExpense = async (user: string, id: string, query: any) => {
+const updateExpense = async (user: string, query: any) => {
   try {
     if (!database.connect()) return false;
 
-    const expense = await Expense.find({ user, _id: id });
+    const expense = await Expense.find({ user, _id: query._id });
 
     const dateObj = new Date(query.date);
 
@@ -61,8 +61,8 @@ const updateExpense = async (user: string, id: string, query: any) => {
 
     const data = { data: isoDate, ...query };
     if (expense) {
-      const update = await Expense.findByIdAndUpdate(id, data);
-      return update;
+      await Expense.findByIdAndUpdate(query._id, data);
+      return { data: isoDate, ...query };
     }
   } catch (e) {
     throw new Error('Error in update expense');

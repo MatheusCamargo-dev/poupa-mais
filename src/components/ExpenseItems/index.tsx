@@ -21,11 +21,11 @@ export default function ExpenseItems() {
         expenses.map((expense: ExpenseProps) => {
           return (
             <ExpenseItem
-              value={expense.amount}
+              amount={expense.amount}
               category={expense.category}
-              expense={expense.title}
-              id={expense._id}
-              comment={expense.description}
+              title={expense.title}
+              _id={expense._id}
+              description={expense.description}
               date={expense.date}
               key={expense._id}
             />

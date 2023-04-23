@@ -52,6 +52,22 @@ export const expensesSlice = createSlice({
       state.expenses.push(action.payload);
       state.totExpenses = state.totExpenses + action.payload.amount;
     },
+    updateExpense: (
+      state: ExpensesStates,
+      action: PayloadAction<ExpenseStates>
+    ) => {
+      const update = action.payload;
+      state.expenses = state.expenses.map((expense) => {
+        if (expense._id == update._id) {
+          return update;
+        }
+        return expense;
+      });
+      state.totExpenses = state.expenses.reduce(
+        (acc, expense) => acc + expense.amount,
+        0
+      );
+    },
     deleteExpenses: (
       state: ExpensesStates,
       action: PayloadAction<ExpenseStates>
@@ -64,6 +80,6 @@ export const expensesSlice = createSlice({
   }
 });
 
-export const { setExpenses, incrementExpenses, deleteExpenses } =
+export const { setExpenses, incrementExpenses, updateExpense, deleteExpenses } =
   expensesSlice.actions;
 export const expensesReducer = expensesSlice.reducer;
