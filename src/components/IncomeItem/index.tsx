@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FaCommentDots } from 'react-icons/fa';
 import { MdDateRange } from 'react-icons/md';
@@ -84,7 +84,7 @@ export default function IncomeItem(props: IncomeItem) {
   } = formProps;
 
   const dispatch = useDispatch();
-  const deleteItem = useCallback(async (id: any) => {
+  const deleteItem = async (id: any) => {
     setIsLoading(true);
     const body = id;
     const response = await apiClient('transactions/income/', 'DELETE', body);
@@ -93,7 +93,7 @@ export default function IncomeItem(props: IncomeItem) {
       setIsLoading(false);
       dispatch(deleteIncomes(data));
     }
-  }, []);
+  };
 
   const incomeUpdate = async (data: any) => {
     setIsLoading(true);

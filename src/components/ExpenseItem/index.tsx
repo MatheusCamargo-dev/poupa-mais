@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FaCommentDots } from 'react-icons/fa';
 import { MdDateRange } from 'react-icons/md';
@@ -87,14 +87,14 @@ export default function ExpenseItem(props: ExpenseItem) {
   } = formProps;
 
   const dispatch = useDispatch();
-  const deleteItem = useCallback(async (id: any) => {
+  const deleteItem = async (id: any) => {
     const body = id;
     const response = await apiClient('transactions/expense/', 'DELETE', body);
     const { data } = await response.json();
     if (data) {
       dispatch(deleteExpenses(data));
     }
-  }, []);
+  };
 
   const expenseUpdate = async (data: any) => {
     setIsLoading(true);

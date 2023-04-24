@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { ReactNode, useCallback, useEffect, useMemo } from 'react';
+import { ReactNode,  useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import AppLoading from '../../components/AppLoading';
@@ -31,11 +31,9 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
   const { isAuthenticated } = authStore;
   const dispatch = useDispatch();
 
-  const authenticated = useMemo(() => {
-    return isAuthenticated;
-  }, [isAuthenticated]);
+  const authenticated =  isAuthenticated;
 
-  const getTransactions = useCallback(async () => {
+  const getTransactions = async () => {
     const [responseIncome, responseExpense] = await Promise.all([
       apiClient('transactions/income/', 'GET'),
       apiClient('transactions/expense/', 'GET')
@@ -47,9 +45,9 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
     ]);
     dispatch(setIncomes(incomes.data));
     dispatch(setExpenses(expense.data));
-  }, [dispatch]);
+  };
 
-  const token = useCallback(async () => {
+  const token = async () => {
     const data = await apiClient('token', 'POST');
     const auth = await data.json();
     dispatch(setAuthenticated(auth.status));
@@ -59,7 +57,7 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
     }
     await getTransactions();
     dispatch(setUser(auth.userData));
-  }, [dispatch]);
+  };
 
   useEffect(() => {
     if (authenticated == 0) {

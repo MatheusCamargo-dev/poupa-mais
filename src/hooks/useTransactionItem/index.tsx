@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 // import { TransactionProps } from '../History';
@@ -66,11 +66,9 @@ export const useTransactionItem = (props: TransactionProps | any) => {
       ? ExpenseCategory[props.category]
       : IncomeCategory[props.category];
 
-  const categoryOptions = useMemo(() => {
-    return props.type == 'expense'
+  const categoryOptions = props.type == 'expense'
       ? ExpenseCategoryOptions
       : IncomeCategoryOptions;
-  }, [ExpenseCategoryOptions, IncomeCategoryOptions]);
 
   const indicator = props.type == 'expense' ? 'bg-red-500' : 'bg-green-500';
   const titleDialog =
