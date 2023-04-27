@@ -59,6 +59,7 @@ export default function Dashboard() {
   }, [expenses, incomes]);
 
   return (
+    finances.length > 0 ?
     <ResponsiveContainer width="100%" height="100%">
       <LineChart width={800} height={400} data={finances}>
         <XAxis
@@ -85,5 +86,13 @@ export default function Dashboard() {
         />
       </LineChart>
     </ResponsiveContainer>
+    :
+    <Skeleton />
   );
+}
+
+const Skeleton = () => {
+  return(
+    <div className="bg-skeleton h-full w-full animate-pulse"></div>
+  )
 }

@@ -14,6 +14,7 @@ module.exports = {
         'black-blue': '#1A2C4E',
         'primary-blue': '#003049',
         'teal-light': '#00756C',
+        'skeleton': '#DFDFDF',
         transaction: '#726A8C',
         instagram: ' #d92e7f'
       }
