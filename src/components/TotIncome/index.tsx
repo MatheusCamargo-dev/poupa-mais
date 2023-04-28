@@ -27,8 +27,8 @@ export default function TotExpense(props: { flex?: string }) {
 const Skeleton = () => {
   return(
       <div
-      className={`flex flex-col md:flex-row p-4 items-center bg-skeleton animate-pulse border-2 w-full justify-center border-zinc-300 text-center  text-transaction rounded-md`}
-    >
+      className={`flex flex-col md:flex-row p-4 py-6 items-center bg-skeleton animate-pulse border-2 w-full justify-center border-zinc-300 text-center  text-transaction rounded-md`}
+      >
       <span className={'text-xl md:text-2xl font-bold text-transaction'}>
       </span>
       <span className={'text-2xl px-1 md:text-4xl text-red-600 font-semibold h-4'}>

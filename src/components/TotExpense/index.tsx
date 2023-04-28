@@ -27,7 +27,7 @@ export default function TotIncome(props: { flex?: string }) {
 const Skeleton = () => {
   return(
       <div
-      className={`flex flex-col md:flex-row p-4 items-center border-2 w-full justify-center animate-pulse bg-skeleton border-zinc-300 text-center  text-transaction rounded-md`}
+      className={`flex flex-col md:flex-row p-4 py-6 items-center border-2 w-full justify-center animate-pulse bg-skeleton border-zinc-300 text-center  text-transaction rounded-md`}
     >
       <span className={'text-xl md:text-2xl font-bold text-transaction'}>
       </span>
