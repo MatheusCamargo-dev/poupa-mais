@@ -1,5 +1,7 @@
-
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
+
 
 import Sidebar from '@/components/Sidebar';
 
@@ -18,6 +20,9 @@ interface AppLayoutProps {
 export default async function AppLayout({ children }: AppLayoutProps) {
 
   const { isAuthenticated } =  store.getState().Auth;
+  const authenticated = isAuthenticated;
+  const cookieStore = cookies();
+  const tokenCookie = cookieStore.get('token');
 
   const getTransactions = async () => {
     const [responseIncome, responseExpense] = await Promise.all([
@@ -29,7 +34,6 @@ export default async function AppLayout({ children }: AppLayoutProps) {
       responseIncome.json(),
       responseExpense.json()
     ]);
-    // console.log(incomes.data);
     store.dispatch(setIncomes(incomes.data));
     store.dispatch(setExpenses(expense.data));
   }
@@ -39,14 +43,14 @@ export default async function AppLayout({ children }: AppLayoutProps) {
     const auth = await data.json();
     store.dispatch(setAuthenticated(auth.status));
     if (auth.status == 0) {
-      return;
+      redirect('account?type=login')
     }else{
       await getTransactions();
       store.dispatch(setUser(auth.userData));
     }
   };
 
-  if(isAuthenticated == 0){
+  if(authenticated == 0 || !tokenCookie){
     await token()
   };
 

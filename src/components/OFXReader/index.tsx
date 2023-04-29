@@ -10,6 +10,7 @@ export default function OFXReader() {
     useOFXReader();
 
   return (
+    typeof window !== undefined ?
     <div className="flex flex-col md:flex-row pt-8 md:space-x-4">
       <div className="bg-white border-2 flex-col items-center justify-center mb-4 md:mb-0 rounded-2xl border-zinc-300 md:w-1/4 px-6 py-8 h-max space-y-4">
         <h1 className="text-3xl font-bold md:whitespace-nowrap">
@@ -31,5 +32,13 @@ export default function OFXReader() {
       </div>
       <TransactionItems transactions={transactions} />
     </div>
+    : <SkeletonOFX />
   );
+}
+
+const SkeletonOFX = () => {
+
+  return(
+    <div className="bg-skeleton animate-pulse border-2 flex-col items-center justify-center mb-4 md:mb-0 rounded-2xl border-zinc-300 md:w-1/4 px-6 py-8 h-max space-y-4"></div>
+  )
 }

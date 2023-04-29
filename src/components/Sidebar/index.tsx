@@ -74,6 +74,7 @@ export default function Sidebar() {
     router.push('/');
   }
   return (
+    typeof window !== undefined ?
     <>
       <div className="min-h-screen sm:block bg-primary-blue">
         <div className="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r border-dark-blue hover:w-56 hover:bg-primary-blue hover:shadow-lg">
@@ -150,5 +151,69 @@ export default function Sidebar() {
         </div>
       </div>
     </>
+    : <SkeletonSidebar />
   );
+}
+
+const SkeletonSidebar = () => {
+  return(
+    <div className="min-h-screen sm:block bg-primary-blue">
+      <div className="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r border-dark-blue hover:w-56 hover:bg-primary-blue hover:shadow-lg">
+        <div className="flex h-screen flex-col justify-between pt-2 pb-6">
+          <div>
+            <div className="w-max p-2.5 flex items-center space-x-3">
+              <img
+                className=" h-8 w-auto lg:block"
+                src="/PriceHouse.ico"
+                alt="Your Company"
+              />
+              <h1 className="font-roboto text-2xl font-bold text-teal-400">
+                {' '}
+                Poupa Mais
+              </h1>
+            </div>
+            <ul className="mt-6 space-y-2 tracking-wide">
+              {Array.from([0, 1, 2, 3]).map(() => (
+                <li
+                  className='bg-skeleton animate-pulse group text-gray-300 hover:text-teal-500
+                  rounded-md px-3 py-2 text-sm font-medium min-w-max'
+                  key={crypto.randomUUID()}
+                >
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="w-max -mb-3 items-center">
+            <Link
+              href="/app/account"
+              className="flex px-3 space-x-3 cursor-pointer  w-56 items-center"
+            >
+              <img
+                className="h-8 w-8 rounded-full"
+                src="https://github.com/MatheusCamargo-dev.png"
+                alt=""
+              />{' '}
+              <div className="flex flex-col justify-center">
+                <span className="bg-skeleton animate-pulse px-4 py-2">
+                </span>
+                <span className=" bg-skeleton animate-pulse px-4 py-2">
+                </span>
+              </div>
+            </Link>
+            <a
+              className="gbg group flex items-center space-x-4 rounded-full px-4 py-3 cursor-pointer text-gray-300 hover:text-white
+            "
+            >
+              <FiLogOut
+                size={30}
+                className="group group-hover:text-red-400"
+              ></FiLogOut>
+              <span className="group-hover:text-red-400">Sair</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }

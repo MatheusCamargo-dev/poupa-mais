@@ -1,17 +1,13 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 import HeaderHome from '@/components/HeaderHome';
 import Login from '@/components/Login';
 import Register from '@/components/Register';
 
 import { useSignInUp } from '@/hooks/useSignSignUp';
-import { apiClient } from '@/services/api-client';
 
 export default function Account() {
-  const { push } = useRouter();
 
   const {
     typeForm,
@@ -23,17 +19,6 @@ export default function Account() {
     handleSignUp,
     loginText
   } = useSignInUp();
-  useEffect(() => {
-    const token = async () => {
-      const data = await apiClient('token', 'POST');
-      const auth = await data.json();
-      if (auth.status == 1) {
-        push('/app');
-        return;
-      }
-    };
-    token();
-  }, [push]);
 
   return (
     <>

@@ -6,7 +6,7 @@ export default function TotIncome(props: { flex?: string }) {
   const { totExpenses } = useStoreSelector((store) => store.Expenses);
   const { flex } = props;
   return (
-    totExpenses > 0 ?
+    (totExpenses || totExpenses == 0) && typeof window !== undefined  ?
     <div
       className={`flex flex-col md:flex-${
         flex ? flex : 'row'
