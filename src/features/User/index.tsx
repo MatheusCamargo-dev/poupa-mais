@@ -1,8 +1,7 @@
-'use client';
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit/dist/createAction';
 
-interface UserState {
+export interface UserState {
   id: string;
   fullname: string;
   username: string;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import OFXReader from '@/components/OFXReader';
+// import OFXReader from '@/components/OFXReader';
 
 export default function Importations() {
   return (
@@ -10,7 +10,7 @@ export default function Importations() {
           <h1 className="text-teal-400 tracking-tight text-4xl font-semibold">
             Importações de extrato bancário
           </h1>
-          <OFXReader />
+          {/* <OFXReader /> */}
         </div>
       </div>
     </div>

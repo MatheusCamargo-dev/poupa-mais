@@ -1,4 +1,3 @@
-'use client';
 import { authReducer } from '@/features/Auth';
 import { expensesReducer } from '@/features/Expenses';
 import { incomesReducer } from '@/features/Incomes';

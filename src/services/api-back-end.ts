@@ -1,15 +1,20 @@
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+
+import { cookies } from 'next/headers';
 
 export default async function apiServer(
   endpoint: string,
   method = 'GET',
-  token: RequestCookie,
   data?: any
 ) {
-  const headers = new Headers({
+  const cookieStore = cookies();
+  const token = cookieStore.get('token');
+  const headers:HeadersInit = {
     'Content-Type': 'application/json',
-    authorization: `Bearer ${token.value}`
-  });
+  };
+
+  if (token) {
+    headers['Authorization'] = `Bearer ${token.value}` as const;
+  }
   const options: RequestInit = {
     method: method,
     cache: 'no-store',
@@ -23,6 +28,6 @@ export default async function apiServer(
     });
   }
 
-  const url = 'http://localhost:3000/api/' + endpoint;
+  const url = 'http://127.0.0.1:3000/api/' + endpoint;
   return fetch(url, options);
 }

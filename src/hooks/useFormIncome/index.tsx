@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 import { incrementIncomes } from '@/features/Incomes';
 import { apiClient } from '@/services/api-client';
+import { store } from '@/store/store';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
@@ -47,7 +48,7 @@ export const useFormIncome = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const {
     register,
     reset,
@@ -64,7 +65,7 @@ export const useFormIncome = () => {
     } = await r.json();
     reset();
     setIsLoading(false);
-    dispatch(incrementIncomes(income));
+    store.dispatch(incrementIncomes(income));
     return income;
   }
 

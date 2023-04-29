@@ -15,7 +15,7 @@ export default function Incomes() {
           </div>
           <div className="flex sm:flex-row flex-col sm:space-x-8 mt-5">
             <FormIncome />
-            <IncomeItems></IncomeItems>
+            <IncomeItems key={crypto.randomUUID()} />
           </div>
         </div>
       </div>
