@@ -13,7 +13,6 @@ export default function FormIncome() {
     useFormIncome();
 
   return (
-    typeof window !== undefined ?
     <FormProvider {...formProps}>
       <form
         className=" space-y-4 md:w-max"
@@ -66,12 +65,11 @@ export default function FormIncome() {
         </div>
       </form>
     </FormProvider>
-    : <SkeletonForm />
     );
 }
 
-const SkeletonForm = () => {
-  return(
-    <form className="bg-skeleton animate-pulse py-72 px-36 w-64 "></form>
-  )
-}
+// const SkeletonForm = () => {
+//   return(
+//     <form className="bg-skeleton animate-pulse py-72 px-36 w-64 "></form>
+//   )
+// }

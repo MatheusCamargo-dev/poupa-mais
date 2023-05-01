@@ -17,7 +17,7 @@ export default function IncomeItems() {
   const { incomes } = useStoreSelector((store) => store.Incomes);
   return (
     <div className="flex flex-col sm:w-full space-y-4 mt-5">
-      {incomes?.[0]?.title !== '' && typeof window !== 'undefined' ?
+      {incomes?.[0]?.title !== '' ?
         incomes.map((income: IncomeProps) => {
           return (
             <IncomeItem

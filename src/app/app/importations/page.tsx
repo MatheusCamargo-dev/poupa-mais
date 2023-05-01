@@ -4,7 +4,6 @@ import OFXReader from '@/components/OFXReader';
 
 export default function Importations() {
   return (
-    typeof window !== undefined &&
     <div className="h-full w-full">
       <div className=" mx-10 lg:mx-auto lg:container h-max my-10">
         <div className="flex flex-col rounded-md p-6 border-2 border-zinc-400 bg-gradient-dark-blue pb-32 lg:w-full">

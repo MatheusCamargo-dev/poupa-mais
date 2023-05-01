@@ -7,7 +7,7 @@ export default function TotExpense(props: { flex?: string }) {
   const { flex } = props;
   const flexClass = flex ? flex : 'row';
   return (
-    (totIncome || totIncome == 0) && typeof window !== undefined  ?
+    (totIncome || totIncome == 0) ?
     <div
       className={`flex flex-col md:flex-${flexClass} p-4 items-center border-2 w-full justify-center border-zinc-300 text-center  text-transaction rounded-md bg-white`}
     >

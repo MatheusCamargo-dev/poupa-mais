@@ -8,7 +8,7 @@ export default function ContentTotValue() {
 
   const balanceValue = totIncome - totExpenses;
   return (
-    balanceValue >= 0 && typeof window !== undefined ?
+    balanceValue >= 0 ?
     <div className="flex flex-col border-2 w-full sm:w-max sm:mx-auto border-zinc-300  rounded-md bg-white">
 
       <div className="flex flex-col p-4 border-2 w-full border-zinc-300  text-transaction rounded-md">
