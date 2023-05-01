@@ -40,3 +40,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.error();
   }
 }
+
+export async function PUT(request: NextRequest) {
+
+  const { data } = await request.json();
+  console.log(data)
+  return NextResponse.json('updated with sucess');
+}

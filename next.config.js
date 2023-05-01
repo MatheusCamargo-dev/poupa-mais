@@ -2,8 +2,11 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    esmExternals: 'loose'
-  }
+    esmExternals: 'loose',
+  },
+  images: {
+    domains: ['github.com']
+  },
 };
 
 module.exports = nextConfig;

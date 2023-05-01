@@ -9,6 +9,7 @@ interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   value?: string;
   placeholder: string;
+  accept?: string;
   autoComplete?: string;
   type: string;
   error?: any;
@@ -30,6 +31,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>((props, ref) => {
       )}
       <input
         type={props.type}
+        accept={props.accept}
         autoComplete={props.autoComplete}
         placeholder={props.placeholder}
         value={props.value}
