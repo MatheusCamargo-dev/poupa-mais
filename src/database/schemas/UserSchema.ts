@@ -4,7 +4,8 @@ const UserSchema = new Schema({
   username: { type: String, required: true, maxLength: 16 },
   password: { type: String, required: true },
   email: { type: String, required: true },
-  active: { type: Boolean, default: true }
+  active: { type: Boolean, default: true },
+  user: {type: String, default: 'avatars/6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws'}
 });
 
 const User = mongoose.model('User', UserSchema);

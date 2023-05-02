@@ -15,7 +15,7 @@ import { destroyCookie } from 'nookies';
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
-
+const supabaseURL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/poupa-mais/avatars`;
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
@@ -122,7 +122,7 @@ export default function Sidebar() {
               >
                 <img
                   className="h-8 w-8 rounded-full"
-                  src="https://github.com/MatheusCamargo-dev.png"
+                  src={user.username.length > 0 ? `${supabaseURL}/${user.username}` : `${supabaseURL}/6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.png`}
                   alt=""
                 />{' '}
                 <div className="flex flex-col justify-center">

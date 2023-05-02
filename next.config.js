@@ -5,7 +5,7 @@ const nextConfig = {
     esmExternals: 'loose',
   },
   images: {
-    domains: ['github.com']
+    domains: ['github.com', 'bmwkzuyijstlnsevtxlm.supabase.co']
   },
 };
 

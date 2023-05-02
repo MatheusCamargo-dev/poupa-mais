@@ -4,14 +4,13 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import FormInput from '@/components/FormInput';
 
-import { supabase } from '@/lib/supabase';
-import { apiClient } from '@/services/api-client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 const schema = z
   .object({
+    _id: z.string(),
     fullname: z
       .string({ required_error: 'Nome é obrigatório.' })
       .min(3, 'O nome deve conter no mínimo 3 letras.')
@@ -50,16 +49,18 @@ const schema = z
 type FormPropsUpdate = z.infer<typeof schema>;
 
 interface User {
+  _id: string;
   fullname: string;
   email: string;
   username: string;
 }
 export default function FormUser(props: User) {
-  const { username, email, fullname} = props;
+  const { _id, username, email, fullname} = props;
   const formProps = useForm<FormPropsUpdate>({
     reValidateMode: 'onSubmit',
     resolver: zodResolver(schema),
     defaultValues: {
+      _id: _id,
       email: email,
       fullname: fullname,
       username: username
@@ -74,21 +75,18 @@ export default function FormUser(props: User) {
 
   const handleUpdateAccount = async (data: any) => {
     try{
-      const { data: uploadData } = await supabase
-      .storage
-      .from('poupa-mais')
-      .upload(`avatars/${username}`, data.avatar, {
-        cacheControl: '3600',
-        upsert: false
+      const formData = new FormData();
+      formData.set("avatar", data.avatar);
+      formData.set("username", data.username);
+      formData.set("fullname", data.fullname);
+      formData.set("email", data.email);
+      formData.set("id", data._id);
+      const upload = await fetch('http://localhost:3000/api/user', {
+        method: 'PUT',
+        body: formData
       })
-
-      if(uploadData && uploadData.path){
-        data.avatar = uploadData.path;
-        const upload = await apiClient('user', 'PUT', data)
         const json = await upload.json();
         console.log(json);
-      }
-
     }catch(e){
       console.error(e);
     }

@@ -1,12 +1,11 @@
 'use client';
-import Image from 'next/image'
 import React from 'react'
 
 import FormUser from '@/components/FormUser';
 
 import { useStoreSelector } from '@/hooks/useStoreSelector'
 
-
+const supabaseURL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/poupa-mais/avatars`;
 export default function Account() {
 
   const user = useStoreSelector((store) => store.User);
@@ -19,13 +18,12 @@ export default function Account() {
           </h1>
           <div className="grid grid-cols-2 text-white">
             <div className="flex flex-col justify-center p-5 space-y-2">
-              <Image
+              <img
                     className="h-64 w-64 rounded-full border-md border-black"
-                    src="https://github.com/MatheusCamargo-dev.png"
+                    src={`${supabaseURL}/${user.username}`}
                     alt=""
                     width={500}
                     height={500}
-                    priority
               />
               <div className="text-4xl">
                 {user.fullname}
@@ -38,6 +36,7 @@ export default function Account() {
             <div className="flex flex-col">
             {user.id !== '' &&
               <FormUser
+                _id={user.id}
                 email={user.email}
                 fullname={user.fullname}
                 username={user.username}
