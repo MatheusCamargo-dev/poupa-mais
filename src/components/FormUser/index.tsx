@@ -1,10 +1,13 @@
 'use client';
-import React from 'react'
+import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
 import FormInput from '@/components/FormInput';
 
+import { setUser } from '@/features/User';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { parseCookies } from 'nookies';
 import { z } from 'zod';
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
@@ -56,6 +59,8 @@ interface User {
 }
 export default function FormUser(props: User) {
   const { _id, username, email, fullname} = props;
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
   const formProps = useForm<FormPropsUpdate>({
     reValidateMode: 'onSubmit',
     resolver: zodResolver(schema),
@@ -75,19 +80,30 @@ export default function FormUser(props: User) {
 
   const handleUpdateAccount = async (data: any) => {
     try{
+      setIsLoading(true);
       const formData = new FormData();
       formData.set("avatar", data.avatar);
       formData.set("username", data.username);
       formData.set("fullname", data.fullname);
       formData.set("email", data.email);
-      formData.set("id", data._id);
-      const upload = await fetch('http://localhost:3000/api/user', {
-        method: 'PUT',
-        body: formData
-      })
-        const json = await upload.json();
-        console.log(json);
+      formData.set("_id", data._id);
+
+      const { token } = await parseCookies();
+      if(token){
+        const upload = await fetch('http://localhost:3000/api/user', {
+          method: 'PUT',
+          headers: {Authorization: `Bearer ${token}`},
+          body: formData
+        })
+        const data = await upload.json();
+        console.log(data);
+        if(data.status == 1){
+          dispatch(setUser(data.user));
+        }
+      }
+      setIsLoading(false)
     }catch(e){
+      setIsLoading(false)
       console.error(e);
     }
 
@@ -146,9 +162,10 @@ export default function FormUser(props: User) {
                   {...register('avatar')}
                   error={errors.avatar}
                 />
-                <button type='submit' className=" flex w-full justify-center rounded-md bg-teal-500 py-2 px-3 text-sm font-semibold hover:text-slate-700 hover:bg-teal-4
+                <button type='submit' disabled={isLoading} className=" flex w-full justify-center rounded-md bg-teal-500 py-2 px-3 text-sm font-semibold hover:text-slate-700 hover:bg-teal-4
 
-                00 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Atualizar dados</button>
+                00 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >{isLoading ? 'Atualizando..' : 'Atualizar dados'}</button>
               </form>
             </FormProvider>
   )

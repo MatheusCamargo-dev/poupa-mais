@@ -42,17 +42,31 @@ const showUser = async (id?: string) => {
     if (id) {
       const user = await User.findById(id);
       return user;
-    } else {
-      const user = await User.find();
-      return user;
     }
   } catch (e) {
     console.error(e);
   }
 };
+
+const updateUser = async (query: any) => {
+  try {
+    if (!database.connect()) return false;
+
+    const userDB = await User.findById(query._id);
+
+    if (userDB) {
+      await User.findByIdAndUpdate(query._id, query);
+      return { status: 1, message: 'updated user with success', user: { id: query._id, ...query} };
+    }
+  } catch (e) {
+    throw new Error('Error in update user');
+  }
+};
+
 const userController = {
   createUser,
-  showUser
+  showUser,
+  updateUser
 };
 
 export default userController;

@@ -6,12 +6,14 @@ export interface UserState {
   fullname: string;
   username: string;
   email: string;
+  avatar: string;
 }
 const initialState: UserState = {
   id: '',
   fullname: '',
   username: '',
-  email: ''
+  email: '',
+  avatar: 'avatars/6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws'
 };
 
 export const userSlice = createSlice({
@@ -23,6 +25,9 @@ export const userSlice = createSlice({
       state.fullname = action.payload.fullname;
       state.email = action.payload.email;
       state.username = action.payload.username;
+      if(action.payload.avatar){
+        state.avatar = action.payload.avatar;
+      }
     }
   }
 });

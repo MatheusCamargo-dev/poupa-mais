@@ -44,36 +44,46 @@ export async function GET(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try{
-    console.log('PUT ACCOUNT');
+    const token = request.headers.get('authorization')?.split(' ')[1];
+    if (token == 'undefined' || token == undefined) {
+      return NextResponse.json({ status: 0, message: 'Token invalid' });
+    }
     const formData = await request.formData();
     const _id = formData.get('_id');
     const avatar = formData.get('avatar');
     const username = formData.get('username');
     const fullname = formData.get('fullname');
     const email = formData.get('email');
-    if(avatar && username){
+    const res = await tokenController.validToken(token);
 
-      const { data: deleteData } = await supabase
-       .storage
-       .from('poupa-mais')
-       .remove([`avatars/${username}`]);
-      if(deleteData){
-        console.log(deleteData);
-        const { data: uploadData } = await supabase
-         .storage
-         .from('poupa-mais')
-         .upload(`avatars/${username}`, avatar, {
-           cacheControl: '3600',
-           upsert: false
-         })
-         console.log(uploadData);
+    if (res && res.status == 1 && res.userData?.id == _id) {
+      const query = {_id, username, fullname, email};
+      let updateUser;
+      if(avatar && avatar !== 'null'){
+        const { data: deleteData } = await supabase
+        .storage
+        .from('poupa-mais')
+        .remove([`avatars/${_id}`]);
+        if(deleteData){
+          const { data: uploadData } = await supabase
+          .storage
+          .from('poupa-mais')
+          .upload(`avatars/${_id}`, avatar, {
+            cacheControl: '3600',
+            upsert: false
+          })
+          if(uploadData){
+              const data = {...query, avatar: uploadData.path};
+              updateUser = await userController.updateUser(data);
+          }
+        }
+      }else{
+        updateUser = await userController.updateUser(query);
       }
-    }
-    return NextResponse.json('updated with sucess');
-
+      return NextResponse.json(updateUser);
+   }
+   return NextResponse.json(res);
   }catch(e){
-    console.log(e);
     return NextResponse.json({message: e});
-
   }
 }

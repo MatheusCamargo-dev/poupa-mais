@@ -5,7 +5,7 @@ import FormUser from '@/components/FormUser';
 
 import { useStoreSelector } from '@/hooks/useStoreSelector'
 
-const supabaseURL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/poupa-mais/avatars`;
+const supabaseURL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/poupa-mais`;
 export default function Account() {
 
   const user = useStoreSelector((store) => store.User);
@@ -19,8 +19,8 @@ export default function Account() {
           <div className="grid grid-cols-2 text-white">
             <div className="flex flex-col justify-center p-5 space-y-2">
               <img
-                    className="h-64 w-64 rounded-full border-md border-black"
-                    src={`${supabaseURL}/${user.username}`}
+                    className="h-64 w-64 rounded-full border-2 border-black"
+                    src={`${supabaseURL}/${user.avatar}`}
                     alt=""
                     width={500}
                     height={500}
