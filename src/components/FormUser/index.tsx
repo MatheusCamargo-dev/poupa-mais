@@ -1,11 +1,15 @@
 'use client';
 import React, { useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
 import FormInput from '@/components/FormInput';
 
+import ExpenseCategories from '../ExpenseCategories';
+import IncomeCategories from '../IncomeCategories';
+
 import { setUser } from '@/features/User';
+import { ExpenseCategoryOptions } from '@/store/expenseCategory';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { parseCookies } from 'nookies';
 import { z } from 'zod';
@@ -33,6 +37,7 @@ const schema = z
       .string({ required_error: 'Email é obrigatório.' })
       .email('email invalido')
       .toLowerCase(),
+    expenseCategories: z.array(z.object({ expenseCategory: z.string().min(3, 'A categoria deve conter no mínimo 3 caracteres.').max(24, 'A categoria não pode conter mais de 24 caracteres')})),
     avatar: z.instanceof(FileList)
       .refine(
         (files) => {
@@ -61,6 +66,7 @@ export default function FormUser(props: User) {
   const { _id, username, email, fullname} = props;
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const expenseCategories = ExpenseCategoryOptions.map((category) => { return {expenseCategory: category}});
   const formProps = useForm<FormPropsUpdate>({
     reValidateMode: 'onSubmit',
     resolver: zodResolver(schema),
@@ -68,16 +74,22 @@ export default function FormUser(props: User) {
       _id: _id,
       email: email,
       fullname: fullname,
-      username: username
+      username: username,
+      expenseCategories
     }
   });
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    control
   } = formProps;
 
+  const {fields, append, remove } = useFieldArray({
+    control,
+    name: 'expenseCategories',
+  })
   const handleUpdateAccount = async (data: any) => {
     try{
       setIsLoading(true);
@@ -108,7 +120,6 @@ export default function FormUser(props: User) {
     }
 
   }
-
   return (
     <FormProvider {...formProps} >
               <form
@@ -162,6 +173,8 @@ export default function FormUser(props: User) {
                   {...register('avatar')}
                   error={errors.avatar}
                 />
+                <IncomeCategories/>
+                <ExpenseCategories error={errors.expenseCategories} newCategories={fields} append={append} remove={remove} register={register} />
                 <button type='submit' disabled={isLoading} className=" flex w-full justify-center rounded-md bg-teal-500 py-2 px-3 text-sm font-semibold hover:text-slate-700 hover:bg-teal-4
 
                 00 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

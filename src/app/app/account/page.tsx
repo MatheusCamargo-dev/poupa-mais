@@ -17,13 +17,13 @@ export default function Account() {
           Configurações da conta
           </h1>
           <div className="grid grid-cols-2 text-white">
-            <div className="flex flex-col justify-center p-5 space-y-2">
+            <div className="flex flex-col p-5 space-y-2">
               <img
-                    className="h-64 w-64 rounded-full border-2 border-black"
+                    className="rounded-full border-2 border-teal-500 mb-8"
                     src={`${supabaseURL}/${user.avatar}`}
                     alt=""
-                    width={500}
-                    height={500}
+                    width={475}
+                    height={475}
               />
               <div className="text-4xl">
                 {user.fullname}
@@ -41,7 +41,6 @@ export default function Account() {
                 fullname={user.fullname}
                 username={user.username}
               />
-
             }
             </div>
 
