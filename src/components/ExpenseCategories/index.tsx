@@ -1,16 +1,40 @@
 'use client'
 
 import React, { useState } from 'react'
+import { FieldArrayWithId, FieldError, FieldErrorsImpl, Merge, UseFormRegister } from 'react-hook-form';
 import { TbTrashFilled } from 'react-icons/tb'
 
 import ErrorMessage from '../ErrorMessage'
 
 interface Props {
-  newCategories: any;
-  append: any;
-  remove: any;
-  register: any;
-  error: any;
+  newCategories: FieldArrayWithId<{
+    fullname: string;
+    username: string;
+    email: string;
+    avatar: File;
+    expenseCategories: {
+        expenseCategory: string;
+    }[];
+    _id: string;
+}, "expenseCategories", "id">[];
+  append: ({ expenseCategory }: {expenseCategory: string}) => void;
+  remove: (index: number) => void;
+  register: UseFormRegister<{
+    expenseCategories: {
+        expenseCategory: string;
+    }[];
+    fullname: string;
+    username: string;
+    email: string;
+    avatar: File;
+    _id: string;
+    incomeCategories: {
+        incomeCategory: string;
+    }[];
+  }>;
+  error:  Merge<FieldError, (Merge<FieldError, FieldErrorsImpl<{
+    expenseCategory: string;
+}>> | undefined)[]> | undefined;
 }
 export default function ExpenseCategories(props: Props) {
 
@@ -38,15 +62,15 @@ export default function ExpenseCategories(props: Props) {
                   <div key={field.id} className='space-y-2'>
                     <div className='flex justify-between p-1 bg-white rounded-md border-2 border-gray-300'>
                             <h1 className='text-blue-400 text-xl'>
-                            <input type='text' maxLength={24} {...register(`expenseCategories.${index}.expenseCategory`)}defaultValue={field.expenseCategory} className='w-full border-b-2 p-1 focus:outline-none border-gray-300 text-blue-400 text-xl' />
+                            <input type='text' maxLength={24} {...register(`expenseCategories.${index}.expenseCategory`)} defaultValue={field.expenseCategory} className='w-full border-b-2 p-1 focus:outline-none border-gray-300 text-blue-400 text-xl' />
                           </h1>
                           <TbTrashFilled
                             size={30}
-                            className="text-transaction md:text-transaction hover:text-red-400"
+                            className="text-transaction md:text-transaction hover:text-red-400 cursor-pointer"
                             onClick={() => remove(index)}
                           />
                       </div>
-                      {error && error[index] && <ErrorMessage errorMessage={error[index].expenseCategory}></ErrorMessage>}
+                      {error && error[index] && <ErrorMessage errorMessage={error[index]?.expenseCategory}></ErrorMessage>}
                   </div>
                 );
               })

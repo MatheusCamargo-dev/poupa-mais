@@ -19,6 +19,15 @@ const UserSchema = new Schema({
       {expenseCategory: 'Outros'},
     ]
   },
+  incomeCategories: {type: Array,
+    default: [
+      {incomeCategory: 'Salário'},
+      {incomeCategory: 'Freelance'},
+      {incomeCategory: 'Investimentos'},
+      {incomeCategory: 'Vendas'},
+      {incomeCategory: 'Outros'},
+    ]
+  }
 });
 
 const User = mongoose.model('User', UserSchema);

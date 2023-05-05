@@ -1,10 +1,11 @@
 'use client';
+
+import { FieldError } from "react-hook-form";
+
 type ErrorMessage = {
-  errorMessage: {
-    message: string;
-  };
+  errorMessage: FieldError | undefined
 };
 export default function ErrorMessage(props: ErrorMessage) {
   const { errorMessage } = props;
-  return <p className="text-red-500 p-0 text-sm">{errorMessage.message}</p>;
+  return <p className="text-red-500 p-0 text-sm">{errorMessage?.message}</p>;
 }

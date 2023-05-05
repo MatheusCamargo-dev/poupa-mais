@@ -122,7 +122,7 @@ export default function IncomeItem(props: IncomeItem) {
   return (
     <div className="flex justify-between w-full p-3 px-5 border-2 hover:bg-zinc-300 mx-auto border-zinc-500  rounded-2xl bg-zinc-50">
       <div className="flex items-center space-x-8" onClick={handleOpenDialog}>
-        {props.category && IncomeCategory[props.category]}
+        {props.category && (IncomeCategory[props.category] || IncomeCategory['Outros'])}
         <div className="flex flex-col ml-2 space-y-2 text-transaction text-lg">
           <div className="flex items-center gap-2">
             <div className="rounded-full w-3 h-3 bg-green-500"></div>

@@ -8,7 +8,7 @@ import FormInput from '@/components/FormInput';
 import ExpenseCategories from '../ExpenseCategories';
 import IncomeCategories from '../IncomeCategories';
 
-import { expenseCategories, setUser } from '@/features/User';
+import { expenseCategories, incomeCategories, setUser } from '@/features/User';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { parseCookies } from 'nookies';
 import { z } from 'zod';
@@ -36,6 +36,7 @@ const schema = z
       .string({ required_error: 'Email é obrigatório.' })
       .email('email invalido')
       .toLowerCase(),
+    incomeCategories: z.array(z.object({ incomeCategory: z.string().min(3, 'A categoria deve conter no mínimo 3 caracteres.').max(24, 'A categoria não pode conter mais de 24 caracteres')})),
     expenseCategories: z.array(z.object({ expenseCategory: z.string().min(3, 'A categoria deve conter no mínimo 3 caracteres.').max(24, 'A categoria não pode conter mais de 24 caracteres')})),
     avatar: z.instanceof(FileList)
       .refine(
@@ -61,9 +62,10 @@ interface User {
   email: string;
   username: string;
   expenseCategories: expenseCategories[];
+  incomeCategories: incomeCategories[];
 }
 export default function FormUser(props: User) {
-  const { _id, username, email, fullname, expenseCategories} = props;
+  const { _id, username, email, fullname, expenseCategories, incomeCategories} = props;
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const formProps = useForm<FormPropsUpdate>({
@@ -74,6 +76,7 @@ export default function FormUser(props: User) {
       email: email,
       fullname: fullname,
       username: username,
+      incomeCategories,
       expenseCategories
     }
   });
@@ -85,11 +88,15 @@ export default function FormUser(props: User) {
     control
   } = formProps;
 
-  const {fields, append, remove } = useFieldArray({
+  const {fields: fieldsExpense, append: appendExpense, remove: removeExpense } = useFieldArray({
     control,
     name: 'expenseCategories',
   })
-  const handleUpdateAccount = async (data: any) => {
+  const {fields: fieldsIncome , append: appendIncome, remove: removeIncome } = useFieldArray({
+    control,
+    name: 'incomeCategories',
+  })
+  const handleUpdateAccount = async (data: FormPropsUpdate) => {
     try{
       setIsLoading(true);
       const formData = new FormData();
@@ -99,6 +106,7 @@ export default function FormUser(props: User) {
       formData.set("email", data.email);
       formData.set("_id", data._id);
       formData.set("expenseCategories", JSON.stringify(data.expenseCategories))
+      formData.set("incomeCategories", JSON.stringify(data.incomeCategories))
       const { token } = await parseCookies();
       if(token){
         const upload = await fetch('http://localhost:3000/api/user', {
@@ -172,8 +180,8 @@ export default function FormUser(props: User) {
                   {...register('avatar')}
                   error={errors.avatar}
                 />
-                <IncomeCategories/>
-                <ExpenseCategories error={errors.expenseCategories} newCategories={fields} append={append} remove={remove} register={register} />
+                <IncomeCategories error={errors.incomeCategories} newCategories={fieldsIncome} append={appendIncome} remove={removeIncome} register={register}/>
+                <ExpenseCategories error={errors.expenseCategories} newCategories={fieldsExpense} append={appendExpense} remove={removeExpense} register={register} />
                 <button type='submit' disabled={isLoading} className=" flex w-full justify-center rounded-md bg-teal-500 py-2 px-3 text-sm font-semibold hover:text-slate-700 hover:bg-teal-4
 
                 00 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

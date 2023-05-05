@@ -4,7 +4,7 @@ import { useStoreSelector } from '@/hooks/useStoreSelector';
 
 export default function Salary() {
   const { incomes } = useStoreSelector((store) => store.Incomes);
-  const amounts = incomes.map((item) => item.amount);
+  const amounts = incomes?.map((item) => item.amount);
   const minAmount = Math.min(...amounts);
   const maxAmount = Math.max(...amounts);
   return (

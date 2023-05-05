@@ -55,7 +55,8 @@ const validToken = async (token: string) => {
         email: user.email,
         username: user.username,
         avatar: user.avatar,
-        expenseCategories: user.expenseCategories
+        expenseCategories: user.expenseCategories,
+        incomeCategories: user.incomeCategories
       };
       return { status: 1, userData };
     }

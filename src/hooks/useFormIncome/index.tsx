@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 // import { useDispatch } from 'react-redux';
 
+import { useStoreSelector } from '../useStoreSelector';
+
 import { incrementIncomes } from '@/features/Incomes';
 import { apiClient } from '@/services/api-client';
 import { store } from '@/store/store';
@@ -56,6 +58,9 @@ export const useFormIncome = () => {
     formState: { errors }
   } = formProps;
 
+  const user = useStoreSelector((store) => store.User);
+  const incomeCategories = user.incomeCategories.map((option) => option.incomeCategory);
+
   async function handleIncome(data: any) {
     setIsLoading(true);
     const body = { type: data.category, ...data };
@@ -72,6 +77,7 @@ export const useFormIncome = () => {
   return {
     formProps,
     errors,
+    incomeCategories,
     isLoading,
     handleSubmit,
     handleIncome,

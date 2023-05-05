@@ -54,14 +54,19 @@ export async function PUT(request: NextRequest) {
     const username = formData.get('username');
     const fullname = formData.get('fullname');
     const email = formData.get('email');
+
     const dataExpenseCategories = formData.getAll('expenseCategories');
-    const category = dataExpenseCategories[0] as string;
-    const expenseCategories = JSON.parse(category)
+    const categoryExpense = dataExpenseCategories[0] as string;
+    const expenseCategories = JSON.parse(categoryExpense)
+
+    const dataIncomeCategories = formData.getAll('incomeCategories');
+    const categoryIncome = dataIncomeCategories[0] as string;
+    const incomeCategories = JSON.parse(categoryIncome)
 
     const res = await tokenController.validToken(token);
 
     if (res && res.status == 1 && res.userData?.id == _id) {
-      const query = {_id, username, fullname, email, expenseCategories};
+      const query = {_id, username, fullname, email, expenseCategories, incomeCategories};
       let updateUser;
       if(avatar && avatar !== 'null'){
         const { data: deleteData } = await supabase

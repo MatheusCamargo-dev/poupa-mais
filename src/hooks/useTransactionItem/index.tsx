@@ -8,8 +8,7 @@ import { TransactionProps } from '@/components/History';
 import { useFormExpense } from '@/hooks/useFormExpense';
 import { useFormIncome } from '@/hooks/useFormIncome';
 import {
-  ExpenseCategory,
-  ExpenseCategoryOptions
+  ExpenseCategory
 } from '@/store/expenseCategory';
 import { IncomeCategory, IncomeCategoryOptions } from '@/store/incomeCategory';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -53,6 +52,7 @@ export const useTransactionItem = (props: TransactionProps | any) => {
   } = formProps;
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { expenseCategories } = useFormExpense()
   const handleOpenDialog = () => {
     setIsDialogOpen(true);
   };
@@ -67,7 +67,7 @@ export const useTransactionItem = (props: TransactionProps | any) => {
       : IncomeCategory[props.category];
 
   const categoryOptions = props.type == 'expense'
-      ? ExpenseCategoryOptions
+      ? expenseCategories
       : IncomeCategoryOptions;
 
   const indicator = props.type == 'expense' ? 'bg-red-500' : 'bg-green-500';

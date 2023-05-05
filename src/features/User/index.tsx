@@ -4,6 +4,10 @@ import { PayloadAction } from '@reduxjs/toolkit/dist/createAction';
 export interface expenseCategories {
   expenseCategory: string
 }
+
+export interface incomeCategories {
+  incomeCategory: string
+}
 export interface UserState {
   id: string;
   fullname: string;
@@ -11,6 +15,7 @@ export interface UserState {
   email: string;
   avatar: string;
   expenseCategories: expenseCategories[];
+  incomeCategories: incomeCategories[];
 }
 const initialState: UserState = {
   id: '',
@@ -29,6 +34,13 @@ const initialState: UserState = {
     {expenseCategory: 'Transações'},
     {expenseCategory: 'Outros'},
   ],
+  incomeCategories: [
+    {incomeCategory: 'Salário'},
+    {incomeCategory: 'Freelance'},
+    {incomeCategory: 'Investimentos'},
+    {incomeCategory: 'Vendas'},
+    {incomeCategory: 'Outros'},
+  ]
 };
 
 export const userSlice = createSlice({
@@ -42,6 +54,7 @@ export const userSlice = createSlice({
       state.username = action.payload.username;
       if(action.payload.avatar) state.avatar = action.payload.avatar;
       if(action.payload.expenseCategories) state.expenseCategories = action.payload.expenseCategories;
+      if(action.payload.incomeCategories) state.incomeCategories = action.payload.incomeCategories;
     }
   }
 });

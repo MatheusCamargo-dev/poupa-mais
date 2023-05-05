@@ -41,6 +41,7 @@ export default function Account() {
                 fullname={user.fullname}
                 username={user.username}
                 expenseCategories={user.expenseCategories}
+                incomeCategories={user.incomeCategories}
               />
             }
             </div>
