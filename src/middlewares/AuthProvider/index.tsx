@@ -56,6 +56,7 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
       return;
     }
     await getTransactions();
+    console.log(auth.userData);
     dispatch(setUser(auth.userData));
   };
 

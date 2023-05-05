@@ -13,11 +13,11 @@ import TextAreaTransactions from '../TextAreaTransactions';
 import { deleteExpenses, updateExpense } from '@/features/Expenses';
 import { formatDateISOToBR } from '@/functions/formatDateISO';
 import { toBRL } from '@/functions/toBRL';
+import { useFormExpense } from '@/hooks/useFormExpense';
 import { useTransactionItem } from '@/hooks/useTransactionItem';
 import { apiClient } from '@/services/api-client';
 import {
-  ExpenseCategory,
-  ExpenseCategoryOptions
+  ExpenseCategory
 } from '@/store/expenseCategory';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -80,6 +80,7 @@ export default function ExpenseItem(props: ExpenseItem) {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [alertDialogOpen, setAlertDialogOpen] = useState(false);
+  const { expenseCategories } = useFormExpense();
   const {
     register,
     handleSubmit,
@@ -122,7 +123,7 @@ export default function ExpenseItem(props: ExpenseItem) {
   return (
     <div className="flex justify-between w-full p-3 px-5 border-2 hover:bg-zinc-300 mx-auto border-zinc-500  rounded-2xl bg-zinc-50">
       <div className="flex items-center space-x-8" onClick={handleOpenDialog}>
-        {props.category && ExpenseCategory[props.category]}
+        {props.category && (ExpenseCategory[props.category] || ExpenseCategory['Outros'])}
         <div className="flex flex-col ml-2 space-y-2 text-transaction text-lg">
           <div className="flex items-center gap-2">
             <div className="rounded-full w-3 h-3 bg-red-500"></div>
@@ -187,7 +188,7 @@ export default function ExpenseItem(props: ExpenseItem) {
               <SelectTransactions
                 {...register('category')}
                 label="Selecione uma categoria:"
-                options={ExpenseCategoryOptions}
+                options={expenseCategories}
                 error={errors.category}
                 disableDefaultOption={true}
               />

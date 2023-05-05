@@ -40,6 +40,7 @@ export default function Account() {
                 email={user.email}
                 fullname={user.fullname}
                 username={user.username}
+                expenseCategories={user.expenseCategories}
               />
             }
             </div>

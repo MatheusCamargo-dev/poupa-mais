@@ -8,8 +8,7 @@ import FormInput from '@/components/FormInput';
 import ExpenseCategories from '../ExpenseCategories';
 import IncomeCategories from '../IncomeCategories';
 
-import { setUser } from '@/features/User';
-import { ExpenseCategoryOptions } from '@/store/expenseCategory';
+import { expenseCategories, setUser } from '@/features/User';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { parseCookies } from 'nookies';
 import { z } from 'zod';
@@ -61,12 +60,12 @@ interface User {
   fullname: string;
   email: string;
   username: string;
+  expenseCategories: expenseCategories[];
 }
 export default function FormUser(props: User) {
-  const { _id, username, email, fullname} = props;
+  const { _id, username, email, fullname, expenseCategories} = props;
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const expenseCategories = ExpenseCategoryOptions.map((category) => { return {expenseCategory: category}});
   const formProps = useForm<FormPropsUpdate>({
     reValidateMode: 'onSubmit',
     resolver: zodResolver(schema),
@@ -99,7 +98,7 @@ export default function FormUser(props: User) {
       formData.set("fullname", data.fullname);
       formData.set("email", data.email);
       formData.set("_id", data._id);
-
+      formData.set("expenseCategories", JSON.stringify(data.expenseCategories))
       const { token } = await parseCookies();
       if(token){
         const upload = await fetch('http://localhost:3000/api/user', {

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
+import { useStoreSelector } from '../useStoreSelector';
+
 import { incrementExpenses } from '@/features/Expenses';
 import { apiClient } from '@/services/api-client';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -46,6 +48,8 @@ export const useFormExpense = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const user = useStoreSelector((store) => store.User);
+  const expenseCategories = user.expenseCategories.map((option) => option.expenseCategory);
   const dispatch = useDispatch();
   const {
     register,
@@ -71,6 +75,7 @@ export const useFormExpense = () => {
     formProps,
     errors,
     isLoading,
+    expenseCategories,
     handleSubmit,
     handleExpense,
     register

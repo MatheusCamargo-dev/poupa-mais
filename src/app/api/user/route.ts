@@ -54,10 +54,14 @@ export async function PUT(request: NextRequest) {
     const username = formData.get('username');
     const fullname = formData.get('fullname');
     const email = formData.get('email');
+    const dataExpenseCategories = formData.getAll('expenseCategories');
+    const category = dataExpenseCategories[0] as string;
+    const expenseCategories = JSON.parse(category)
+
     const res = await tokenController.validToken(token);
 
     if (res && res.status == 1 && res.userData?.id == _id) {
-      const query = {_id, username, fullname, email};
+      const query = {_id, username, fullname, email, expenseCategories};
       let updateUser;
       if(avatar && avatar !== 'null'){
         const { data: deleteData } = await supabase
