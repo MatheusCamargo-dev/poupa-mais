@@ -14,9 +14,10 @@ import TextAreaTransactions from '../TextAreaTransactions';
 import { deleteIncomes, updateIncome } from '@/features/Incomes';
 import { formatDateISOToBR } from '@/functions/formatDateISO';
 import { toBRL } from '@/functions/toBRL';
+import { useFormIncome } from '@/hooks/useFormIncome';
 import { useTransactionItem } from '@/hooks/useTransactionItem';
 import { apiClient } from '@/services/api-client';
-import { IncomeCategory, IncomeCategoryOptions } from '@/store/incomeCategory';
+import { IncomeCategory } from '@/store/incomeCategory';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
@@ -78,6 +79,7 @@ export default function IncomeItem(props: IncomeItem) {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [alertDialogOpen, setAlertDialogOpen] = useState(false);
+  const { incomeCategories } = useFormIncome();
   const {
     register,
     handleSubmit,
@@ -187,7 +189,7 @@ export default function IncomeItem(props: IncomeItem) {
               <SelectTransactions
                 {...register('category')}
                 label="Selecione uma categoria:"
-                options={IncomeCategoryOptions}
+                options={incomeCategories}
                 error={errors.category}
                 disableDefaultOption={true}
               />

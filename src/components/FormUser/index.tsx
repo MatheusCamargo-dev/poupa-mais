@@ -98,6 +98,7 @@ export default function FormUser(props: User) {
   })
   const handleUpdateAccount = async (data: FormPropsUpdate) => {
     try{
+      console.log(data);
       setIsLoading(true);
       const formData = new FormData();
       formData.set("avatar", data.avatar);
@@ -171,9 +172,9 @@ export default function FormUser(props: User) {
                   file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition
                   file:duration-150 file:ease-in-out file:[border-inline-end-width:1px]
                   file:[margin-inline-end:0.75rem] hover:file:bg-blue-600 focus:border-primary
-                focus:text-neutral-700 focus:shadow-te-primary focus:outline-none
-                dark:border-neutral-600 dark:text-black dark:file:bg-blue-700
-                dark:file:text-neutral-100 dark:focus:border-primary"
+                  focus:text-neutral-700 focus:shadow-te-primary focus:outline-none
+                  dark:border-neutral-600 dark:text-black dark:file:bg-blue-700
+                  dark:file:text-neutral-100 dark:focus:border-primary"
                   label='Imagem:'
                   accept='image/*'
                   type='file'

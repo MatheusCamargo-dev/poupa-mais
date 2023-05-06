@@ -6,10 +6,9 @@ import SelectTransactions from '../SelectTransactions';
 import TextAreaTransactions from '../TextAreaTransactions';
 
 import { useFormIncome } from '@/hooks/useFormIncome';
-import { IncomeCategoryOptions } from '@/store/incomeCategory';
 
 export default function FormIncome() {
-  const { errors, formProps, handleIncome, handleSubmit, isLoading, register } =
+  const { errors, formProps, handleIncome, handleSubmit, isLoading, register, incomeCategories } =
     useFormIncome();
 
   return (
@@ -44,7 +43,7 @@ export default function FormIncome() {
         <SelectTransactions
           {...register('category')}
           label="Selecione uma categoria:"
-          options={IncomeCategoryOptions}
+          options={incomeCategories}
           error={errors.category}
         />
         <TextAreaTransactions

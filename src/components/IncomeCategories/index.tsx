@@ -50,7 +50,7 @@ export default function IncomeCategories(props: Props) {
       <div className='flex flex-col'>
         <div className="flex justify-between">
           <span className='text-teal-500'>Categorias de rendimentos</span>
-          <button onClick={() => setShowCategories(state => !state)} className='w-6 h-6 cursor-pointer p-1 text-xl text-bold bg-teal-100 flex items-center justify-center rounded-full text-black'>{showCategories ? '-' : '+'}</button>
+          <button type='button' onClick={() => setShowCategories(state => !state)} className='w-6 h-6 cursor-pointer p-1 text-xl text-bold bg-teal-100 flex items-center justify-center rounded-full text-black'>{showCategories ? '-' : '+'}</button>
         </div>
         {
           showCategories &&

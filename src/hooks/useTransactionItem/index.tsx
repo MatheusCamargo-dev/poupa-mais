@@ -10,7 +10,7 @@ import { useFormIncome } from '@/hooks/useFormIncome';
 import {
   ExpenseCategory
 } from '@/store/expenseCategory';
-import { IncomeCategory, IncomeCategoryOptions } from '@/store/incomeCategory';
+import { IncomeCategory } from '@/store/incomeCategory';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
@@ -52,7 +52,8 @@ export const useTransactionItem = (props: TransactionProps | any) => {
   } = formProps;
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { expenseCategories } = useFormExpense()
+  const { expenseCategories } = useFormExpense();
+  const { incomeCategories } = useFormIncome();
   const handleOpenDialog = () => {
     setIsDialogOpen(true);
   };
@@ -68,7 +69,7 @@ export const useTransactionItem = (props: TransactionProps | any) => {
 
   const categoryOptions = props.type == 'expense'
       ? expenseCategories
-      : IncomeCategoryOptions;
+      : incomeCategories;
 
   const indicator = props.type == 'expense' ? 'bg-red-500' : 'bg-green-500';
   const titleDialog =
