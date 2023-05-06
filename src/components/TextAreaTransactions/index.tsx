@@ -1,6 +1,6 @@
 'use client';
 import React, { TextareaHTMLAttributes, forwardRef } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { FieldError, useFormContext } from 'react-hook-form';
 
 import ErrorMessage from '../ErrorMessage';
 
@@ -11,7 +11,7 @@ interface TextAreaTransactionsProps
   value?: string;
   placeholder: string;
   autoComplete?: string;
-  error?: any;
+  error?: FieldError;
   className?: string;
   defaultValue?: string;
 }

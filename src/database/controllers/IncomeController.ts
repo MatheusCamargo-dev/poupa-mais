@@ -1,6 +1,19 @@
 import database from '../MongoConnect';
 import { Income } from '../schemas/IncomeSchema';
-const store = async (query: any) => {
+
+import { Schema } from 'mongoose';
+
+type IncomeProps = {
+  title: string;
+  amount: number;
+  category: string;
+  date: string;
+  description: string;
+  user: Schema.Types.ObjectId;
+  _id: string;
+};
+
+const store = async (query: IncomeProps) => {
   try {
     if (!database.connect()) return false;
     const { title, amount, category, description, date, user } = query;
@@ -49,7 +62,7 @@ const deleteById = async (id: string, user: string) => {
   }
 };
 
-const updateIncome = async (user: string, query: any) => {
+const updateIncome = async (user: string, query: IncomeProps) => {
   try {
     if (!database.connect()) return false;
 
@@ -68,11 +81,6 @@ const updateIncome = async (user: string, query: any) => {
     throw new Error('Error in update income');
   }
 };
-
-// Create: Model.create() ou new Model() seguido de model.save()
-// Read: Model.find(), Model.findOne(), Model.findById()
-// Update: Model.updateOne(), Model.updateMany(), Model.findOneAndUpdate(), Model.findByIdAndUpdate()
-// Delete: Model.deleteOne(), Model.deleteMany(), Model.findOneAndDelete(), Model.findByIdAndDelete()
 
 const incomeController = {
   store,

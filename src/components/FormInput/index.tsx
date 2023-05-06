@@ -1,6 +1,6 @@
 'use client';
 import React, { InputHTMLAttributes, forwardRef } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { FieldError, useFormContext } from 'react-hook-form';
 
 import ErrorMessage from '../ErrorMessage';
 
@@ -12,7 +12,7 @@ interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   accept?: string;
   autoComplete?: string;
   type: string;
-  error?: any;
+  error?: FieldError | undefined;
   className: string;
   defaultValue?: string;
 }

@@ -1,8 +1,14 @@
+import { FormPropsRegister } from '@/components/Register';
+
 import { apiClient } from './api-client';
 
 import { setCookie } from 'nookies';
 
-export async function signInRequest(data: BodyInit) {
+export type FormPropsLogin = {
+  email: string;
+  password: string;
+}
+export async function signInRequest(data: FormPropsLogin) {
   const jwt = await apiClient('auth', 'POST', data);
   const auth = await jwt.json();
   auth.status == 1 &&
@@ -12,7 +18,7 @@ export async function signInRequest(data: BodyInit) {
   return auth;
 }
 
-export async function signUpRequest(data: BodyInit) {
+export async function signUpRequest(data: FormPropsRegister) {
   const response = await apiClient('user', 'POST', data);
   const userData = await response.json();
   return userData;

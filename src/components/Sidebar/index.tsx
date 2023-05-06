@@ -15,6 +15,12 @@ import { destroyCookie } from 'nookies';
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
+type Navigation = {
+  name: string;
+  href: string;
+  icon: JSX.Element;
+  current: boolean;
+}
 const supabaseURL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/poupa-mais`;
 export default function Sidebar() {
   const router = useRouter();
@@ -50,7 +56,7 @@ export default function Sidebar() {
 
   useEffect(() => {
     const href = pathname;
-    const currentNav = navigation.map((item: any) =>
+    const currentNav = navigation.map((item: Navigation) =>
       item.href == href
         ? { ...item, current: true }
         : { ...item, current: false }
@@ -59,7 +65,7 @@ export default function Sidebar() {
   }, [pathname]);
 
   function currentPage(key: string) {
-    const currentNav = navigation.map((item: any) =>
+    const currentNav = navigation.map((item: Navigation) =>
       item.name == key
         ? { ...item, current: true }
         : { ...item, current: false }
@@ -122,7 +128,7 @@ export default function Sidebar() {
               >
                 <img
                   className="h-8 w-8 rounded-full"
-                  src={user.avatar.length > 0 ? `${supabaseURL}/${user.avatar}` : `${supabaseURL}/avatars/6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.png`}
+                  src={user.avatar.length > 0 ? `${supabaseURL}/${user.avatar}` : `${supabaseURL}/avatars/6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws`}
                   alt=""
                 />{' '}
                 <div className="flex flex-col justify-center">

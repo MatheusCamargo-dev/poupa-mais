@@ -9,7 +9,12 @@ interface Token extends JwtPayload {
   iat?: number;
   exp?: number;
 }
-const createToken = async (queryUser: any) => {
+
+interface UserProps {
+  email: string;
+  password: string;
+}
+const createToken = async (queryUser: UserProps) => {
   try {
     const { email = '', password = '' } = queryUser;
 

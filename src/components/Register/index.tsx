@@ -7,8 +7,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 type Register = {
-  changeForm: any;
-  handleSignUp: any;
+  changeForm: () => void;
+  handleSignUp:  (data: {
+    email: string;
+    password: string;
+    fullname: string;
+    username: string;
+    confirm_password: string;
+}) => Promise<void>;
   errorMessage: string;
   isLoading: boolean;
 };
@@ -43,7 +49,7 @@ const schema = z
     message: 'As senhas precisam ser iguais'
   });
 
-type FormPropsRegister = z.infer<typeof schema>;
+export type FormPropsRegister = z.infer<typeof schema>;
 
 export default function Register(props: Register) {
   const { changeForm, handleSignUp, errorMessage, isLoading } = props;

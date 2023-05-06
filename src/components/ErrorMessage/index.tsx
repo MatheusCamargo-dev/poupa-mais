@@ -3,7 +3,7 @@
 import { FieldError } from "react-hook-form";
 
 type ErrorMessage = {
-  errorMessage: FieldError | undefined
+  errorMessage: FieldError | { message: string}
 };
 export default function ErrorMessage(props: ErrorMessage) {
   const { errorMessage } = props;

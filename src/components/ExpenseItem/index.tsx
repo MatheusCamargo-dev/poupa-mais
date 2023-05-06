@@ -88,16 +88,16 @@ export default function ExpenseItem(props: ExpenseItem) {
   } = formProps;
 
   const dispatch = useDispatch();
-  const deleteItem = async (id: any) => {
-    const body = id;
-    const response = await apiClient('transactions/expense/', 'DELETE', body);
+  const deleteItem = async (id: string) => {
+    setIsLoading(true);
+    const response = await apiClient('transactions/expense/', 'DELETE', id);
     const { data } = await response.json();
     if (data) {
       dispatch(deleteExpenses(data));
     }
   };
 
-  const expenseUpdate = async (data: any) => {
+  const expenseUpdate = async (data: FormPropsUpdate) => {
     setIsLoading(true);
     const r = await apiClient('transactions/expense', 'PUT', data);
     const { expense, status } = await r.json();

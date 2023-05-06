@@ -1,7 +1,7 @@
 'use client';
 import React, { InputHTMLAttributes, forwardRef } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
-import { useFormContext, Controller } from 'react-hook-form';
+import { useFormContext, Controller, FieldError } from 'react-hook-form';
 
 import ErrorMessage from '../ErrorMessage';
 
@@ -17,7 +17,7 @@ interface InputTransactionsProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
   autoComplete?: string;
   type: string;
-  error?: any;
+  error?: FieldError;
   className?: string;
   defaultValue?: string;
 }

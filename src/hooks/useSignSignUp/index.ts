@@ -1,7 +1,9 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { signInRequest, signUpRequest } from '@/services/auth';
+import { FormPropsRegister } from '@/components/Register';
+
+import { FormPropsLogin, signInRequest, signUpRequest } from '@/services/auth';
 
 export const useSignInUp = () => {
   const router = useRouter();
@@ -38,7 +40,7 @@ export const useSignInUp = () => {
     return true;
   }
 
-  async function handleSignIn(data: any) {
+  async function handleSignIn(data: FormPropsLogin) {
     setIsLoading(true);
     setErrorMessage('');
     setLoginText('wait...');
@@ -53,7 +55,7 @@ export const useSignInUp = () => {
     }
   }
 
-  async function handleSignUp(data: any) {
+  async function handleSignUp(data: FormPropsRegister) {
     setIsLoading(true);
     const { password, confirm_password } = data;
     if (!passwordIsValid(password, confirm_password)) {

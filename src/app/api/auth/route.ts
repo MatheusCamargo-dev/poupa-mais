@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 
 import tokenController from '@/database/controllers/TokenController';
 import cors from 'micro-cors';
+import { RequestHandler } from 'micro/types/src/lib';
 
 const corsHandler = cors({
   allowMethods: ['POST', 'GET', 'HEAD'],
@@ -10,7 +11,7 @@ const corsHandler = cors({
   origin: '*'
 });
 
-export async function OPTIONS(request: any) {
+export async function OPTIONS(request: RequestHandler) {
   try {
     await corsHandler(request);
     return NextResponse.json({});

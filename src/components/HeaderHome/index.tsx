@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { Fragment, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -9,6 +9,13 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
+
+type Navigation =  {
+  name: string;
+  href: string;
+  current: boolean;
+};
+
 
 export default function HeaderHome() {
   const pathname = usePathname();
@@ -22,7 +29,7 @@ export default function HeaderHome() {
 
   useEffect(() => {
     const href = pathname + (type ? `?type=${type}` : '');
-    const currentNav = navigation.map((item: any) =>
+    const currentNav = navigation.map((item: Navigation) =>
       item.href == href
         ? { ...item, current: true }
         : { ...item, current: false }
@@ -31,7 +38,7 @@ export default function HeaderHome() {
   }, [pathname, type]);
 
   function currentPage(key: string) {
-    const currentNav = navigation.map((item: any) =>
+    const currentNav = navigation.map((item: Navigation) =>
       item.name == key
         ? { ...item, current: true }
         : { ...item, current: false }

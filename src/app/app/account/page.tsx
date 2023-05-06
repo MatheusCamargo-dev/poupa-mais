@@ -19,7 +19,7 @@ export default function Account() {
           <div className="grid grid-cols-2 text-white">
             <div className="flex flex-col p-5 space-y-2">
               <img
-                    className="rounded-full border-2 border-teal-500 mb-8"
+                    className="rounded-full w-64 h-64 border-2 border-teal-500 mb-8"
                     src={`${supabaseURL}/${user.avatar}`}
                     alt=""
                     width={475}

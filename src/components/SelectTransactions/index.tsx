@@ -1,6 +1,6 @@
 'use client';
 import React, { SelectHTMLAttributes, forwardRef } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { FieldError, useFormContext } from 'react-hook-form';
 
 import ErrorMessage from '../ErrorMessage';
 
@@ -8,7 +8,7 @@ interface SelectTransactionsProps
   extends SelectHTMLAttributes<HTMLSelectElement> {
   name: string;
   label?: string;
-  error?: any;
+  error?: FieldError;
   options: Array<string>;
   disableDefaultOption?: boolean;
 }

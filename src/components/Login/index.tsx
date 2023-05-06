@@ -9,10 +9,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 type Login = {
-  handleSignIn: any;
+  handleSignIn: (data: FormPropsLogin) => Promise<void>;
   errorMessage: string;
   loginText: string;
-  changeForm: any;
+  changeForm: () => void;
   isLoading: boolean;
   email: string;
 };

@@ -40,7 +40,7 @@ const schema = z
     message: 'Por favor, selecione uma opção'
   });
 
-type FormPropsRegister = z.infer<typeof schema>;
+export type FormPropsRegister = z.infer<typeof schema>;
 
 export const useFormIncome = () => {
   const formProps = useForm<FormPropsRegister>({
@@ -61,7 +61,8 @@ export const useFormIncome = () => {
   const user = useStoreSelector((store) => store.User);
   const incomeCategories = user.incomeCategories.map((option) => option.incomeCategory);
 
-  async function handleIncome(data: any) {
+  async function handleIncome(data: FormPropsRegister) {
+    console.log(data);
     setIsLoading(true);
     const body = { type: data.category, ...data };
     const r = await apiClient('transactions/income/', 'POST', body);

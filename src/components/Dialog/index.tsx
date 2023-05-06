@@ -1,10 +1,11 @@
 import { Dispatch, SetStateAction } from 'react';
+import { SubmitHandler } from 'react-hook-form';
 
 type DialogProps = {
   children: React.ReactNode;
   color?: string;
   handleCloseDialog: Dispatch<SetStateAction<any>>;
-  handleSubmit: any;
+  handleSubmit: SubmitHandler<any>;
   size?: string;
   title: string;
   loading: boolean;

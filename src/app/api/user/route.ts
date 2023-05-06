@@ -49,19 +49,19 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ status: 0, message: 'Token invalid' });
     }
     const formData = await request.formData();
-    const _id = formData.get('_id');
+    const _id = formData.get('_id') as string;
     const avatar = formData.get('avatar');
-    const username = formData.get('username');
-    const fullname = formData.get('fullname');
-    const email = formData.get('email');
+    const username = formData.get('username') as string;
+    const fullname = formData.get('fullname') as string;
+    const email = formData.get('email') as string;
 
     const dataExpenseCategories = formData.getAll('expenseCategories');
     const categoryExpense = dataExpenseCategories[0] as string;
-    const expenseCategories = JSON.parse(categoryExpense)
+    const expenseCategories = JSON.parse(categoryExpense) as {expenseCategory: string}[];
 
     const dataIncomeCategories = formData.getAll('incomeCategories');
     const categoryIncome = dataIncomeCategories[0] as string;
-    const incomeCategories = JSON.parse(categoryIncome)
+    const incomeCategories = JSON.parse(categoryIncome) as {incomeCategory: string}[];
 
     const res = await tokenController.validToken(token);
 

@@ -1,7 +1,3 @@
-// Create: Model.create() ou new Model() seguido de model.save()
-// Read: Model.find(), Model.findOne(), Model.findById()
-// Update: Model.updateOne(), Model.updateMany(), Model.findOneAndUpdate(), Model.findByIdAndUpdate()
-// Delete: Model.deleteOne(), Model.deleteMany(), Model.findOneAndDelete(), Model.findByIdAndDelete()
 
 const submit = async (text: string) => {
   try {

@@ -58,7 +58,7 @@ export const useFormExpense = () => {
     formState: { errors }
   } = formProps;
 
-  async function handleExpense(data: any) {
+  async function handleExpense(data: FormPropsRegister) {
     setIsLoading(true);
     const body = { type: data.category, ...data };
     const r = await apiClient('transactions/expense/', 'POST', body);

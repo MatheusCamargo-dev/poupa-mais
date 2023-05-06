@@ -2,8 +2,18 @@ import database from '../MongoConnect';
 import { User } from '../schemas/UserSchema';
 
 import bcryptjs from 'bcryptjs';
+interface UserProps {
+  _id?: string;
+  fullname?: string;
+  username?: string;
+  password?: string;
+  email?: string;
+  avatar?: string;
+  expenseCategories?: { expenseCategory: string}[];
+  incomeCategories?: { incomeCategory: string}[];
+}
 
-const createUser = async (queryUser: any) => {
+const createUser = async (queryUser: UserProps) => {
   try {
     if (!database.connect()) return false;
     const { password, email, username } = queryUser;
@@ -19,22 +29,19 @@ const createUser = async (queryUser: any) => {
     }
 
     const salt = bcryptjs.genSaltSync();
-    const cryptPassword = bcryptjs.hashSync(password, salt);
-
-    const dataUser = { ...queryUser, password: cryptPassword };
-    const user = new User(dataUser);
-    if (await user.save()) {
-      return { status: 1, email, message: `Created with success` };
+    if(password){
+      const cryptPassword = bcryptjs.hashSync(password, salt);
+      const dataUser = { ...queryUser, password: cryptPassword };
+      const user = new User(dataUser);
+      if (await user.save()) {
+        return { status: 1, email, message: `Created with success` };
+      }
     }
+
   } catch (e) {
     throw new Error('Error in create user');
   }
 };
-
-// Create: Model.create() ou new Model() seguido de model.save()
-// Read: Model.find(), Model.findOne(), Model.findById()
-// Update: Model.updateOne(), Model.updateMany(), Model.findOneAndUpdate(), Model.findByIdAndUpdate()
-// Delete: Model.deleteOne(), Model.deleteMany(), Model.findOneAndDelete(), Model.findByIdAndDelete()
 
 const showUser = async (id?: string) => {
   try {
@@ -48,15 +55,15 @@ const showUser = async (id?: string) => {
   }
 };
 
-const updateUser = async (query: any) => {
+const updateUser = async (user: UserProps) => {
   try {
     if (!database.connect()) return false;
 
-    const userDB = await User.findById(query._id);
+    const userDB = await User.findById(user._id);
 
     if (userDB) {
-      await User.findByIdAndUpdate(query._id, query);
-      return { status: 1, message: 'updated user with success', user: { id: query._id, ...query} };
+      await User.findByIdAndUpdate(user._id, user);
+      return { status: 1, message: 'updated user with success', user: { id: user._id, ...user} };
     }
   } catch (e) {
     throw new Error('Error in update user');

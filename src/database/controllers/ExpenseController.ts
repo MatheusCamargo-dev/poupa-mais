@@ -1,6 +1,18 @@
 import database from '../MongoConnect';
 import { Expense } from '../schemas/ExpenseSchema';
-const store = async (query: any) => {
+
+import { Schema } from 'mongoose';
+
+export type ExpenseProps = {
+  title: string;
+  amount: number;
+  category: string;
+  date: string;
+  description: string;
+  user: Schema.Types.ObjectId;
+  _id: string;
+};
+const store = async (query: ExpenseProps) => {
   try {
     if (!database.connect()) return false;
     const { title, amount, category, description, date, user } = query;
@@ -49,7 +61,7 @@ const deleteById = async (id: string, user: string) => {
   }
 };
 
-const updateExpense = async (user: string, query: any) => {
+const updateExpense = async (user: string, query: ExpenseProps) => {
   try {
     if (!database.connect()) return false;
 
@@ -68,11 +80,6 @@ const updateExpense = async (user: string, query: any) => {
     throw new Error('Error in update expense');
   }
 };
-
-// Create: Model.create() ou new Model() seguido de model.save()
-// Read: Model.find(), Model.findOne(), Model.findById()
-// Update: Model.updateOne(), Model.updateMany(), Model.findOneAndUpdate(), Model.findByIdAndUpdate()
-// Delete: Model.deleteOne(), Model.deleteMany(), Model.findOneAndDelete(), Model.findByIdAndDelete()
 
 const expenseController = {
   store,

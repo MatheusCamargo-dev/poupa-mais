@@ -87,10 +87,9 @@ export default function IncomeItem(props: IncomeItem) {
   } = formProps;
 
   const dispatch = useDispatch();
-  const deleteItem = async (id: any) => {
+  const deleteItem = async (id: string) => {
     setIsLoading(true);
-    const body = id;
-    const response = await apiClient('transactions/income/', 'DELETE', body);
+    const response = await apiClient('transactions/income/', 'DELETE', id);
     const { data } = await response.json();
     if (data) {
       setIsLoading(false);
@@ -98,7 +97,7 @@ export default function IncomeItem(props: IncomeItem) {
     }
   };
 
-  const incomeUpdate = async (data: any) => {
+  const incomeUpdate = async (data: FormPropsUpdate) => {
     setIsLoading(true);
     const r = await apiClient('transactions/income', 'PUT', data);
     const { income, status } = await r.json();

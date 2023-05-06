@@ -82,8 +82,8 @@ export async function PUT(request: Request) {
     const res = await tokenController.validToken(token);
     if (res && res.status == 1) {
       const userId = res.userData?.id;
-      const body = await request.json();
-      const expense = await expenseController.updateExpense(userId, body.data);
+      const { data } = await request.json();
+      const expense = await expenseController.updateExpense(userId, data);
       if (expense) {
         return NextResponse.json({
           status: 1,

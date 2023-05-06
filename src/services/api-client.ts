@@ -4,7 +4,7 @@ import { parseCookies } from 'nookies';
 export async function apiClient(
   endpoint: string,
   method = 'GET',
-  data?: BodyInit | undefined,
+  data?: any,
   ctx: Pick<NextPageContext, 'req'> | undefined = undefined
 ) {
   const { token } = await parseCookies(ctx);
