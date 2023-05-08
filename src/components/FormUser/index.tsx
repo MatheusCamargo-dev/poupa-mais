@@ -117,7 +117,6 @@ export default function FormUser(props: User) {
           body: formData
         })
         const data = await upload.json();
-        console.log(data);
         if(data.status == 1){
           dispatch(setUser(data.user));
         }
