@@ -27,6 +27,6 @@ export async function apiClient(
       data
     });
   }
-  const url = 'https:localhost/api/' + endpoint;
+  const url = 'https:/api/' + endpoint;
   return fetch(url, options);
 }
