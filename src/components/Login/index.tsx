@@ -111,24 +111,6 @@ export default function Login(props: Login) {
                 ></ErrorMessage>
               )}
             </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-teal-300 text-teal-600 focus:ring-teal-600"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-2 block text-sm text-black"
-                >
-                  Remember me
-                </label>
-              </div>
-            </div>
-
             <div>
               <button
                 type="submit"
