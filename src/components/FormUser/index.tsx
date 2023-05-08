@@ -110,7 +110,7 @@ export default function FormUser(props: User) {
       formData.set("incomeCategories", JSON.stringify(data.incomeCategories))
       const { token } = await parseCookies();
       if(token){
-        const upload = await fetch('http://localhost:3000/api/user', {
+        const upload = await fetch('https://matheuscamargo.dev/api/user', {
           method: 'PUT',
           headers: {Authorization: `Bearer ${token}`},
           body: formData

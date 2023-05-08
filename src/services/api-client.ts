@@ -27,6 +27,6 @@ export async function apiClient(
       data
     });
   }
-  const url = 'http://localhost:3000/api/' + endpoint;
+  const url = 'https:/matheuscamargo.dev/api/' + endpoint;
   return fetch(url, options);
 }

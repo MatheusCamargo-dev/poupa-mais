@@ -79,7 +79,7 @@ export default function Register(props: Register) {
               <FormInput
                 className="block border border-grey w-full p-3 rounded"
                 label="Nome completo:"
-                placeholder="Full Name"
+                placeholder="Nome completo"
                 autoComplete="nickname"
                 type="text"
                 {...register('fullname')}
