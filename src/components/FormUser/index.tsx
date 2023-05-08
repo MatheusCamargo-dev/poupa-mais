@@ -112,6 +112,7 @@ export default function FormUser(props: User) {
       if(token){
         const upload = await fetch('https://matheuscamargo.dev/api/user', {
           method: 'PUT',
+          mode: 'cors',
           headers: {Authorization: `Bearer ${token}`},
           body: formData
         })
