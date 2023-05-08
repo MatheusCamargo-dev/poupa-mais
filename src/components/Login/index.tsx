@@ -67,15 +67,15 @@ export default function Login(props: Login) {
             alt="Your Company"
           />
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-black">
-            Sign in to your account
+            Entrar na sua conta
           </h2>
           <p className="mt-2 text-center text-sm text-black">
-            Or{' '}
+            Ou{' '}
             <a
               onClick={changeForm}
               className="font-medium cursor-pointer text-teal-500 hover:text-teal-400"
             >
-              register a new account
+              registre uma nova conta
             </a>
           </p>
         </div>

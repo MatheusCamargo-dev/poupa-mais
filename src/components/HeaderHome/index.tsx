@@ -22,9 +22,9 @@ export default function HeaderHome() {
   const searchParams = useSearchParams();
   const type = searchParams.get('type');
   const [navigation, setNavigation] = useState([
-    { name: 'Home', href: '/', current: false },
-    { name: 'Login', href: '/account?type=login', current: false },
-    { name: 'Register', href: '/account?type=register', current: false }
+    { name: 'Inicio', href: '/', current: false },
+    { name: 'Entrar', href: '/account?type=login', current: false },
+    { name: 'Registrar', href: '/account?type=register', current: false }
   ]);
 
   useEffect(() => {

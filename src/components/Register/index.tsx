@@ -69,7 +69,7 @@ export default function Register(props: Register) {
       <div className="container md:h-auto lg:h-full max-w-md mx-auto py-16 md:py-32 flex-1 flex flex-col items-center justify-center px-2">
         <div className="bg-white px-8 py-8 rounded shadow-md p-8 text-black w-full">
           <h1 className="text-3xl text-center text-black font-bold tracking-tight ">
-            Register
+            Crie uma nova conta
           </h1>
           <FormProvider {...formProps}>
             <form
@@ -137,12 +137,12 @@ export default function Register(props: Register) {
           </FormProvider>
 
           <div className="text-black mt-6">
-            Already have an account?
+            Já tem uma conta?
             <a
               onClick={changeForm}
               className="font-medium cursor-pointer text-teal-600 hover:text-teal-500"
             >
-              Log in
+              Entrar
             </a>
           </div>
         </div>

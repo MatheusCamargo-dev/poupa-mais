@@ -8,7 +8,7 @@ import { FormPropsLogin, signInRequest, signUpRequest } from '@/services/auth';
 export const useSignInUp = () => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState('');
-  const [loginText, setLoginText] = useState('Sign In');
+  const [loginText, setLoginText] = useState('Entrar');
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const searchParams = useSearchParams();
@@ -43,7 +43,7 @@ export const useSignInUp = () => {
   async function handleSignIn(data: FormPropsLogin) {
     setIsLoading(true);
     setErrorMessage('');
-    setLoginText('wait...');
+    setLoginText('Aguarde...');
     const user = await signInRequest(data);
     if (user.status == 0) {
       setErrorMessage(user.message);
