@@ -112,7 +112,7 @@ export default function FormUser(props: User) {
         const upload = await fetch('api/user', {
           method: 'PUT',
           mode: 'cors',
-          headers: {Authorization: `Bearer ${token}`,  'Access-Control-Allow-Origin':'*'},
+          headers: {Authorization: `Bearer ${token}`},
           body: formData
         })
         const data = await upload.json();
