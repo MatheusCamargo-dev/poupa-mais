@@ -109,7 +109,7 @@ export default function FormUser(props: User) {
       formData.set("incomeCategories", JSON.stringify(data.incomeCategories))
       const { token } = await parseCookies();
       if(token){
-        const upload = await fetch('api/user', {
+        const upload = await fetch('/api/user', {
           method: 'PUT',
           mode: 'cors',
           headers: {Authorization: `Bearer ${token}`},
