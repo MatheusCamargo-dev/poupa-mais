@@ -3,25 +3,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import tokenController from '@/database/controllers/TokenController';
 import userController from '@/database/controllers/UserController';
 import { supabase } from '@/lib/supabase';
-import cors from 'micro-cors';
-import { RequestHandler } from 'micro/types/src/lib';
-
-const corsHandler = cors({
-  allowMethods: ['POST', 'GET', 'HEAD'],
-  allowHeaders: ['Content-Type', 'Authorization'],
-  exposeHeaders: ['Content-Length', 'Date', 'X-Request-Id'],
-  origin: '*'
-});
-
-export async function OPTIONS(request: RequestHandler) {
-  try {
-    await corsHandler(request);
-    return NextResponse.json({});
-  } catch (e) {
-    console.error(e);
-    return NextResponse.error();
-  }
-}
 
 export async function POST(request: Request) {
   try {
@@ -61,9 +42,8 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function PUT(request: any) {
+export async function PUT(request: NextRequest) {
   try{
-    await corsHandler(request);
     const token = request.headers.get('authorization')?.split(' ')[1];
     if (token == 'undefined' || token == undefined) {
       return NextResponse.json({ status: 0, message: 'Token invalid' });
