@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <HeaderHome></HeaderHome>
       <Bundler></Bundler>
-      <div className="bg-teal-light w-100 h-8"></div>
+      <div className="bg-dark-blue w-100 h-8"></div>
       <ContentHome></ContentHome>
       <FooterHome></FooterHome>
     </>

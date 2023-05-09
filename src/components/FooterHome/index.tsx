@@ -64,7 +64,7 @@ export default function FooterHome() {
             </div>
             <div className="lg:w-1/3 text-center">
               <h4 className="text-lg font-bold">Sobre mim </h4>
-              <p className="leading-loose flex items-center text-center justify-center">
+              <p className="leading-loose hover:text-indigo-500 flex items-center text-center justify-center">
                 {' '}
                 Trying to do better! <ImRocket className="ml-2" />
               </p>

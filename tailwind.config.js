@@ -32,6 +32,9 @@ module.exports = {
         '.bg-gradient-teal': {
           backgroundImage: 'linear-gradient(to bottom, #00C4B4, #00756C)'
         },
+        '.bg-test': {
+          backgroundImage: 'linear-gradient(to bottom, #87e8dd, #1A3051)'
+        },
         '.bg-gradient-dark-blue': {
           backgroundImage: 'linear-gradient(to bottom, #1A3051 , #171F3F )'
         },

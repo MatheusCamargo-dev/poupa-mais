@@ -79,7 +79,7 @@ export default function Register(props: Register) {
               <FormInput
                 className="block border border-grey w-full p-3 rounded"
                 label="Nome completo:"
-                placeholder="Nome completo"
+                placeholder="Seu nome completo"
                 autoComplete="nickname"
                 type="text"
                 {...register('fullname')}
@@ -88,7 +88,7 @@ export default function Register(props: Register) {
               <FormInput
                 className="block border border-grey w-full p-3 rounded"
                 label="Usuário:"
-                placeholder="Username"
+                placeholder="Seu apelido de usuário"
                 type="text"
                 {...register('username')}
                 error={errors.username}
@@ -96,7 +96,7 @@ export default function Register(props: Register) {
               <FormInput
                 className="block border border-grey w-full p-3 rounded"
                 label="Email:"
-                placeholder="Email"
+                placeholder="Seu email"
                 autoComplete="email"
                 type="text"
                 {...register('email')}
@@ -105,7 +105,7 @@ export default function Register(props: Register) {
               <FormInput
                 className="block border border-grey w-full p-3 rounded"
                 label="Senha:"
-                placeholder="password"
+                placeholder="Sua senha"
                 autoComplete="new-password"
                 type="password"
                 {...register('password')}
@@ -131,7 +131,7 @@ export default function Register(props: Register) {
                 className="group relative flex w-full justify-center rounded-md bg-teal-500 py-2 px-3 text-sm font-semibold text-slate-700 hover:bg-teal-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 disabled={isLoading}
               >
-                {isLoading ? 'wait..' : 'Create Account'}
+                {isLoading ? 'Aguarde..' : 'Criar conta'}
               </button>
             </form>
           </FormProvider>
@@ -142,7 +142,7 @@ export default function Register(props: Register) {
               onClick={changeForm}
               className="font-medium cursor-pointer text-teal-600 hover:text-teal-500"
             >
-              Entrar
+             {' '} Entrar
             </a>
           </div>
         </div>
