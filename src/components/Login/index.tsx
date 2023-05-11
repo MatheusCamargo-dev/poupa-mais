@@ -59,17 +59,17 @@ export default function Login(props: Login) {
   }, [email]);
   return (
     <div className="h-screen flex flex-col justify-center items-center">
-      <div className="w-full max-w-md bg-white p-8 sm:p-16 rounded space-y-7">
+      <div className="w-full max-w-md bg-gradient-dark-blue p-8 sm:p-16 rounded-md space-y-7">
         <div>
           <img
             className="mx-auto h-12 w-auto"
             src="/PriceHouse.ico"
             alt="Your Company"
           />
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-black">
+          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-white">
             Entrar na sua conta
           </h2>
-          <p className="mt-2 text-center text-sm text-black">
+          <p className="mt-2 text-center text-sm text-white">
             Ou{' '}
             <a
               onClick={changeForm}

@@ -13,6 +13,7 @@ module.exports = {
         'dark-blue': '#1C2331',
         'black-blue': '#1A2C4E',
         'primary-blue': '#003049',
+        'secondary-blue': '#0b3f59',
         'teal-light': '#00756C',
         'skeleton': '#DFDFDF',
         transaction: '#726A8C',
@@ -32,8 +33,8 @@ module.exports = {
         '.bg-gradient-teal': {
           backgroundImage: 'linear-gradient(to bottom, #00C4B4, #00756C)'
         },
-        '.bg-test': {
-          backgroundImage: 'linear-gradient(to bottom, #87e8dd, #1A3051)'
+        '.bg-gradient-dark-teal': {
+          backgroundImage: 'linear-gradient(to bottom, #109385, #16736b)'
         },
         '.bg-gradient-dark-blue': {
           backgroundImage: 'linear-gradient(to bottom, #1A3051 , #171F3F )'

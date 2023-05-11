@@ -7,7 +7,7 @@ export default function StartNow() {
       <div className="flex rounded-md shadow">
         <Link
           href="/account?type=register"
-          className="py-2 px-5 bg-white flex items-center space-x-2 text-teal-500 font-medium rounded-md hover:bg-gray-100 hover:text-teal-600"
+          className="py-2 px-5 bg-primary-blue flex transform transition-all hover:scale-110 items-center space-x-2 text-teal-500 font-medium rounded-md hover:bg-secondary-blue hover:text-teal-400"
         >
           <span>Começar agora</span>
           <GiTakeMyMoney color="#7DE4D9" size={34} />

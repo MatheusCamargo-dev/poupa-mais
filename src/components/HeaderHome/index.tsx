@@ -48,7 +48,7 @@ export default function HeaderHome() {
   }
 
   return (
-    <Disclosure as="nav" className="bg-white shadow-lg z-500">
+    <Disclosure as="nav" className="bg-primary-blue shadow-lg z-500">
       {({ open }) => (
         <>
           <div className="ml max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -65,7 +65,7 @@ export default function HeaderHome() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex items-center justify-center ml-2 sm:mr-auto">
+                <div className="flex items-center justify-center ml-2 space-x-1 sm:mr-auto transform transition-all hover:scale-105">
                   <div className="flex flex-shrink-0 items-center">
                     <Image
                       width={32}
@@ -95,8 +95,8 @@ export default function HeaderHome() {
                         href={item.href}
                         className={classNames(
                           item.current
-                            ? 'border-b-4 border-teal-500 text-black'
-                            : 'text-gray-500 hover:border-teal-400 hover:border-b-4 hover:text-black',
+                            ? 'border-b-4 border-teal-500 text-white'
+                            : 'text-gray-200 hover:border-teal-400 hover:border-b-4 hover:text-white',
                           'rounded-1 px-3 py-2 text-sm font-medium'
                         )}
                         onClick={() => currentPage(item.name)}

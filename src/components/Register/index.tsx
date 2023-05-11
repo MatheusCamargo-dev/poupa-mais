@@ -67,8 +67,8 @@ export default function Register(props: Register) {
   return (
     <>
       <div className="container md:h-auto lg:h-full max-w-md mx-auto py-16 md:py-32 flex-1 flex flex-col items-center justify-center px-2">
-        <div className="bg-white px-8 py-8 rounded shadow-md p-8 text-black w-full">
-          <h1 className="text-3xl text-center text-black font-bold tracking-tight ">
+        <div className="bg-gradient-dark-blue px-8 py-8 rounded-md shadow-md p-8 text-black w-full">
+          <h1 className="text-3xl text-center text-white font-bold tracking-tight ">
             Crie uma nova conta
           </h1>
           <FormProvider {...formProps}>
@@ -136,7 +136,7 @@ export default function Register(props: Register) {
             </form>
           </FormProvider>
 
-          <div className="text-black mt-6">
+          <div className="text-white mt-6">
             Já tem uma conta?
             <a
               onClick={changeForm}
