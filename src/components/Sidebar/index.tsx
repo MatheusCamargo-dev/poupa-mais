@@ -29,7 +29,7 @@ export default function Sidebar() {
   const dispatch = useDispatch();
   const [navigation, setNavigation] = useState([
     {
-      name: 'Dashboard',
+      name: 'Página Inicial',
       href: '/app',
       icon: <MdDashboard size={25} />,
       current: false
@@ -50,6 +50,12 @@ export default function Sidebar() {
       name: 'Importações',
       href: '/app/importations',
       icon: <TbFileImport size={25} />,
+      current: false
+    },
+    {
+      name: 'Dashboard',
+      href: '/app/dashboards',
+      icon: <MdDashboard size={25} />,
       current: false
     }
   ]);
