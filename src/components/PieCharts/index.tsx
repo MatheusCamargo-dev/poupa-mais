@@ -50,7 +50,6 @@ export default function PieChart({ transaction, text }: PieProps) {
             color: '#FFFF', // Define a cor do texto nos dataLabels (preto)
           },
           formatter: function(){
-            console.log(this.point);
             if(this.point.options.y)
             return `${this.point.options.name} <br/>`+ toBRL(this.point.options.y);
           }
@@ -69,7 +68,7 @@ export default function PieChart({ transaction, text }: PieProps) {
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
   return (
-    <div className="w-9/12 text-white">
+    <div className="w-11/12 md:w-9/12 text-white flex justify-center">
       <HighchartsReact
       highcharts={Highcharts}
       options={options}
