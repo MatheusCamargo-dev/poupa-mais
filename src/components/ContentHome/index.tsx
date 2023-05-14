@@ -18,7 +18,7 @@ export default function ContentHome() {
           />
       </div>
       <div className="mt-4 flex flex-col md:flex-row px-8">
-        <Image width={500} height={500} src="/financas2.png" className="transform transition-all hover:scale-105" alt="" />
+        <Image width={750} height={750} src="/HomePage.png" className="transform transition-all hover:scale-105" alt="" />
         <div className="flex flex-col text-white ml-32 mb-16 w-50 justify-center ">
           <h1 className="text-4xl text-teal-300 font-bold tracking-tight">
             Nunca foi tão fácil controlar os seus gastos!

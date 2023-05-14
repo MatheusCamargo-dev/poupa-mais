@@ -4,6 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 import { GiPayMoney, GiReceiveMoney } from 'react-icons/gi';
+import { HiHome } from 'react-icons/hi';
 import { MdDashboard } from 'react-icons/md';
 import { TbFileImport } from 'react-icons/tb';
 import { useDispatch } from 'react-redux';
@@ -31,7 +32,7 @@ export default function Sidebar() {
     {
       name: 'Página Inicial',
       href: '/app',
-      icon: <MdDashboard size={25} />,
+      icon: <HiHome size={25} />,
       current: false
     },
     {
