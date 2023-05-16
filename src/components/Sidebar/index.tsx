@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
@@ -11,6 +12,8 @@ import { useDispatch } from 'react-redux';
 
 import { setAuthenticated } from '@/features/Auth';
 import { useStoreSelector } from '@/hooks/useStoreSelector';
+import { Disclosure } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { destroyCookie } from 'nookies';
 
 function classNames(...classes: string[]) {
@@ -88,7 +91,7 @@ export default function Sidebar() {
   }
   return (
     <>
-      <div className="min-h-screen sm:block bg-primary-blue">
+      <div className="min-h-screen sm:block hidden bg-primary-blue">
         <div className="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r border-dark-blue hover:w-56 hover:bg-primary-blue hover:shadow-lg">
           <div className="flex h-screen flex-col justify-between pt-2 pb-6">
             <div>
@@ -162,69 +165,78 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
+      <Disclosure as="nav" className="bg-primary-blue sm:hidden shadow-lg z-500">
+        {({ open }) => (
+        <>
+          <div className="ml max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="relative flex h-16 items-center justify-between">
+              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                {/* Mobile menu button*/}
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-teal-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </Disclosure.Button>
+              </div>
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="flex items-center justify-center ml-2 space-x-1 sm:mr-auto transform transition-all hover:scale-105">
+                  <div className="flex flex-shrink-0 items-center">
+                    <Image
+                      width={32}
+                      height={32}
+                      className="block h-8 w-auto lg:hidden"
+                      src="/PriceHouse.ico"
+                      alt="Your Company"
+                    />
+                    <Image
+                      width={32}
+                      height={32}
+                      className="hidden h-8 w-auto lg:block text-white"
+                      src="/PriceHouse.ico"
+                      alt="Your Company"
+                    />
+                  </div>
+                  <h1 className="font-roboto font-bold text-teal-400">
+                    {' '}
+                    Poupa Mais
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Disclosure.Panel className="sm:hidden">
+            {({ close }) => (
+              <div className="space-y-1 px-2 pt-2 pb-3 flex flex-col">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={classNames(
+                      item.current
+                        ? 'bg-teal-500 text-white'
+                        : 'text-gray-300 hover:bg-teal-500 hover:text-white',
+                      'rounded-md flex items-center gap-1 px-3 py-2 text-sm font-medium ui-close:rotate-90 ui-close:transform'
+                    )}
+                    onClick={() => {
+                      currentPage(item.name);
+                      close();
+                    }}
+                    aria-current={item.current ? 'page' : undefined}
+                  >
+                     {item.icon}
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </Disclosure.Panel>
+        </>
+      )}
+      </Disclosure>
     </>
   );
 }
-
-// const SkeletonSidebar = () => {
-//   return(
-//     <div className="min-h-screen sm:block bg-primary-blue">
-//       <div className="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r border-dark-blue hover:w-56 hover:bg-primary-blue hover:shadow-lg">
-//         <div className="flex h-screen flex-col justify-between pt-2 pb-6">
-//           <div>
-//             <div className="w-max p-2.5 flex items-center space-x-3">
-//               <img
-//                 className=" h-8 w-auto lg:block"
-//                 src="/PriceHouse.ico"
-//                 alt="Your Company"
-//               />
-//               <h1 className="font-roboto text-2xl font-bold text-teal-400">
-//                 {' '}
-//                 Poupa Mais
-//               </h1>
-//             </div>
-//             <ul className="mt-6 space-y-2 tracking-wide">
-//               {Array.from([0, 1, 2, 3]).map(() => (
-//                 <li
-//                   className='bg-skeleton animate-pulse group text-gray-300 hover:text-teal-500
-//                   rounded-md px-3 py-2 text-sm font-medium min-w-max'
-//                   key={crypto.randomUUID()}
-//                 >
-//                 </li>
-//               ))}
-//             </ul>
-//           </div>
-
-//           <div className="w-max -mb-3 items-center">
-//             <Link
-//               href="/app/account"
-//               className="flex px-3 space-x-3 cursor-pointer  w-56 items-center"
-//             >
-//               <img
-//                 className="h-8 w-8 rounded-full"
-//                 src="https://github.com/MatheusCamargo-dev.png"
-//                 alt=""
-//               />{' '}
-//               <div className="flex flex-col justify-center">
-//                 <span className="bg-skeleton animate-pulse px-4 py-2">
-//                 </span>
-//                 <span className=" bg-skeleton animate-pulse px-4 py-2">
-//                 </span>
-//               </div>
-//             </Link>
-//             <a
-//               className="gbg group flex items-center space-x-4 rounded-full px-4 py-3 cursor-pointer text-gray-300 hover:text-white
-//             "
-//             >
-//               <FiLogOut
-//                 size={30}
-//                 className="group group-hover:text-red-400"
-//               ></FiLogOut>
-//               <span className="group-hover:text-red-400">Sair</span>
-//             </a>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
