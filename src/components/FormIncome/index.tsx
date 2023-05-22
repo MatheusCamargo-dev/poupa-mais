@@ -42,7 +42,7 @@ export default function FormIncome() {
         />
         <SelectTransactions
           {...register('category')}
-          label="Selecione uma categoria:"
+          label="Categoria:"
           options={incomeCategories}
           error={errors.category}
         />

@@ -7,10 +7,9 @@ import { supabase } from '@/lib/supabase';
 export async function POST(request: Request) {
   try {
     const { data } = await request.json();
-    const { fullname, username, password, email } = data;
+    const { fullname, password, email } = data;
     const user = await userController.createUser({
       fullname,
-      username,
       password,
       email
     });
@@ -51,7 +50,6 @@ export async function PUT(request: NextRequest) {
     const formData = await request.formData();
     const _id = formData.get('_id') as string;
     const avatar = formData.get('avatar');
-    const username = formData.get('username') as string;
     const fullname = formData.get('fullname') as string;
     const email = formData.get('email') as string;
 
@@ -66,7 +64,7 @@ export async function PUT(request: NextRequest) {
     const res = await tokenController.validToken(token);
 
     if (res && res.status == 1 && res.userData?.id == _id) {
-      const query = {_id, username, fullname, email, expenseCategories, incomeCategories};
+      const query = {_id, fullname, email, expenseCategories, incomeCategories};
       let updateUser;
       if(avatar && avatar !== 'null'){
         const { data: deleteData } = await supabase

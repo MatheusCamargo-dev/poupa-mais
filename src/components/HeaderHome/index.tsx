@@ -65,28 +65,28 @@ export default function HeaderHome() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex items-center justify-center ml-2 space-x-1 sm:mr-auto transform transition-all hover:scale-105">
-                  <div className="flex flex-shrink-0 items-center">
-                    <Image
-                      width={32}
-                      height={32}
-                      className="block h-8 w-auto lg:hidden"
-                      src="/PriceHouse.ico"
-                      alt="Your Company"
-                    />
-                    <Image
-                      width={32}
-                      height={32}
-                      className="hidden h-8 w-auto lg:block text-white"
-                      src="/PriceHouse.ico"
-                      alt="Your Company"
-                    />
-                  </div>
-                  <h1 className="font-roboto font-bold text-teal-400">
-                    {' '}
-                    Poupa Mais
-                  </h1>
-                </div>
+                <Link href="/" className='flex items-center justify-center ml-2 space-x-1 sm:mr-auto transform transition-all hover:scale-105'>
+                    <div className="flex flex-shrink-0 items-center">
+                      <Image
+                        width={32}
+                        height={32}
+                        className="block h-8 w-auto lg:hidden"
+                        src="/PriceHouse.ico"
+                        alt="Your Company"
+                      />
+                      <Image
+                        width={32}
+                        height={32}
+                        className="hidden h-8 w-auto lg:block text-white"
+                        src="/PriceHouse.ico"
+                        alt="Your Company"
+                      />
+                    </div>
+                    <h1 className="font-roboto font-bold text-teal-400">
+                      {' '}
+                      Poupa Mais
+                    </h1>
+                </Link>
                 <div className="hidden sm:ml-6 sm:block ml-auto">
                   <div className="flex space-x-4 ">
                     {navigation?.map((item) => (

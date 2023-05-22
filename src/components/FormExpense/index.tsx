@@ -49,7 +49,7 @@ export default function FormExpense() {
         />
         <SelectTransactions
           {...register('category')}
-          label="Selecione uma categoria:"
+          label="Categoria:"
           options={expenseCategories}
           error={errors.category}
         />

@@ -5,7 +5,6 @@ import bcryptjs from 'bcryptjs';
 interface UserProps {
   _id?: string;
   fullname?: string;
-  username?: string;
   password?: string;
   email?: string;
   avatar?: string;
@@ -16,16 +15,11 @@ interface UserProps {
 const createUser = async (queryUser: UserProps) => {
   try {
     if (!database.connect()) return false;
-    const { password, email, username } = queryUser;
+    const { password, email } = queryUser;
 
     const alreadyEmail = await User.findOne({ email });
     if (alreadyEmail) {
       return { status: 0, message: `Email já cadastrado` };
-    }
-
-    const alreadyName = await User.findOne({ username });
-    if (alreadyName) {
-      return { status: 0, message: `Usuário já cadastrado` };
     }
 
     const salt = bcryptjs.genSaltSync();

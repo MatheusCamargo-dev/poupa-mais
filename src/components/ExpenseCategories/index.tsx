@@ -9,7 +9,6 @@ import ErrorMessage from '../ErrorMessage'
 interface Props {
   newCategories: FieldArrayWithId<{
     fullname: string;
-    username: string;
     email: string;
     avatar: File;
     expenseCategories: {
@@ -24,7 +23,6 @@ interface Props {
         expenseCategory: string;
     }[];
     fullname: string;
-    username: string;
     email: string;
     avatar: File;
     _id: string;

@@ -47,7 +47,7 @@ export const useSignInUp = () => {
     const user = await signInRequest(data);
     if (user.status == 0) {
       setErrorMessage(user.message);
-      setLoginText('Sign In');
+      setLoginText('Entrar');
       setIsLoading(false);
     }
     if (user.status === 1) {

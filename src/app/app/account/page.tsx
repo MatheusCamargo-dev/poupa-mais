@@ -29,7 +29,7 @@ export default function Account() {
                 {user.fullname}
               </div>
               <div className='flex flex-col space-y-2 w-full'>
-                <span>Usuário: {user.username}</span>
+                <span>Usuário: {user.fullname}</span>
                 <span>Email: {user.email}</span>
               </div>
             </div>
@@ -39,7 +39,6 @@ export default function Account() {
                 _id={user.id}
                 email={user.email}
                 fullname={user.fullname}
-                username={user.username}
                 expenseCategories={user.expenseCategories}
                 incomeCategories={user.incomeCategories}
               />

@@ -27,11 +27,6 @@ const schema = z
           .map((word) => word[0].toLocaleUpperCase().concat(word.substring(1)))
           .join(' ')
       ),
-    username: z
-      .string({ required_error: 'Usuário é obrigatório.' })
-      .min(3, 'O usuário deve conter no mínimo 3 caracteres.')
-      .max(16, 'O usuário deve conter no máximo 16 caracteres.')
-      .trim(),
     email: z
       .string({ required_error: 'Email é obrigatório.' })
       .email('email invalido')
@@ -60,12 +55,11 @@ interface User {
   _id: string;
   fullname: string;
   email: string;
-  username: string;
   expenseCategories: expenseCategories[];
   incomeCategories: incomeCategories[];
 }
 export default function FormUser(props: User) {
-  const { _id, username, email, fullname, expenseCategories, incomeCategories} = props;
+  const { _id, email, fullname, expenseCategories, incomeCategories} = props;
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const formProps = useForm<FormPropsUpdate>({
@@ -75,7 +69,6 @@ export default function FormUser(props: User) {
       _id: _id,
       email: email,
       fullname: fullname,
-      username: username,
       incomeCategories,
       expenseCategories
     }
@@ -101,7 +94,6 @@ export default function FormUser(props: User) {
       setIsLoading(true);
       const formData = new FormData();
       formData.set("avatar", data.avatar);
-      formData.set("username", data.username);
       formData.set("fullname", data.fullname);
       formData.set("email", data.email);
       formData.set("_id", data._id);
@@ -141,14 +133,6 @@ export default function FormUser(props: User) {
                   type="text"
                   {...register('fullname')}
                   error={errors.fullname}
-                />
-                <FormInput
-                  className="block border border-grey w-full p-3 rounded"
-                  label="Usuário:"
-                  placeholder="Username"
-                  type="text"
-                  {...register('username')}
-                  error={errors.username}
                 />
                 <FormInput
                   className="block border border-grey w-full p-3 rounded"

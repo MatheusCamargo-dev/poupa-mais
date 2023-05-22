@@ -5,7 +5,7 @@ export default function FooterHome() {
   return (
     <>
       <footer className="bg-gray-800 text-white">
-        <div className="container mx-auto py-2.5">
+        <div className="container mx-auto py-1">
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-3 md:space-y-0">
             <div className="lg:w-1/3 lg:mb-0 text-center gap-2">
               <h4 className="text-lg font-bold">Contatos</h4>
@@ -71,7 +71,7 @@ export default function FooterHome() {
             </div>
           </div>
         </div>
-        <div className="bg-gray-900 py-4">
+        <div className="bg-gray-900 py-1">
           <div className="container mx-auto">
             <p className="text-center text-white text-sm">
               &copy; Matheus Camargo 2023

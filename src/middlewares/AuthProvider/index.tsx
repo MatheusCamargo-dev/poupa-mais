@@ -68,7 +68,7 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
   return (
     <>
       {authenticated == 1 && <Header />}
-      {authenticated == 1 && child}
+      {authenticated == 1 && <div className='max-h-screen w-full overflow-y-scroll'>{child}</div>}
       {authenticated == 0 && <AppLoading />}
     </>
   );

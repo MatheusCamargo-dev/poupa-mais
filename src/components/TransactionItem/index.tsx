@@ -100,7 +100,7 @@ export default function TransactionItem(props: TransactionProps) {
               />
               <SelectTransactions
                 {...register('category')}
-                label="Selecione uma categoria:"
+                label="Categoria:"
                 options={categoryOptions}
                 error={errors.category}
               />

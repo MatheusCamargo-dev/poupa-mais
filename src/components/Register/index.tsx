@@ -12,7 +12,6 @@ type Register = {
     email: string;
     password: string;
     fullname: string;
-    username: string;
     confirm_password: string;
 }) => Promise<void>;
   errorMessage: string;
@@ -29,12 +28,7 @@ const schema = z
           .split(' ')
           .map((word) => word[0].toLocaleUpperCase().concat(word.substring(1)))
           .join(' ')
-      ),
-    username: z
-      .string({ required_error: 'Usuário é obrigatório.' })
-      .min(3, 'O usuário deve conter no mínimo 3 caracteres.')
-      .max(16, 'O usuário deve conter no máximo 16 caracteres.')
-      .trim(),
+    ),
     email: z
       .string({ required_error: 'Email é obrigatório.' })
       .email('email invalido')
@@ -84,14 +78,6 @@ export default function Register(props: Register) {
                 type="text"
                 {...register('fullname')}
                 error={errors.fullname}
-              />
-              <FormInput
-                className="block border border-grey w-full p-3 rounded"
-                label="Usuário:"
-                placeholder="Seu apelido de usuário"
-                type="text"
-                {...register('username')}
-                error={errors.username}
               />
               <FormInput
                 className="block border border-grey w-full p-3 rounded"

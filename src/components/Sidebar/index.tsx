@@ -145,9 +145,6 @@ export default function Sidebar() {
                   <span className=" text-white text-semibold text-lg hover:text-teal-500 break-all">
                     {user.fullname}
                   </span>
-                  <span className=" text-zinc-400 text-semibold text-lg break-all">
-                    #{user.username}
-                  </span>
                 </div>
               </Link>
               <a

@@ -58,7 +58,6 @@ const validToken = async (token: string) => {
         id: user.id,
         fullname: user.fullname,
         email: user.email,
-        username: user.username,
         avatar: user.avatar,
         expenseCategories: user.expenseCategories,
         incomeCategories: user.incomeCategories

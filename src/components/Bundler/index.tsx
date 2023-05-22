@@ -12,7 +12,7 @@ export default function Bundler() {
               Domine suas finanças com <span className='group-hover:text-green-400'>Poupa Mais🤩</span>
             </h2>
             <br/>
-            <p className="text-zinc-100 text-center text-lg md:text-xl font-light overflow-hidden line-clamp-3 transform transition-all hover:scale-110">
+            <p className="text-zinc-100 text-center text-lg md:text-xl font-light overflow-hidden line-clamp-3 transform transition-all">
                 Transforme suas finanças com <span className='group-hover:text-green-400 group-hover:text-2xl'>Poupa Mais </span>
                 Controle seus gastos e alcance a estabilidade financeira desejada. <br/>
                 Nosso aplicativo oferece um poderoso sistema de orçamento pessoal,
