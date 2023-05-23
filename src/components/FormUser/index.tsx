@@ -7,6 +7,7 @@ import FormInput from '@/components/FormInput';
 
 import ExpenseCategories from '../ExpenseCategories';
 import IncomeCategories from '../IncomeCategories';
+import MediaPicker from '../MediaPicker';
 
 import { expenseCategories, incomeCategories, setUser } from '@/features/User';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -55,11 +56,12 @@ interface User {
   _id: string;
   fullname: string;
   email: string;
+  avatar: string;
   expenseCategories: expenseCategories[];
   incomeCategories: incomeCategories[];
 }
 export default function FormUser(props: User) {
-  const { _id, email, fullname, expenseCategories, incomeCategories} = props;
+  const { _id, email, fullname, expenseCategories, incomeCategories, avatar} = props;
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const formProps = useForm<FormPropsUpdate>({
@@ -143,27 +145,7 @@ export default function FormUser(props: User) {
                   {...register('email')}
                   error={errors.email}
                 />
-                <FormInput
-                  placeholder=''
-                  className="m-0 w-full min-w-0 flex-auto rounded
-                  border border-solid bg-white border-neutral-300
-                  bg-clip-padding px-3 py-[0.32rem] text-base
-                  font-normal text-neutral-700 transition
-                  duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem]
-                  file:overflow-hidden file:rounded-none file:border-0
-                  file:border-solid file:border-inherit file:bg-neutral-100
-                  file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition
-                  file:duration-150 file:ease-in-out file:[border-inline-end-width:1px]
-                  file:[margin-inline-end:0.75rem] hover:file:bg-blue-600 focus:border-primary
-                  focus:text-neutral-700 focus:shadow-te-primary focus:outline-none
-                  dark:border-neutral-600 dark:text-black dark:file:bg-blue-700
-                  dark:file:text-neutral-100 dark:focus:border-primary"
-                  label='Imagem:'
-                  accept='image/*'
-                  type='file'
-                  {...register('avatar')}
-                  error={errors.avatar}
-                />
+                <MediaPicker label='Foto:' register={register} name='avatar' avatar={avatar} error={errors.avatar}/>
                 <IncomeCategories error={errors.incomeCategories} newCategories={fieldsIncome} append={appendIncome} remove={removeIncome} register={register}/>
                 <ExpenseCategories error={errors.expenseCategories} newCategories={fieldsExpense} append={appendExpense} remove={removeExpense} register={register} />
                 <button type='submit' disabled={isLoading} className=" flex w-full justify-center rounded-md bg-teal-500 py-2 px-3 text-sm font-semibold hover:text-slate-700 hover:bg-teal-4

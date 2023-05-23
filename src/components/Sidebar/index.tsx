@@ -153,7 +153,7 @@ export default function Sidebar() {
               "
               >
                 <FiLogOut
-                  size={30}
+                  size={25}
                   className="group group-hover:text-red-400"
                 ></FiLogOut>
                 <span className="group-hover:text-red-400">Sair</span>

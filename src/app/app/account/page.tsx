@@ -19,7 +19,7 @@ export default function Account() {
           <div className="grid grid-cols-2 text-white">
             <div className="flex flex-col p-5 space-y-2">
               <img
-                    className="rounded-full w-64 h-64 border-2 border-teal-500 mb-8"
+                    className="rounded-full w-[350px] h-[350px] border-2 border-teal-500 mb-8"
                     src={`${supabaseURL}/${user.avatar}`}
                     alt=""
                     width={475}
@@ -29,7 +29,6 @@ export default function Account() {
                 {user.fullname}
               </div>
               <div className='flex flex-col space-y-2 w-full'>
-                <span>Usuário: {user.fullname}</span>
                 <span>Email: {user.email}</span>
               </div>
             </div>
@@ -37,6 +36,7 @@ export default function Account() {
             {user.id !== '' &&
               <FormUser
                 _id={user.id}
+                avatar={user.avatar}
                 email={user.email}
                 fullname={user.fullname}
                 expenseCategories={user.expenseCategories}

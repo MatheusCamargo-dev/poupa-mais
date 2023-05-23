@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import tokenController from '@/database/controllers/TokenController';
 import userController from '@/database/controllers/UserController';
+import { User } from '@/database/schemas/UserSchema';
 import { supabase } from '@/lib/supabase';
+import { randomUUID } from 'node:crypto'
+import { extname } from 'node:path';
 
 export async function POST(request: Request) {
   try {
@@ -63,26 +66,30 @@ export async function PUT(request: NextRequest) {
 
     const res = await tokenController.validToken(token);
 
+    let updateUser;
+
+    const user = await User.findById(_id);
     if (res && res.status == 1 && res.userData?.id == _id) {
       const query = {_id, fullname, email, expenseCategories, incomeCategories};
-      let updateUser;
       if(avatar && avatar !== 'null'){
+        const avatarUUID = randomUUID()
+
         const { data: deleteData } = await supabase
         .storage
         .from('poupa-mais')
-        .remove([`avatars/${_id}`]);
-        if(deleteData){
-          const { data: uploadData } = await supabase
-          .storage
-          .from('poupa-mais')
-          .upload(`avatars/${_id}`, avatar, {
-            cacheControl: '3600',
-            upsert: false
-          })
-          if(uploadData){
-              const data = {...query, avatar: uploadData.path};
-              updateUser = await userController.updateUser(data);
-          }
+        .remove([`${user?.avatar}`]);
+
+        const { data: uploadData } = await supabase
+        .storage
+        .from('poupa-mais')
+        .upload(`avatars/${avatarUUID}`, avatar, {
+          cacheControl: '3600',
+          upsert: false
+        })
+
+        if(uploadData){
+            const data = {...query, avatar: uploadData.path};
+            updateUser = await userController.updateUser(data);
         }
       }else{
         updateUser = await userController.updateUser(query);
