@@ -18,7 +18,7 @@ export default function ContentTotValue() {
           Saldo total
         </span>{' '}
         <span
-          className={`text-2xl px-10 md:text-4xl font-semibold ${
+          className={`text-2xl px-10 md:text-4xl font-semibold text-center ${
             balanceValue > 0 ? 'text-emerald-400' : 'text-red-500'
           }`}
         >

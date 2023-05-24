@@ -228,6 +228,19 @@ export default function Sidebar() {
                     {item.name}
                   </Link>
                 ))}
+                <a
+                  onClick={signOut}
+                  className="gbg group flex items-end space-x-4 rounded-full px-4 py-3 cursor-pointer text-gray-300 hover:text-white
+                "
+                >
+                  <FiLogOut
+                    size={20}
+                    color="rgb(254 202 202)"
+                    className="group group-hover:text-red-400"
+                  />
+                  <span className="group-hover:text-red-400 text-sm text-red-200">Sair</span>
+
+                </a>
               </div>
             )}
           </Disclosure.Panel>

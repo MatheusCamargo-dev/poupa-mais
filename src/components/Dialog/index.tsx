@@ -84,7 +84,7 @@ function Dialog(props: DialogProps) {
               className="relative px-8 pt-5 bg-white w-full flex-col flex
             rounded-lg space-x-4"
             >
-              <div className="text-2xl font-semibold flex items-center gap-2">
+              <div className="text-xl md:text-2xl font-semibold flex items-center gap-2">
                 {indicator && (
                   <div
                     className={`${indicator} rounded-full w-3 h-3 mr-2 md:mr-0`}
@@ -120,9 +120,9 @@ function Dialog(props: DialogProps) {
                 className={`${
                   loading && hidden
                 } mt-3 w-full inline-flex justify-center rounded-md
-                border border-gray-300 shadow-sm px-4 py-2 bg-white text-base
+                border border-gray-300 shadow-sm px-4 py-2 bg-white
                 font-medium text-gray-700 hover:bg-gray-100 focus:ring-indigo-500
-                sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm`}
+                sm:mt-0 sm:ml-3 sm:w-auto text-sm`}
                 onClick={handleCloseDialog}
               >
                 Cancelar

@@ -24,13 +24,13 @@ const SelectTransactions = forwardRef<
   return (
     <div key={props.name} className="space-y-1 text-xl">
       {props.label && (
-        <label htmlFor={props.name} className="text-teal-500">
+        <label htmlFor={props.name} className="text-sm md:text-md text-teal-500">
           {props.label}
         </label>
       )}
       <select
         {...register(`${props.name}`)}
-        className={'block border-zinc-500 border-2 md:w-full p-1 rounded-md'}
+        className={'block border-zinc-500 text-sm md:text-md border-2 md:w-full p-1 rounded-md'}
         ref={ref}
       >
         {!props.disableDefaultOption && (

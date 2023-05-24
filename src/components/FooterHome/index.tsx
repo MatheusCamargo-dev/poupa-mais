@@ -6,7 +6,7 @@ export default function FooterHome() {
     <>
       <footer className="bg-gray-800 text-white">
         <div className="container mx-auto py-1">
-          <div className="flex flex-col lg:flex-row justify-between items-center space-y-3 md:space-y-0">
+          <div className="flex flex-col-reverse lg:flex-row justify-between items-center space-y-3 md:space-y-0">
             <div className="lg:w-1/3 lg:mb-0 text-center gap-2">
               <h4 className="text-lg font-bold">Contatos</h4>
               <p className="leading-loose ">

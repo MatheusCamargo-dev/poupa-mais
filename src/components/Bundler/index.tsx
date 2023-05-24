@@ -8,11 +8,11 @@ export default function Bundler() {
       <div className="flex md:flex-row flex-col justify-center items-center mx-auto">
         <div className="max-w-7xl px-4 sm:px-6 lg:px-8 ml-4 self-end">
           <div className="lg:text-center group space-y-2">
-            <h2 className="text-zinc-100 text-4xl md:text-5xl font-bold tracking-tight mb-2 transform transition-all hover:scale-110">
+            <h2 className="text-zinc-100 text-4xl md:text-5xl text-center font-bold tracking-tight mb-2 transform transition-all hover:scale-110">
               Domine suas finanças com <span className='group-hover:text-green-400'>Poupa Mais🤩</span>
             </h2>
             <br/>
-            <p className="text-zinc-100 text-center text-lg md:text-xl font-light overflow-hidden line-clamp-3 transform transition-all">
+            <p className="text-zinc-100 text-left md:text-center text-lg md:text-xl font-light overflow-hidden line-clamp-3 transform transition-all">
                 Transforme suas finanças com <span className='group-hover:text-green-400 group-hover:text-2xl'>Poupa Mais </span>
                 Controle seus gastos e alcance a estabilidade financeira desejada. <br/>
                 Nosso aplicativo oferece um poderoso sistema de orçamento pessoal,

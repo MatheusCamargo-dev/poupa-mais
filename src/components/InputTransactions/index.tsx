@@ -55,7 +55,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
                   }}
                   prefix="R$"
                   placeholder="R$"
-                  className="block border-zinc-500 border-2 p-1 rounded-md w-full"
+                  className="block border-zinc-500 text-sm md:text-md border-2 p-1 rounded-md w-full"
                 />
               )}
             />
@@ -75,7 +75,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
                   selected={field.value}
                   locale="pt"
                   dateFormat={'dd/MM/yyyy'}
-                  className="block border-zinc-500 border-2 p-1 rounded-md w-full"
+                  className="block border-zinc-500 border-2 p-1 text-sm md:text-md rounded-md w-full"
                 />
               )}
             />
@@ -91,7 +91,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
               value={props.value}
               defaultValue={props.defaultValue}
               {...register(props.name)}
-              className={'block border-zinc-500 border-2 p-1 rounded-md w-full'}
+              className={'block border-zinc-500 text-sm md:text-md border-2 p-1 rounded-md w-full'}
               ref={ref}
             />
           );
@@ -101,7 +101,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
     return (
       <div key={props.name} className="space-y-1 text-2xl">
         {props.label && (
-          <label htmlFor={props.name} className="text-teal-500">
+          <label htmlFor={props.name} className="text-teal-500 text-sm md:text-md">
             {props.label}
           </label>
         )}
