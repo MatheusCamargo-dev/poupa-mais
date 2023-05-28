@@ -2,8 +2,8 @@ import React from 'react'
 import { Line } from "react-chartjs-2";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, ChartData, TooltipItem } from "chart.js/auto";
-
-ChartJS.register(ArcElement, Tooltip, Legend);
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+ChartJS.register(ArcElement, Tooltip, Legend,ChartDataLabels );
 
 interface TransactionProps {
     date: string;
@@ -80,13 +80,41 @@ export default function BalanceCharts({ merged, text }: LineProps) {
         {
           label: 'Saldo',
           data: amounts,
-          fill: true,
-          tension: 0.4,
-          backgroundColor: 'rgb(29, 146, 146, 0.1)',
-          //
-          borderColor:  'rgb(29, 146, 146)',
-          pointBorderColor: 'rgb(96, 207, 207)',
-          pointBorderWidth: 2,
+          fill: 'start',
+          tension: 0.3,
+          // backgroundColor: 'rgb(29, 146, 146, 0.1)',
+
+          backgroundColor(context) {
+              const bgColor = [
+                'rgb(120, 154, 76, 0.8)',
+                'rgb(91, 119, 75, 0.7)',
+                'rgb(49, 70, 74, 0.6)',
+                'rgb(34, 53, 73, 0.5)',
+              ]
+
+              if(!context.chart.chartArea){
+                return
+              }
+
+              const { ctx, chartArea: {top, bottom} } = context.chart;
+
+              const gradientBg = ctx.createLinearGradient(0, top, 0, bottom);
+
+              const colorTranches = 1 / (bgColor.length - 1);
+
+              for(let i = 0; i < bgColor.length - 1; i++){
+                gradientBg.addColorStop(0 + i * colorTranches, bgColor[i])
+              }
+
+
+              return gradientBg;
+          },
+
+          borderColor:  'rgb(148, 204, 90)',
+          borderWidth: 4,
+          pointBorderColor: 'rgb(148, 204, 90)',
+          pointBackgroundColor: 'rgb(148, 204, 90)',
+          pointBorderWidth: 0.5,
 
         }
       ]
@@ -94,12 +122,14 @@ export default function BalanceCharts({ merged, text }: LineProps) {
   };
 
   const chartData = getDataForChart(Object.values(totAmounts));
-
   const optionsLineChart = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
+      datalabels: {
+        display: false, // Desabilita os data labels para todos os tipos de gráficos
+      },
       tooltip: {
         callbacks: {
           label: function (context: TooltipItem<"line">) {
@@ -114,39 +144,44 @@ export default function BalanceCharts({ merged, text }: LineProps) {
               return label;
           },
         }
+
       }
     },
     elements: {
       point: {
         radius: 4,
         hoverRadius: 6,
-
-      }
+      },
     },
     scales: {
       x: {
         grid: {
-          color: '#999797',
+          color: '#ffffff',
           display: false,
+        },
+        beginAtZero: true,
+        ticks: {
+          color: 'white'
         }
       },
       y: {
+        beginAtZero: true,
         grid: {
           color: '#999797',
           display: false,
         },
         ticks: {
-          color: 'white',
+          color: 'rgb(148, 204, 90)',
           callback: (value: number | string) => Intl.NumberFormat('en', { notation: 'compact'}).format(Number(value)),
         }
       }
-    }
+    },
   };
 
   return (
-    <div className="bg-dark-blue rounded-lg p-4 text-white flex gap-2 items-center flex-col">
+    <div className="bg-dash rounded-lg p-4 text-white flex gap-2 items-center flex-col">
       <h1 className="text-left text-xl font-bold">{text}</h1>
-      <div className="w-full h-full">
+      <div className="w-full h-full bg-transparent p-1 rounded-lg">
         <Line data={chartData} options={optionsLineChart} />
       </div>
     </div>

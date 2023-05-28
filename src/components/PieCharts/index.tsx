@@ -68,7 +68,7 @@ export default function PieChart({ transaction, text }: PieProps) {
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
   return (
-    <div className="text-white p-4 flex justify-center bg-dark-blue rounded-lg">
+    <div className="text-white p-4 flex justify-center bg-dash rounded-lg">
       <HighchartsReact
       highcharts={Highcharts}
       containerProps={{ style: { width: "100%", height: "100% " } }}

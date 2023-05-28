@@ -94,7 +94,9 @@ export default function LineCharts({ transaction, text, color = 'rgb(75, 192, 19
   return (
     <div className="h-9/12 p-4 rounded-lg bg-dark-blue text-white flex gap-8 items-center justify-center flex-col">
       <h1 className="text-center text-xl font-bold">{text}</h1>
-      <Line data={chartData} options={optionsLineChart} />
+      <div className="h-92">
+        <Line data={chartData} options={optionsLineChart} />
+      </div>
     </div>
   )
 }
