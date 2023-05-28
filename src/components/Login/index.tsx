@@ -114,12 +114,14 @@ export default function Login(props: Login) {
             <div>
               <button
                 type="submit"
-                className="group relative flex w-full justify-center rounded-md bg-teal-500 py-2 px-3 text-sm font-semibold text-slate-700 hover:bg-teal-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="group relative flex w-full justify-center text-gray-900 rounded-md bg-teal-400 disabled:bg-teal-600 py-2 px-3 text-sm font-semibold
+                          enabled:hover:bg-teal-500 enabled:hover:text-black focus-visible:outline focus-visible:outline-2
+                          focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 disabled={isLoading}
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <LockClosedIcon
-                    className="h-5 w-5 text-black group-hover:text-white"
+                    className="h-5 w-5 text-black "
                     aria-hidden="true"
                   />
                 </span>

@@ -114,7 +114,9 @@ export default function Register(props: Register) {
               )}
               <button
                 type="submit"
-                className="group relative flex w-full justify-center rounded-md bg-teal-500 py-2 px-3 text-sm font-semibold text-slate-700 hover:bg-teal-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="group relative flex w-full justify-center rounded-md bg-teal-400 py-2 px-3 text-sm
+                          font-semibold text-gray-900 enabled:hover:bg-teal-500 disabled:bg-teal-600 enabled:hover:text-black focus-visible:outline
+                          focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 disabled={isLoading}
               >
                 {isLoading ? 'Aguarde..' : 'Criar conta'}
