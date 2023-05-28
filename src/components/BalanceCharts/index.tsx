@@ -81,10 +81,13 @@ export default function BalanceCharts({ merged, text }: LineProps) {
           label: 'Saldo',
           data: amounts,
           fill: true,
-          tension: 0.1,
-          borderColor:  'rgb(75, 192, 192)',
-          pointBorderColor: 'transparent',
-          pointBorderWidth: 4
+          tension: 0.4,
+          backgroundColor: 'rgb(29, 146, 146, 0.1)',
+          //
+          borderColor:  'rgb(29, 146, 146)',
+          pointBorderColor: 'rgb(96, 207, 207)',
+          pointBorderWidth: 2,
+
         }
       ]
     };
@@ -115,9 +118,8 @@ export default function BalanceCharts({ merged, text }: LineProps) {
     },
     elements: {
       point: {
-        radius: 5,
+        radius: 4,
         hoverRadius: 6,
-        backgroundColor: 'white',
 
       }
     },
@@ -125,11 +127,13 @@ export default function BalanceCharts({ merged, text }: LineProps) {
       x: {
         grid: {
           color: '#999797',
+          display: false,
         }
       },
       y: {
         grid: {
           color: '#999797',
+          display: false,
         },
         ticks: {
           color: 'white',
@@ -140,9 +144,11 @@ export default function BalanceCharts({ merged, text }: LineProps) {
   };
 
   return (
-    <div className=" h-72 w-10/12 text-white flex gap-6 items-center flex-col">
-      <h1 className="text-center text-xl font-bold">{text}</h1>
-      <Line data={chartData} options={optionsLineChart} />
+    <div className="bg-dark-blue rounded-lg p-4 text-white flex gap-2 items-center flex-col">
+      <h1 className="text-left text-xl font-bold">{text}</h1>
+      <div className="w-full h-full">
+        <Line data={chartData} options={optionsLineChart} />
+      </div>
     </div>
   )
 }
