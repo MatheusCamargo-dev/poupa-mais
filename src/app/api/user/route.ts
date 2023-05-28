@@ -5,7 +5,6 @@ import userController from '@/database/controllers/UserController';
 import { User } from '@/database/schemas/UserSchema';
 import { supabase } from '@/lib/supabase';
 import { randomUUID } from 'node:crypto'
-import { extname } from 'node:path';
 
 export async function POST(request: Request) {
   try {
@@ -86,6 +85,8 @@ export async function PUT(request: NextRequest) {
           cacheControl: '3600',
           upsert: false
         })
+
+        console.log(deleteData);
 
         if(uploadData){
             const data = {...query, avatar: uploadData.path};

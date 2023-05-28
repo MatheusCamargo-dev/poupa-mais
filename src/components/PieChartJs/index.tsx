@@ -3,10 +3,9 @@ import { Pie } from 'react-chartjs-2';
 
 import { TransactionProps } from '../History';
 
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, ChartData, CoreChartOptions, ElementChartOptions, PluginChartOptions, DatasetChartOptions, ScaleChartOptions, DoughnutControllerChartOptions, TooltipItem } from 'chart.js';
-import { _DeepPartialObject } from 'chart.js/dist/types/utils';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, ChartData, TooltipItem } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-
+import {Context} from 'chartjs-plugin-datalabels';
 
 export default function PieChartJs({ transaction, text}: { transaction: TransactionProps[], text: string}) {
 
@@ -38,15 +37,7 @@ export default function PieChartJs({ transaction, text}: { transaction: Transact
 
   };
 
-  const options:
-  _DeepPartialObject<
-  CoreChartOptions<"pie">
-  & ElementChartOptions<"pie">
-  & PluginChartOptions<"pie">
-  & DatasetChartOptions<"pie">
-  & ScaleChartOptions
-  & DoughnutControllerChartOptions>
-  = {
+  const options: any= {
     responsive: true,
     layout: {
       padding: {
@@ -90,7 +81,7 @@ export default function PieChartJs({ transaction, text}: { transaction: Transact
           bottom: 4,
         },
         textAlign: 'center',
-        formatter(value, context) {
+        formatter(value: number, context: Context) {
             const category = groupKeys[context.dataIndex]
             const actuallyCategory = context.chart.legend?.legendItems?.filter((category) => category.hidden === false);
             const totTransaction = actuallyCategory?.map((category) => {
