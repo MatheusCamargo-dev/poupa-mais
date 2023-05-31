@@ -18,7 +18,8 @@ module.exports = {
         'teal-light': '#00756C',
         'skeleton': '#DFDFDF',
         transaction: '#726A8C',
-        instagram: ' #d92e7f'
+        instagram: ' #d92e7f',
+        'money': '#94cc5a'
       }
     },
     fontFamily: {

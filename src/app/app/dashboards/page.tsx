@@ -1,14 +1,18 @@
 
 'use client';
 
+import { BiDownArrowCircle, BiHistory, BiUpArrowCircle } from 'react-icons/bi';
+import { MdAttachMoney } from 'react-icons/md';
+
 import BalanceCharts from '@/components/BalanceCharts';
 import { TransactionProps } from '@/components/History';
 // import LineCharts from '@/components/LineCharts';
 import PieChartJs from '@/components/PieChartJs';
-import PieChart from '@/components/PieCharts';
+// import PieChart from '@/components/PieCharts';
 
 import { toBRL } from '@/functions/toBRL';
 import { useStoreSelector } from '@/hooks/useStoreSelector';
+import { emerald, red} from 'tailwindcss/colors'
 
 export default function Dashboards() {
   const { incomes, totIncome } = useStoreSelector((store) => store.Incomes);
@@ -26,60 +30,58 @@ export default function Dashboards() {
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-dash h-[8rem] rounded-lg w-42 p-4 flex flex-col justify-between">
-                <span className='text-xl font-bold text-white'>Saldo total</span>
-                {
-                  balanceValue >= 0 &&
-                  <span className='text-2xl font-semibold text-[#94cc5a]'>
-
+              <div className="bg-emerald-700 h-[8rem] rounded-lg w-42 p-4 flex flex-col justify-between">
+                  <div className="flex justify-between items-center">
+                    <span className='text-md text-gray-50 semi-bold'>Saldo total</span>
+                    <MdAttachMoney size={25} color='white'/>
+                  </div>
+                  <span className='text-xl font-semibold text-white'>
                     {isNaN(balanceValue) ? 'R$ 0.00' : toBRL(balanceValue)}
                   </span>
-                }
-
-                {
-                  balanceValue < 0 &&
-                  <span className='text-2xl font-semibold text-red-600'>
-                    {isNaN(balanceValue) ? 'R$ 0.00' : toBRL(balanceValue)}
-                  </span>
-                }
-
-              </div>
-
-
-              <div className="bg-dash h-[8rem] rounded-lg w-42 p-4 flex flex-col justify-between">
-                <span className='text-xl font-bold text-white'>Última transação</span>
-                {
-                  mostRecentTransaction.type == 'expense' &&
-                  <span className='text-2xl font-semibold text-red-500'>
-                    {isNaN(mostRecentTransaction.amount) ? 'R$ 0.00' : toBRL(-mostRecentTransaction.amount)}
-                  </span>
-                }
-                {
-                  mostRecentTransaction.type == 'income' &&
-                  <span className='text-2xl font-semibold text-emerald-600'>
-                    {isNaN(mostRecentTransaction.amount) ? 'R$ 0.00' : toBRL(mostRecentTransaction.amount)}
-                  </span>
-                }
               </div>
 
               <div className="bg-dash h-[8rem] rounded-lg w-42 p-4 flex flex-col justify-between">
-                <span className='text-xl font-bold text-white'>Rendimentos totais</span>
-                <span className='text-2xl font-semibold text-emerald-600'>
-                  {isNaN(totIncome) ? 'R$ 0.00' : toBRL(totIncome)}
-                </span>
-              </div>
-
-              <div className="bg-dash h-[8rem] rounded-lg w-42 p-4 flex flex-col justify-between">
-                <span className='text-xl font-bold text-white'>Despesas totais</span>
-                <span className='text-2xl font-semibold text-red-500'>
+                <div className="flex justify-between items-center">
+                  <span className='text-md text-gray-100'>Despesas totais</span>
+                  <BiDownArrowCircle color={red['500']} size={25}/>
+                </div>
+                <span className='text-xl font-semibold text-red-500'>
                   {isNaN(totExpenses) ? 'R$ 0.00' : toBRL(totExpenses)}
                 </span>
               </div>
 
+              <div className="bg-zinc-600 h-[8rem] rounded-lg w-42 p-4 flex flex-col justify-between">
+                <div className="flex justify-between items-center">
+                  <span className='text-md text-gray-100'>Última transação</span>
+                  <BiHistory color='white' size={20} />
+                </div>
+                  {
+                    mostRecentTransaction.type == 'expense' &&
+                    <span className='text-lg font-semibold text-white'>
+                      {isNaN(mostRecentTransaction.amount) ? 'R$ 0.00' : toBRL(-mostRecentTransaction.amount)}
+                    </span>
+                  }
+                  {
+                    mostRecentTransaction.type == 'income' &&
+                    <span className='text-lg font-semibold text-white'>
+                      {isNaN(mostRecentTransaction.amount) ? 'R$ 0.00' : toBRL(mostRecentTransaction.amount)}
+                    </span>
+                  }
+              </div>
+
+              <div className="bg-dash h-[8rem] rounded-lg w-42 p-4 flex flex-col justify-between">
+                <div className="flex justify-between items-center">
+                  <span className='text-md text-gray-100'>Rendimentos totais</span>
+                  <BiUpArrowCircle color={emerald['600']} size={25}/>
+                </div>
+                <span className='text-xl font-semibold text-money'>
+                  {isNaN(totIncome) ? 'R$ 0.00' : toBRL(totIncome)}
+                </span>
+              </div>
             </div>
             <BalanceCharts text='Movimentação de saldo' merged={merged}/>
-            <PieChart transaction={incomes} text='Rendimentos' />
-            <PieChart transaction={expenses} text='Despesas' />
+            {/* <PieChart transaction={incomes} text='Rendimentos' />
+            <PieChart transaction={expenses} text='Despesas' /> */}
             <PieChartJs transaction={incomes} text='Rendimentos' />
             <PieChartJs transaction={expenses} text='Despesas' />
             {/* <LineCharts text='Rendimentos' transaction={incomes} color='rgb(134 239 172)'/>
