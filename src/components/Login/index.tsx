@@ -114,18 +114,27 @@ export default function Login(props: Login) {
             <div>
               <button
                 type="submit"
-                className="group relative flex w-full justify-center text-gray-900 rounded-md bg-teal-400 disabled:bg-teal-600 py-2 px-3 text-sm font-semibold
+                className="group relative flex w-full justify-center items-center text-gray-900 rounded-md bg-teal-400 disabled:bg-teal-600 py-2 px-3 text-sm font-semibold
                           enabled:hover:bg-teal-500 enabled:hover:text-black focus-visible:outline focus-visible:outline-2
                           focus-visible:outline-offset-2 disabled:cursor-not-allowed focus-visible:outline-indigo-600"
                 disabled={isLoading}
               >
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <LockClosedIcon
-                    className="h-5 w-5 text-black "
-                    aria-hidden="true"
-                  />
-                </span>
-                {loginText}
+               {
+                  !isLoading ?
+                    <div className="flex items-center justify-center transform translate-x-1/2 ">
+                      <div className="border-t-transparent border-solid animate-spin rounded-full border-white border-2 h-4 w-4"></div>
+                    </div>
+                    :
+                    <>
+                      <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <LockClosedIcon
+                          className="h-5 w-5 text-black "
+                          aria-hidden="true"
+                        />
+                      </span>
+                      {loginText}
+                    </>
+                }
               </button>
             </div>
           </form>

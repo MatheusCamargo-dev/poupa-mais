@@ -148,7 +148,7 @@ export default function ExpenseItem(props: ExpenseItem) {
       >
         <TbTrashFilled
           size={30}
-          className="text-transaction md:text-white hover:text-red-400"
+          className="text-transaction md:text-white cursor-pointer hover:text-red-400"
         ></TbTrashFilled>
       </div>
       {isDialogOpen && (
