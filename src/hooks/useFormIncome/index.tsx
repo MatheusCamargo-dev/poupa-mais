@@ -19,7 +19,7 @@ const schema = z
       .trim(),
     category: z.string().nonempty(),
     amount: z
-      .string({
+      .coerce.number({
         errorMap: () => {
           return { message: 'Informe um número.' };
         }
@@ -44,8 +44,7 @@ export type FormPropsRegister = z.infer<typeof schema>;
 
 export const useFormIncome = () => {
   const formProps = useForm<FormPropsRegister>({
-    mode: 'all',
-    reValidateMode: 'onBlur',
+    reValidateMode: 'onSubmit',
     resolver: zodResolver(schema)
   });
 
@@ -62,7 +61,6 @@ export const useFormIncome = () => {
   const incomeCategories = user.incomeCategories.map((option) => option.incomeCategory);
 
   async function handleIncome(data: FormPropsRegister) {
-    console.log(data);
     setIsLoading(true);
     const body = { type: data.category, ...data };
     const r = await apiClient('transactions/income/', 'POST', body);

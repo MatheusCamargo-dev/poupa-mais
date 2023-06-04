@@ -7,5 +7,5 @@ type ErrorMessage = {
 };
 export default function ErrorMessage(props: ErrorMessage) {
   const { errorMessage } = props;
-  return <p className="text-red-500 p-0 text-sm">{errorMessage?.message}</p>;
+  return <p className="text-red-500 p-0 text-sm break-words">{errorMessage?.message}</p>;
 }

@@ -32,7 +32,7 @@ export default function Dashboards() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-emerald-700 h-[8rem] rounded-lg w-42 p-4 flex flex-col justify-between">
                   <div className="flex justify-between items-center">
-                    <span className='text-md text-gray-50 semi-bold'>Saldo total</span>
+                    <span className='text-base text-gray-50 semi-bold'>Saldo total</span>
                     <MdAttachMoney size={25} color='white'/>
                   </div>
                   <span className='text-xl font-semibold text-white'>
@@ -42,7 +42,7 @@ export default function Dashboards() {
 
               <div className="bg-dash h-[8rem] rounded-lg w-42 p-4 flex flex-col justify-between">
                 <div className="flex justify-between items-center">
-                  <span className='text-md text-gray-100'>Despesas totais</span>
+                  <span className='text-base text-gray-100'>Despesas totais</span>
                   <BiDownArrowCircle color={red['500']} size={25}/>
                 </div>
                 <span className='text-xl font-semibold text-red-500'>
@@ -52,7 +52,7 @@ export default function Dashboards() {
 
               <div className="bg-zinc-600 h-[8rem] rounded-lg w-42 p-4 flex flex-col justify-between">
                 <div className="flex justify-between items-center">
-                  <span className='text-md text-gray-100'>Última transação</span>
+                  <span className='text-base text-gray-100'>Última transação</span>
                   <BiHistory color='white' size={20} />
                 </div>
                   {
@@ -71,7 +71,7 @@ export default function Dashboards() {
 
               <div className="bg-dash h-[8rem] rounded-lg w-42 p-4 flex flex-col justify-between">
                 <div className="flex justify-between items-center">
-                  <span className='text-md text-gray-100'>Rendimentos totais</span>
+                  <span className='text-base text-gray-100'>Rendimentos totais</span>
                   <BiUpArrowCircle color={emerald['600']} size={25}/>
                 </div>
                 <span className='text-xl font-semibold text-money'>

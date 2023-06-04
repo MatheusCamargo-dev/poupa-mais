@@ -170,6 +170,13 @@ export default function IncomeItem(props: IncomeItem) {
                 type="text"
                 error={errors.title}
               />
+              <SelectTransactions
+                {...register('category')}
+                label="Selecione uma categoria:"
+                options={incomeCategories}
+                error={errors.category}
+                disableDefaultOption={true}
+              />
               <InputTransactions
                 {...register('amount')}
                 label="Valor:"
@@ -184,13 +191,6 @@ export default function IncomeItem(props: IncomeItem) {
                 autoComplete="date"
                 type="date"
                 error={errors.date}
-              />
-              <SelectTransactions
-                {...register('category')}
-                label="Selecione uma categoria:"
-                options={incomeCategories}
-                error={errors.category}
-                disableDefaultOption={true}
               />
               <TextAreaTransactions
                 {...register('description')}

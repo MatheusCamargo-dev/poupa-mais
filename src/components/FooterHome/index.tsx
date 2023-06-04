@@ -8,13 +8,13 @@ export default function FooterHome() {
         <div className="container mx-auto py-1">
           <div className="flex flex-col-reverse lg:flex-row justify-between items-center space-y-3 md:space-y-0">
             <div className="lg:w-1/3 lg:mb-0 text-center gap-2">
-              <h4 className="text-md md:text-lg font-bold">Contatos</h4>
-              <p className="text-sm md:text-md leading-loose ">
+              <h4 className="text-base md:text-lg font-bold">Contatos</h4>
+              <p className="text-sm md:text-base leading-loose ">
                 Email: matheuscamargodev@gmail.com
               </p>
             </div>
             <div className="lg:w-1/3 lg:mb-0 flex flex-col justify-center items-center gap-2">
-              <h4 className="text-md md:text-lg font-bold">Fale com o CEO</h4>
+              <h4 className="text-base md:text-lg font-bold">Fale com o CEO</h4>
               <div className="flex justify-center lg:justify-start mb-2 gap-5">
                 <a
                   className="btn-social"
@@ -63,8 +63,8 @@ export default function FooterHome() {
               </div>
             </div>
             <div className="lg:w-1/3 text-center">
-              <h4 className="text-md md:text-lg font-bold">Sobre mim </h4>
-              <p className="text-sm md:text-md leading-loose hover:text-indigo-500 flex items-center text-center justify-center">
+              <h4 className="text-base md:text-lg font-bold">Sobre mim </h4>
+              <p className="text-sm md:text-base leading-loose hover:text-indigo-500 flex items-center text-center justify-center">
                 {' '}
                 Trying to do better! <ImRocket className="ml-2" />
               </p>

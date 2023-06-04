@@ -90,9 +90,9 @@ const SkeletonContentTotValue = () => {
 const SkeletonHistory = () => {
   return(
     <div className="flex justify-between w-full p-3 border-2 mx-auto border-zinc-500 h-12  rounded-2xl bg-skeleton animate-pulse">
-      <span className="text-md md:text-2xl font-medium text-red-600">
+      <span className="text-base md:text-2xl font-medium text-red-600">
       </span>
-      <span className="text-md md:text-2xl font-bold whitespace-nowrap text-red-700">
+      <span className="text-base md:text-2xl font-bold whitespace-nowrap text-red-700">
       </span>
     </div>
   )
@@ -108,9 +108,9 @@ const SkeletonSalary = () => {
     </div>
     <div className="flex flex-col py-4 space-y-2">
       <div className="flex justify-between w-full p-3 border-2 mx-auto border-zinc-500  rounded-2xl bg-skeleton animate-pulse">
-        <span className="text-md md:text-2xl font-bold whitespace-nowrap text-transaction h-8 w-32">
+        <span className="text-base md:text-2xl font-bold whitespace-nowrap text-transaction h-8 w-32">
         </span>
-        <span className="text-md md:text-2xl font-bold whitespace-nowrap text-transaction h-8 w-32">
+        <span className="text-base md:text-2xl font-bold whitespace-nowrap text-transaction h-8 w-32">
         </span>
       </div>
     </div>
@@ -128,9 +128,9 @@ const SkeletonExpense = () => {
     </div>
     <div className="flex flex-col py-4 space-y-2">
       <div className="flex justify-between w-full p-3 border-2 mx-auto border-zinc-500  rounded-2xl bg-skeleton animate-pulse">
-        <span className="text-md md:text-2xl font-bold whitespace-nowrap text-transaction h-8 w-32">
+        <span className="text-base md:text-2xl font-bold whitespace-nowrap text-transaction h-8 w-32">
         </span>
-        <span className="text-md md:text-2xl font-bold whitespace-nowrap text-transaction h-8 w-32">
+        <span className="text-base md:text-2xl font-bold whitespace-nowrap text-transaction h-8 w-32">
         </span>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { useFormContext, Controller, FieldError } from 'react-hook-form';
 
 import ErrorMessage from '../ErrorMessage';
 
-import pt from 'date-fns/locale/es';
+import pt  from 'date-fns/locale/pt-BR';
 import { CurrencyInput, Currencies, Locales } from 'input-currency-react';
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -55,7 +55,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
                   }}
                   prefix="R$"
                   placeholder="R$"
-                  className="block border-zinc-500 text-sm sm:text-md border-2 p-1 rounded-md w-full"
+                  className="block border-zinc-500 text-sm border-2 p-1 rounded-md w-2/3 "
                 />
               )}
             />
@@ -73,9 +73,10 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
                   placeholderText="Selecione uma data"
                   onChange={(date) => field.onChange(date)}
                   selected={field.value}
-                  locale="pt"
+                  locale={pt}
+                  autoComplete='off'
                   dateFormat={'dd/MM/yyyy'}
-                  className="block border-zinc-500 border-2 p-1 text-sm sm:text-md rounded-md w-full"
+                  className="block border-zinc-500 border-2 p-1 text-sm rounded-md w-3/4"
                 />
               )}
             />
@@ -91,7 +92,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
               value={props.value}
               defaultValue={props.defaultValue}
               {...register(props.name)}
-              className={'block border-zinc-500 text-sm sm:text-md border-2 p-1 rounded-md w-full'}
+              className={'block border-zinc-500 text-sm md:text-base border-2 p-1 rounded-md w-full'}
               ref={ref}
             />
           );
@@ -101,7 +102,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
     return (
       <div key={props.name} className="space-y-1 text-2xl">
         {props.label && (
-          <label htmlFor={props.name} className="text-teal-500 text-sm sm:text-md">
+          <label htmlFor={props.name} className="text-teal-500 text-sm md:text-lg">
             {props.label}
           </label>
         )}

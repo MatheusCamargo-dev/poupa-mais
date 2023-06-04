@@ -17,10 +17,10 @@ export default function Salary() {
       </div>
       <div className="flex flex-col py-4 space-y-2">
         <div className="flex justify-between w-full p-3 border-2 mx-auto border-zinc-500  rounded-2xl bg-zinc-100">
-          <span className="text-md md:text-2xl font-bold whitespace-nowrap text-transaction">
+          <span className="text-base md:text-2xl font-bold whitespace-nowrap text-transaction">
             {toBRL(minAmount)}
           </span>
-          <span className="text-md md:text-2xl font-bold whitespace-nowrap text-transaction">
+          <span className="text-base md:text-2xl font-bold whitespace-nowrap text-transaction">
             {toBRL(maxAmount)}
           </span>
         </div>
@@ -42,9 +42,9 @@ const Skeleton = () => {
     </div>
     <div className="flex flex-col py-4 space-y-2">
       <div className="flex justify-between w-full p-3 border-2 mx-auto border-zinc-500  rounded-2xl bg-skeleton animate-pulse">
-        <span className="text-md md:text-2xl font-bold whitespace-nowrap text-transaction h-8 w-32">
+        <span className="text-base md:text-2xl font-bold whitespace-nowrap text-transaction h-8 w-32">
         </span>
-        <span className="text-md md:text-2xl font-bold whitespace-nowrap text-transaction h-8 w-32">
+        <span className="text-base md:text-2xl font-bold whitespace-nowrap text-transaction h-8 w-32">
         </span>
       </div>
     </div>

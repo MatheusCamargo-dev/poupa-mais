@@ -17,7 +17,7 @@ const schema = z
       .trim(),
     category: z.string().nonempty(),
     amount: z
-      .string({
+      .coerce.number({
         errorMap: () => {
           return { message: 'Informe um número.' };
         }
@@ -30,7 +30,7 @@ const schema = z
     }),
     description: z
       .string({ required_error: 'Uma breve descrição' })
-      .min(5, 'Informe uma breve descrição de pelo menos 5 caracteres.')
+      .min(5, 'A descrição deve conter menos 5 caracteres.')
       .max(35, 'A descrição não pode ultrapassar 35 caracteres.')
   })
   .refine((fields) => fields.category !== 'selecione', {
@@ -42,8 +42,7 @@ type FormPropsRegister = z.infer<typeof schema>;
 
 export const useFormExpense = () => {
   const formProps = useForm<FormPropsRegister>({
-    mode: 'all',
-    reValidateMode: 'onBlur',
+    reValidateMode: 'onSubmit',
     resolver: zodResolver(schema)
   });
 

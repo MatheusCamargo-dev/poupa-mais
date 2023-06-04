@@ -120,7 +120,7 @@ export default function Login(props: Login) {
                 disabled={isLoading}
               >
                {
-                  !isLoading ?
+                  isLoading ?
                     <div className="flex items-center justify-center transform translate-x-1/2 ">
                       <div className="border-t-transparent border-solid animate-spin rounded-full border-white border-2 h-4 w-4"></div>
                     </div>

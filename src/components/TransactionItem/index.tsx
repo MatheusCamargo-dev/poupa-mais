@@ -75,7 +75,7 @@ export default function TransactionItem(props: TransactionProps) {
           onClick={handleOpenDialog}
         >
           <div>
-            <span className="text-md">+</span> Adicionar transação
+            <span className="text-base">+</span> Adicionar transação
           </div>
         </button>
       </div>

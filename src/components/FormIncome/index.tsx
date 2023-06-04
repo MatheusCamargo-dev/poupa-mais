@@ -25,6 +25,12 @@ export default function FormIncome() {
           type="text"
           error={errors.title}
         />
+        <SelectTransactions
+          {...register('category')}
+          label="Categoria:"
+          options={incomeCategories}
+          error={errors.category}
+        />
         <InputTransactions
           {...register('amount')}
           label="Valor:"
@@ -40,12 +46,6 @@ export default function FormIncome() {
           type="date"
           error={errors.date}
         />
-        <SelectTransactions
-          {...register('category')}
-          label="Categoria:"
-          options={incomeCategories}
-          error={errors.category}
-        />
         <TextAreaTransactions
           {...register('description')}
           label="Descrição:"
@@ -57,7 +57,11 @@ export default function FormIncome() {
           <button
             type="submit"
             disabled={isLoading}
-            className="group relative flex md:w-full text-md justify-center rounded-3xl bg-teal-500 py-2 px-3 font-semibold text-slate-700 hover:bg-teal-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="group relative flex md:w-full text-sm justify-center
+                      rounded-3xl bg-teal-500 py-2 px-3 font-semibold text-slate-700
+                      hover:bg-teal-500 hover:text-white focus-visible:outline
+                      focus-visible:outline-2 focus-visible:outline-offset-2
+                      focus-visible:outline-indigo-600"
           >
             {isLoading ? 'Aguarde..' : '+ Adicionar rendimento'}
           </button>
