@@ -55,7 +55,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
                   }}
                   prefix="R$"
                   placeholder="R$"
-                  className="block border-zinc-500 text-sm border-2 p-1 rounded-md w-2/3 "
+                  className="block border-zinc-500 text-sm border-2 p-1 rounded-md w-3/4 "
                 />
               )}
             />
