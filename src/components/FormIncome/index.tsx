@@ -35,7 +35,7 @@ export default function FormIncome() {
           {...register('amount')}
           label="Valor:"
           placeholder="Valor do rendimento"
-          type="text"
+          type="amount"
           error={errors.amount}
         />
         <InputTransactions

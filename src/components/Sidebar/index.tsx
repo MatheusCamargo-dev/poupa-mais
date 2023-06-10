@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { FiLogOut } from 'react-icons/fi';
-import { GiPayMoney, GiReceiveMoney } from 'react-icons/gi';
+import { GiMoneyStack, GiPayMoney, GiReceiveMoney } from 'react-icons/gi';
 import { HiHome } from 'react-icons/hi';
 import { MdDashboard } from 'react-icons/md';
 import { TbFileImport } from 'react-icons/tb';
@@ -31,7 +31,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   const user = useStoreSelector((store) => store.User);
   const dispatch = useDispatch();
-  const [navigation, setNavigation] = useState([
+  const [navigation, setNavigation] = useState<Navigation []>([
     {
       name: 'Página Inicial',
       href: '/app',
@@ -48,6 +48,12 @@ export default function Sidebar() {
       name: 'Despesas',
       href: '/app/expenses',
       icon: <GiPayMoney size={25} />,
+      current: false
+    },
+    {
+      name: 'Metas',
+      href: '/app/goals',
+      icon: <GiMoneyStack size={35} />,
       current: false
     },
     {

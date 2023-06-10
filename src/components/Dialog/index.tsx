@@ -77,7 +77,7 @@ function Dialog(props: DialogProps) {
           <div
             className={`inline-block align-bottom bg-white rounded-lg text-left
             overflow-hidden shadow-xl transform transition-all sm:my-8
-            sm:align-middle w-full sm:w-max sm:${size}`}
+            sm:align-middle w-[344px]`}
             role="dialog"
           >
             <div

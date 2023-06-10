@@ -1,5 +1,6 @@
 import { authReducer } from '@/features/Auth';
 import { expensesReducer } from '@/features/Expenses';
+import { goalsReducer } from '@/features/Goals';
 import { incomesReducer } from '@/features/Incomes';
 import { userReducer } from '@/features/User';
 import { configureStore } from '@reduxjs/toolkit';
@@ -9,7 +10,8 @@ export const store = configureStore({
     Auth: authReducer,
     User: userReducer,
     Incomes: incomesReducer,
-    Expenses: expensesReducer
+    Expenses: expensesReducer,
+    Goals: goalsReducer,
   }
 });
 

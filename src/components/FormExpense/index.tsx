@@ -42,7 +42,7 @@ export default function FormExpense() {
           {...register('amount')}
           label="Valor:"
           placeholder="Valor da despesa"
-          type="text"
+          type="amount"
           error={errors.amount}
         />
         <InputTransactions

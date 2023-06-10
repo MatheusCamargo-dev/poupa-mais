@@ -20,6 +20,8 @@ interface InputTransactionsProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: FieldError;
   className?: string;
   defaultValue?: string;
+  datalist?: string[];
+  'w-full'?: boolean;
 }
 
 // export default InputTransactions;
@@ -34,7 +36,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
         case 'amount': {
           return (
             <Controller
-              name="amount"
+              name={props.name}
               control={control}
               defaultValue="0,00"
               render={({ field }) => (
@@ -55,7 +57,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
                   }}
                   prefix="R$"
                   placeholder="R$"
-                  className="block border-zinc-500 text-sm border-2 p-1 rounded-md w-3/4 "
+                  className={`block border-zinc-500 text-sm border-2 p-1 rounded-md ${props['w-full'] ? 'w-full' : 'w-3/4'}`}
                 />
               )}
             />
@@ -92,7 +94,9 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
               value={props.value}
               defaultValue={props.defaultValue}
               {...register(props.name)}
-              className={'block border-zinc-500 text-sm md:text-base border-2 p-1 rounded-md w-full'}
+              list={props.name+'-suggestion'}
+              id={props.name}
+              className={'block webkit-calendar-picker border-zinc-500 text-sm md:text-base border-2 p-1 rounded-md w-full'}
               ref={ref}
             />
           );
@@ -106,7 +110,20 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
             {props.label}
           </label>
         )}
-        {switchInput(props.name)}
+        <div>
+
+        {switchInput(props.type)}
+        {props.datalist &&
+          <datalist id={props.name+'-suggestion'} className='text-sm text-gray-50'>
+            {
+              props.datalist.map((option) => {
+                return <option key={option} value={option} />
+              })
+
+            }
+          </datalist>
+        }
+        </div>
 
         {props.error && (
           <ErrorMessage errorMessage={props.error}></ErrorMessage>

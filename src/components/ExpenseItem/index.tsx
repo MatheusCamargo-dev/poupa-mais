@@ -181,7 +181,7 @@ export default function ExpenseItem(props: ExpenseItem) {
                 {...register('amount')}
                 label="Valor:"
                 placeholder="Valor do rendimento"
-                type="text"
+                type="amount"
                 error={errors.amount}
               />
               <InputTransactions
