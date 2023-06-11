@@ -4,8 +4,9 @@ import { PayloadAction } from '@reduxjs/toolkit/dist/createAction';
 
 export interface GoalStates extends GoalState {
   _id: string;
+  createdAt: string;
 }
-interface GoalsStates {
+export interface GoalsStates {
   goals: GoalStates[];
 }
 const initialState: GoalsStates = {
@@ -18,6 +19,7 @@ const initialState: GoalsStates = {
       interestRate: 0,
       monthlyValue: 0,
       balanceCategory: 'Saldo total',
+      createdAt: '',
     }
   ],
 };
@@ -36,6 +38,10 @@ export const goalsSlice = createSlice({
       state: GoalsStates,
       action: PayloadAction<GoalStates>
     ) => {
+      if(state.goals[0]._id === ''){
+        state.goals[0] = action.payload
+        return;
+      }
       state.goals.push(action.payload);
     },
     updateGoal: (

@@ -8,6 +8,7 @@ import Header from '../../components/Sidebar';
 
 import { setAuthenticated } from '@/features/Auth';
 import { setExpenses } from '@/features/Expenses';
+import { setGoals } from '@/features/Goals';
 import { setIncomes } from '@/features/Incomes';
 import { setUser } from '@/features/User';
 import { useStoreSelector } from '@/hooks/useStoreSelector';
@@ -34,17 +35,20 @@ export default function AuthProvider(props: AuthenticatedComponentProps) {
   const authenticated =  isAuthenticated;
 
   const getTransactions = async () => {
-    const [responseIncome, responseExpense] = await Promise.all([
+    const [responseIncome, responseExpense, responseGoal] = await Promise.all([
       apiClient('transactions/income/', 'GET'),
-      apiClient('transactions/expense/', 'GET')
+      apiClient('transactions/expense/', 'GET'),
+      apiClient('transactions/goal/', 'GET')
     ]);
 
-    const [incomes, expense] = await Promise.all([
+    const [incomes, expenses, goals] = await Promise.all([
       responseIncome.json(),
-      responseExpense.json()
+      responseExpense.json(),
+      responseGoal.json()
     ]);
     dispatch(setIncomes(incomes.data));
-    dispatch(setExpenses(expense.data));
+    dispatch(setExpenses(expenses.data));
+    dispatch(setGoals(goals.data));
   };
 
   const token = async () => {

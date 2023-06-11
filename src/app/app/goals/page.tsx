@@ -10,7 +10,10 @@ import GoalsItems from "@/components/GoalsItems";
 import InputTransactions from "@/components/InputTransactions";
 import SelectTransactions from "@/components/SelectTransactions";
 
+import { incrementGoals } from "@/features/Goals";
 import { useStoreSelector } from "@/hooks/useStoreSelector";
+import { apiClient } from "@/services/api-client";
+import { store } from "@/store/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
@@ -43,8 +46,9 @@ const goalSchema = z.object({
 type FormGoalSchema = z.infer<typeof goalSchema>;
 export type GoalState = z.infer<typeof goalSchema>;
 export default function Goals() {
-
+  const { goals } = useStoreSelector((store) => store.Goals);
   const [ newGoalDialogOpen, setNewGoalDialogOpen] = useState(false);
+  const [ isLoading, setIsLoading] = useState(false);
 
   const user = useStoreSelector((store) => store.User);
   const incomeCategories = user.incomeCategories.map((option) => option.incomeCategory);
@@ -72,10 +76,17 @@ export default function Goals() {
     'Total investido no exterior'
   ]
 
-  function handleCreateNewGoal (data: FormGoalSchema) {
-    reset()
-    console.log(data)
+  async function handleCreateNewGoal (data: FormGoalSchema) {
+    setIsLoading(true);
+    const r = await apiClient('transactions/goal/', 'POST', data);
+    const {
+      data: { goal }
+    } = await r.json();
+    reset();
+    setIsLoading(false);
+    store.dispatch(incrementGoals(goal));
   }
+
   return (
       <div className=" md:mx-10 lg:mx-auto lg:container h-max my-10">
         <div className="flex flex-col rounded-md pl-6 p-6 border-2 border-zinc-400 bg-gradient-dark-blue lg:w-full">
@@ -101,7 +112,11 @@ export default function Goals() {
               <div className="bg-dash py-44 px-44 rounded-lg text-white flex flex-col">
                 <h1 className="text-center text-xl font-bold">Nogut chart</h1>
               </div>
-              <GoalsItems />
+              {
+                goals[0]._id !== '' ?
+                  <GoalsItems goals={goals} />
+                : <EmptyGoals />
+              }
             </div>
           </div>
 
@@ -111,7 +126,7 @@ export default function Goals() {
             handleCloseDialog={() => setNewGoalDialogOpen(false)}
             title={`Criar meta`}
             handleSubmit={handleSubmit(handleCreateNewGoal)}
-            loading={false}
+            loading={isLoading}
             color="bg-teal-400"
             hoverColor="hover:bg-teal-500"
             action="Salvar"
@@ -159,7 +174,6 @@ export default function Goals() {
                       decimalsLimit={2}
                       {...register('interestRate')}
                       onValueChange={(value) => {
-                        console.log(value)
                         value && setValue('interestRate', Number(value.replace(',', '.')))
                       }}
 
@@ -190,6 +204,16 @@ export default function Goals() {
           </Dialog>
       )}
       </div>
+  )
+}
+
+const EmptyGoals = () => {
+
+  return(
+    <div className="flex flex-col justify-center items-center text-2xl text-white flex-1">
+      <h1>Você ainda não possui nenhuma meta 🙄</h1>
+      <h1>Inicie uma meta para transformar seus sonhos em objetivos 😉!</h1>
+    </div>
   )
 }
 

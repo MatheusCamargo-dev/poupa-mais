@@ -15,10 +15,10 @@ export async function POST(request: Request) {
     if (res && res.status == 1) {
       const { data } = await request.json();
       const query = { user: res.userData?.id, ...data };
-      const income = await goalController.store(query);
-      if (income) {
+      const goal = await goalController.store(query);
+      if (goal) {
         return NextResponse.json({
-          data: income
+          data: goal
         });
       }
     }

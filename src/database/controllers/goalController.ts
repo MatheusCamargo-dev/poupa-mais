@@ -1,16 +1,26 @@
 import database from '../MongoConnect';
 import { Goal } from '../schemas/GoalSchema';
 
+import { GoalState } from '@/app/app/goals/page';
 import { GoalStates } from '@/features/Goals';
 
 
-const store = async (query: GoalStates) => {
+const store = async (query: GoalState) => {
   try {
     if (!database.connect()) return false;
 
     const goal = new Goal(query);
     if (await goal.save()) {
-      return { status: 1, message: `Created with success`, goal };
+      const { _id, createdAt, initialValue, monthlyValue, interestRate, endGoalValue, balanceCategory } = goal;
+      return { status: 1, message: `Created with success`, goal: {
+        _id,
+        initialValue,
+        monthlyValue,
+        interestRate,
+        endGoalValue,
+        balanceCategory,
+        createdAt
+      } };
     }
   } catch (e) {
     throw new Error('Error in create goal');
@@ -20,7 +30,7 @@ const store = async (query: GoalStates) => {
 const show = async (id: string) => {
   try {
     if (!database.connect()) return false;
-    const data = await Goal.find({ user: id }).sort({ createdAt: -1 });
+    const data = await Goal.find({ user: id }, { user: 0, updatedAt: 0}).sort({ createdAt: -1 });
     return data;
   } catch (e) {
     throw new Error('Error in show income');
