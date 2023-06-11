@@ -15,6 +15,8 @@ export interface ExpenseProps {
 }
 export default function ExpenseItems() {
   const { expenses } = useStoreSelector((store) => store.Expenses);
+
+  console.log(expenses)
   return (
     <div className="flex flex-col sm:w-full space-y-4 mt-5">
       {expenses?.[0]?.title !== '' ?
@@ -32,6 +34,10 @@ export default function ExpenseItems() {
           );
         }) : Array.from([0, 1, 2, 3, 4]).map(() =>  <Skeleton key={crypto.randomUUID()}/>)
       }
+      {
+        expenses.length === 0
+         && <EmptyExpense />
+      }
     </div>
   );
 }
@@ -47,3 +53,14 @@ const Skeleton = () => {
     </div>
   )
 }
+
+const EmptyExpense = () => {
+
+  return(
+    <div className="flex flex-col justify-center items-center text-2xl text-white flex-1">
+      <h1>Você ainda não possui nenhuma despesa 🙄</h1>
+      <h1>Cadastre uma despesa para estar no controle da sua vida financeira 😉!</h1>
+    </div>
+  )
+}
+

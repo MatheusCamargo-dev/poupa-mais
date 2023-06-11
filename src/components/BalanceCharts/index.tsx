@@ -22,6 +22,8 @@ interface LineProps{
 }
 
 export default function BalanceCharts({ merged, text }: LineProps) {
+
+  console.log(merged)
   const transactions = merged.sort((a, b) => {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   })
@@ -182,7 +184,10 @@ export default function BalanceCharts({ merged, text }: LineProps) {
     <div className="bg-dash rounded-lg p-4 text-white flex gap-2 items-center flex-col">
       <h1 className="text-left text-xl font-bold">{text}</h1>
       <div className="w-full h-full bg-transparent p-1 rounded-lg">
-        <Line data={chartData} options={optionsLineChart} />
+        {merged.length > 0
+          &&
+          <Line data={chartData} options={optionsLineChart} />
+        }
       </div>
     </div>
   )

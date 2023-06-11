@@ -56,15 +56,21 @@ export default function Dashboards() {
                   <BiHistory color='white' size={20} />
                 </div>
                   {
-                    mostRecentTransaction.type == 'expense' &&
+                    mostRecentTransaction?.type == 'expense' &&
                     <span className='text-lg font-semibold text-white'>
                       {isNaN(mostRecentTransaction.amount) ? 'R$ 0.00' : toBRL(-mostRecentTransaction.amount)}
                     </span>
                   }
                   {
-                    mostRecentTransaction.type == 'income' &&
+                    mostRecentTransaction?.type == 'income' &&
                     <span className='text-lg font-semibold text-white'>
                       {isNaN(mostRecentTransaction.amount) ? 'R$ 0.00' : toBRL(mostRecentTransaction.amount)}
+                    </span>
+                  }
+                  {
+                    mostRecentTransaction == undefined &&
+                    <span className='text-lg font-semibold text-white'>
+                      R$ 0.00
                     </span>
                   }
               </div>
@@ -80,12 +86,8 @@ export default function Dashboards() {
               </div>
             </div>
             <BalanceCharts text='Movimentação de saldo' merged={merged}/>
-            {/* <PieChart transaction={incomes} text='Rendimentos' />
-            <PieChart transaction={expenses} text='Despesas' /> */}
             <PieChartJs transaction={incomes} text='Rendimentos' />
             <PieChartJs transaction={expenses} text='Despesas' />
-            {/* <LineCharts text='Rendimentos' transaction={incomes} color='rgb(134 239 172)'/>
-            <LineCharts text='Despesas' transaction={expenses} color='rgb(239 68 68)'/> */}
           </div>
 
         </div>

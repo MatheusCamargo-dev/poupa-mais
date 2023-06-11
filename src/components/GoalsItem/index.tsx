@@ -119,7 +119,6 @@ export default function GoalsItem(goal: GoalStates) {
     const { goal, status } = await r.json();
     setIsLoading(false);
     setEditGoalDialogOpen(false);
-    console.log(goal)
     if (status == 1) {
 
       dispatch(updateGoal(goal));
@@ -218,7 +217,6 @@ export default function GoalsItem(goal: GoalStates) {
                     <CurrencyInput
                       suffix="%"
                       allowNegativeValue={false}
-                      // value={watch('interestRate')}
                       className="border-zinc-500 text-sm border-2 p-1 rounded-md text-right"
                       placeholder="0%"
                       decimalSeparator=","

@@ -33,6 +33,10 @@ export default function IncomeItems() {
         })
         : Array.from([0, 1, 2, 3, 4]).map(() =>  <Skeleton key={crypto.randomUUID()}/>)
       }
+      {
+        incomes.length === 0 &&
+        <EmptyIncome />
+      }
     </div>
   );
 }
@@ -48,3 +52,14 @@ const Skeleton = () => {
     </div>
   )
 }
+
+const EmptyIncome = () => {
+
+  return(
+    <div className="flex flex-col justify-center items-center text-2xl text-white flex-1">
+      <h1>Você ainda não possui nenhum rendimento 🙄</h1>
+      <h1>Cadastre um rendimento para estar no controle da sua vida financeira 😉!</h1>
+    </div>
+  )
+}
+
