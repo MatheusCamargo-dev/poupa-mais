@@ -15,7 +15,7 @@ const initialState: GoalsStates = {
       _id: '',
       title: '',
       initialValue: 0,
-      endGoalValue: 0,
+      endGoalValue: 1,
       interestRate: 0,
       monthlyValue: 0,
       balanceCategory: 'Saldo total',

@@ -11,9 +11,10 @@ const store = async (query: GoalState) => {
 
     const goal = new Goal(query);
     if (await goal.save()) {
-      const { _id, createdAt, initialValue, monthlyValue, interestRate, endGoalValue, balanceCategory } = goal;
+      const { _id, title, createdAt, initialValue, monthlyValue, interestRate, endGoalValue, balanceCategory } = goal;
       return { status: 1, message: `Created with success`, goal: {
         _id,
+        title,
         initialValue,
         monthlyValue,
         interestRate,
@@ -60,7 +61,7 @@ const update = async (user: string, query: GoalStates) => {
 
     if (goal) {
       await Goal.findByIdAndUpdate(query._id, query);
-      return { query };
+      return { ...query };
     }
   } catch (e) {
     throw new Error('Error in update goal');

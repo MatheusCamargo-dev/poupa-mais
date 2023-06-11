@@ -42,7 +42,7 @@ const InputTransactions = forwardRef<HTMLInputElement, InputTransactionsProps>(
               render={({ field }) => (
                 <CurrencyInput
                   {...register(props.name)}
-                  value={field.value}
+                  value={String(field.value)}
                   ref={null}
                   options={{
                     precision: 2,

@@ -84,7 +84,7 @@ function Dialog(props: DialogProps) {
               className="relative px-8 pt-5 bg-white w-full flex-col flex
             rounded-lg space-x-4"
             >
-              <div className="text-base md:text-xl font-semibold flex items-center gap-2">
+              <div className="text-base md:text-xl text-black font-semibold flex items-center gap-2">
                 {indicator && (
                   <div
                     className={`${indicator} rounded-full w-3 h-3 mr-2 md:mr-0`}

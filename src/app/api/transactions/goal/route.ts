@@ -15,6 +15,7 @@ export async function POST(request: Request) {
     if (res && res.status == 1) {
       const { data } = await request.json();
       const query = { user: res.userData?.id, ...data };
+      console.log(query)
       const goal = await goalController.store(query);
       if (goal) {
         return NextResponse.json({

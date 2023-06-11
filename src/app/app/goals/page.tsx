@@ -56,6 +56,9 @@ export default function Goals() {
   const form = useForm<FormGoalSchema>({
     reValidateMode: 'onSubmit',
     resolver: zodResolver(goalSchema),
+    defaultValues: {
+      initialValue: 0,
+    }
   })
 
   const {
@@ -77,14 +80,19 @@ export default function Goals() {
   ]
 
   async function handleCreateNewGoal (data: FormGoalSchema) {
+    console.log(data)
+
     setIsLoading(true);
     const r = await apiClient('transactions/goal/', 'POST', data);
     const {
       data: { goal }
     } = await r.json();
+
+    console.log(goal)
     reset();
     setIsLoading(false);
     store.dispatch(incrementGoals(goal));
+    setNewGoalDialogOpen(false)
   }
 
   return (
@@ -202,7 +210,7 @@ export default function Goals() {
               </FormProvider>
             </div>
           </Dialog>
-      )}
+        )}
       </div>
   )
 }
