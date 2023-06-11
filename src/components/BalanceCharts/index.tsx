@@ -23,7 +23,6 @@ interface LineProps{
 
 export default function BalanceCharts({ merged, text }: LineProps) {
 
-  console.log(merged)
   const transactions = merged.sort((a, b) => {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   })

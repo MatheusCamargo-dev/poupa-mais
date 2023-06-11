@@ -4,6 +4,7 @@ import { useState } from "react";
 import CurrencyInput from 'react-currency-input-field';
 import { FormProvider, useForm } from "react-hook-form";
 
+import BarChartJs from "@/components/BarChartJs";
 import Dialog from "@/components/Dialog";
 import ErrorMessage from "@/components/ErrorMessage";
 import GoalsItems from "@/components/GoalsItems";
@@ -91,14 +92,10 @@ export default function Goals() {
     setNewGoalDialogOpen(false)
   }
 
-  console.log(goals)
 
   return (
       <div className=" md:mx-10 lg:mx-auto lg:container h-max my-10">
         <div className="flex flex-col rounded-md pl-6 p-6 border-2 border-zinc-400 bg-gradient-dark-blue lg:w-full">
-          {/* <h1 className="text-teal-400 tracking-tight text-4xl font-semibold">
-            Metas financeiras
-          </h1> */}
           <div className="flex flex-col">
             <div className="flex text-white justify-between items-center">
               <h1 className="text-2xl text-teal-400 font-semibold">Metas em andamento</h1>
@@ -115,8 +112,8 @@ export default function Goals() {
               </div>
             </div>
             <div className="flex mt-10 space-x-4">
-              <div className="bg-dash py-44 px-44 rounded-lg text-white flex flex-col">
-                <h1 className="text-center text-xl font-bold">Nogut chart</h1>
+              <div className="bg-dash rounded-lg text-white flex flex-col">
+                <BarChartJs />
               </div>
               {
                 goals[0]?._id === '' && <SkeletonGoals />

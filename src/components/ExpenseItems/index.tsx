@@ -16,7 +16,6 @@ export interface ExpenseProps {
 export default function ExpenseItems() {
   const { expenses } = useStoreSelector((store) => store.Expenses);
 
-  console.log(expenses)
   return (
     <div className="flex flex-col sm:w-full space-y-4 mt-5">
       {expenses?.[0]?.title !== '' ?

@@ -23,11 +23,10 @@ export default function Dashboard() {
   const { expenses } = useStoreSelector((store) => store.Expenses);
   const { incomes } = useStoreSelector((store) => store.Incomes);
   const [finances, setFinances] = useState<DataTransaction[]>([]);
-
+  let merged = [{_id: '', date: '',type: '', amount: 0}];
   useEffect(() => {
     if (expenses.length > 0 || incomes.length > 0) {
-      const merged = expenses.concat(incomes);
-
+      merged = expenses.concat(incomes);
       const transactions = merged.map((transaction) => {
         return {
           date: transaction.date,
@@ -54,40 +53,51 @@ export default function Dashboard() {
           };
           return { ...acc, [date]: newData };
         }, {});
-      setFinances(Object.values(formatedData));
+
+       if(Object.keys(formatedData).includes('Invalid Date')){
+         setFinances([{ date: '', income: 0, expense: 0}]);
+        }else{
+          setFinances(Object.values(formatedData));
+        }
     }
   }, [expenses, incomes]);
-
+  const ticks = Array.from(new Set(finances.map((item) => item.date)));
   return (
-    finances.length > 0 ?
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart width={800} height={400} data={finances}>
-        <XAxis
-          dataKey="date"
-          ticks={Array.from(new Set(finances.map((item) => item.date)))}
-        />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          name="Rendimentos"
-          dataKey="income"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />
-        <Line
-          type="monotone"
-          name="Despesas"
-          dataKey="expense"
-          stroke="#82ca9d"
-          activeDot={{ r: 8 }}
-        />
-      </LineChart>
-    </ResponsiveContainer>
-    :
-    <Skeleton />
+    <>
+    {
+    finances.length > 0 &&
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart width={800} height={400} data={finances}>
+          <XAxis
+            dataKey="date"
+            ticks={ticks }
+          />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Legend />
+          <Line
+            type="monotone"
+            name="Rendimentos"
+            dataKey="income"
+            stroke="#8884d8"
+            activeDot={{ r: 8 }}
+          />
+          <Line
+            type="monotone"
+            name="Despesas"
+            dataKey="expense"
+            stroke="#82ca9d"
+            activeDot={{ r: 8 }}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    }
+    {
+      (merged.length == 2 && merged[0]?._id == '') &&
+      <Skeleton />
+    }
+    </>
   );
 }
 
