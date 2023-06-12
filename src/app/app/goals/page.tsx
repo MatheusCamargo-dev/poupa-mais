@@ -113,7 +113,7 @@ export default function Goals() {
             </div>
             <div className="flex mt-10 space-x-4">
               <div className="bg-dash rounded-lg text-white flex flex-col">
-                <BarChartJs />
+                <BarChartJs goals={goals}/>
               </div>
               {
                 goals[0]?._id === '' && <SkeletonGoals />

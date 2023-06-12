@@ -2,8 +2,8 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 
 
+import { GoalsStates } from '@/features/Goals';
 import { useBalanceValue } from '@/hooks/useBalanceValue';
-import { useStoreSelector } from '@/hooks/useStoreSelector';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -28,9 +28,8 @@ import ChartjsPluginStacked100 from 'chartjs-plugin-stacked100';
 
 
 // ChartJS.register(ArcElement, Tooltip, Legend);
-export default function BarChartJs() {
+export default function BarChartJs({goals}: GoalsStates) {
 
-  const { goals } = useStoreSelector((store) => store.Goals);
   const { balanceValue, incomes } = useBalanceValue();
 
   const labels = goals.map((goal) => goal.balanceCategory);
