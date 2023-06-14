@@ -126,7 +126,8 @@ export default function Goals() {
           </div>
 
         </div>
-        {newGoalDialogOpen && (
+        {
+        newGoalDialogOpen && (
           <Dialog
             handleCloseDialog={() => setNewGoalDialogOpen(false)}
             title={`Criar meta`}
@@ -207,7 +208,8 @@ export default function Goals() {
               </FormProvider>
             </div>
           </Dialog>
-        )}
+        )
+        }
       </div>
   )
 }

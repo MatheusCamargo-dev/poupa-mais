@@ -1,28 +1,9 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
-
+import Chart from 'react-apexcharts'
 
 import { GoalsStates } from '@/features/Goals';
+import { toBRL } from '@/functions/toBRL';
 import { useBalanceValue } from '@/hooks/useBalanceValue';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import ChartjsPluginStacked100 from 'chartjs-plugin-stacked100';
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-    ChartjsPluginStacked100
-  );
 
 
 
@@ -31,7 +12,6 @@ import ChartjsPluginStacked100 from 'chartjs-plugin-stacked100';
 export default function BarChartJs({goals}: GoalsStates) {
 
   const { balanceValue, incomes } = useBalanceValue();
-
   const labels = goals.map((goal) => goal.balanceCategory);
   const chartData = goals.map((goal) => {
     let currentValue = 0;
@@ -46,63 +26,71 @@ export default function BarChartJs({goals}: GoalsStates) {
       },0) + goal.initialValue;
     }
 
-    const completionPercentage = (((currentValue) * 100) / goal.endGoalValue);
-    const percentage = (completionPercentage > 100) ? 100 : completionPercentage;
-    return Number(percentage.toFixed(2))
+    // const completionPercentage = (((currentValue) * 100) / goal.endGoalValue);
+    // const percentage = (completionPercentage > 100) ? 100 : completionPercentage;
+    return {currentValue, goal: goal.endGoalValue}
   })
 
-  const data = {
-    labels: labels,
-    datasets: [
-      {
-        data: chartData,
-        backgroundColor: [
-          'rgba(75, 192, 192, 0.2)',
-        ],
-        borderColor: [
-          'rgb(75, 192, 192)'
-        ],
-        borderWidth: 1
-      },
-      {
-        data: chartData.map(() => 100),
-        backgroundColor: [
-          'rgba(201, 203, 207, 0.2)'
-        ],
-        borderColor: [
-          'rgb(201, 203, 207)'
-        ],
-        borderWidth: 1
-      },
-
-   ]
-  };
 
   return (
 
       <div className="flex w-96 items-center justify-center">
-        <Bar data={data} options={{
-           responsive: true,
-           plugins: {
-             legend: {
-               display: false,
-             },
-             title: {
-               display: true,
-               text: 'Metas',
-               color: '#fff'
-             },
-             stacked100: {
-              enable: true,
-              replaceTooltipLabel: false,
-             },
-           },
-           scales: {
-            y: {
-              beginAtZero: true
-            }
-           }
-        }} />
+        <Chart width={350} height={350} type='bar'
+          series={[{
+            name: 'Valor atual',
+            data: chartData.map(data => data.currentValue)
+          },
+          {
+            name: 'Objetivo',
+            data: chartData.map(data => data.goal),
+            color: 'transparent'
+          }
+          ]}
+          options={{
+              labels: labels,
+              chart: {
+                stacked: true,
+                stackType: '100%',
+                toolbar: {
+                  show: false
+                }
+              },
+              yaxis: {
+                labels: {
+                  style: {
+                    colors: ['#FFF'],
+                  },
+                  formatter(val) {
+                      return val + '%'
+                  },
+                },
+              },
+              xaxis: {
+                labels: {
+                  style: {
+                    colors: '#FFF'
+                  }
+                }
+              },
+              grid: {
+                show: false
+              },
+              tooltip: {
+                enabled: true,
+                theme: 'dark',
+                y: {
+                  formatter(val) {
+                      return toBRL(val)
+                  },
+                },
+              },
+              legend: {
+                show: false,
+              },
+
+
+          }}
+        />
       </div>
   )
 }
