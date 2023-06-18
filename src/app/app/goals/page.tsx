@@ -98,10 +98,10 @@ export default function Goals() {
         <div className="flex flex-col rounded-md pl-6 p-6 border-2 border-zinc-400 bg-gradient-dark-blue lg:w-full">
           <div className="flex flex-col">
             <div className="flex text-white justify-between items-center">
-              <h1 className="text-2xl text-teal-400 font-semibold">Metas em andamento</h1>
+              <h1 className="text-4xl text-teal-400 font-semibold">Metas em andamento</h1>
               <div>
                 <button
-                    type="submit"
+                    type="button"
                     onClick={() => setNewGoalDialogOpen(true)}
                     className="flex md:w-full text-sm justify-center
                               rounded-3xl bg-teal-500 py-2 px-3 font-semibold text-slate-700
@@ -111,7 +111,7 @@ export default function Goals() {
                 </button>
               </div>
             </div>
-            <div className="flex mt-10 space-x-4">
+            <div className="flex mt-5 space-x-4">
               <div className="bg-dash rounded-lg text-white flex flex-col">
                 <BarChartJs goals={goals}/>
               </div>

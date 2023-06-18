@@ -2,7 +2,6 @@ import React from 'react';
 import Chart from 'react-apexcharts'
 
 import { GoalsStates } from '@/features/Goals';
-import { toBRL } from '@/functions/toBRL';
 import { useBalanceValue } from '@/hooks/useBalanceValue';
 
 
@@ -12,7 +11,7 @@ import { useBalanceValue } from '@/hooks/useBalanceValue';
 export default function BarChartJs({goals}: GoalsStates) {
 
   const { balanceValue, incomes } = useBalanceValue();
-  const labels = goals.map((goal) => goal.balanceCategory);
+  const labels = goals.map((goal) => goal.title);
   const chartData = goals.map((goal) => {
     let currentValue = 0;
 
@@ -26,9 +25,9 @@ export default function BarChartJs({goals}: GoalsStates) {
       },0) + goal.initialValue;
     }
 
-    // const completionPercentage = (((currentValue) * 100) / goal.endGoalValue);
-    // const percentage = (completionPercentage > 100) ? 100 : completionPercentage;
-    return {currentValue, goal: goal.endGoalValue}
+    const completionPercentage = (((currentValue) * 100) / goal.endGoalValue);
+    const percentage = (completionPercentage > 100) ? 100 : completionPercentage;
+    return {percentage, goal: goal.endGoalValue, currentValue}
   })
 
 
@@ -38,24 +37,21 @@ export default function BarChartJs({goals}: GoalsStates) {
         <Chart width={350} height={350} type='bar'
           series={[{
             name: 'Valor atual',
-            data: chartData.map(data => data.currentValue)
+            data: chartData.map((data) => {
+              return Number(data.percentage.toFixed(2))
+            })
           },
-          {
-            name: 'Objetivo',
-            data: chartData.map(data => data.goal),
-            color: 'transparent'
-          }
           ]}
           options={{
               labels: labels,
               chart: {
-                stacked: true,
-                stackType: '100%',
+                stacked: false,
                 toolbar: {
                   show: false
                 }
               },
               yaxis: {
+                max: 100,
                 labels: {
                   style: {
                     colors: ['#FFF'],
@@ -68,9 +64,20 @@ export default function BarChartJs({goals}: GoalsStates) {
               xaxis: {
                 labels: {
                   style: {
-                    colors: '#FFF'
-                  }
-                }
+                    colors: '#FFF',
+                    fontSize: '10px'
+                  },
+                  rotate: 0,
+                  hideOverlappingLabels: false,
+                  trim: true,
+
+                },
+
+              },
+              dataLabels: {
+                formatter(val) {
+                    return val + '%'
+                },
               },
               grid: {
                 show: false
@@ -78,11 +85,6 @@ export default function BarChartJs({goals}: GoalsStates) {
               tooltip: {
                 enabled: true,
                 theme: 'dark',
-                y: {
-                  formatter(val) {
-                      return toBRL(val)
-                  },
-                },
               },
               legend: {
                 show: false,
