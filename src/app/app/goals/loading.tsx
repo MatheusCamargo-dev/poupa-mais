@@ -1,3 +1,4 @@
+'use client'
 export default function Loading() {
   return (
     <div className=" md:mx-10 lg:mx-auto lg:container h-max my-10">
