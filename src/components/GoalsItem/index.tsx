@@ -136,20 +136,20 @@ export default function GoalsItem(goal: GoalStates) {
   ]
 
   return (
-    <div className="flex w-full space-x-4 p-3 px-5 border-2 hover:bg-zinc-300 mx-auto border-zinc-500 rounded-2xl bg-zinc-50">
+    <div className="flex flex-col sm:flex-row w-full space-x-4 p-3 px-5 border-2 hover:bg-zinc-300 mx-auto border-zinc-500 rounded-2xl bg-zinc-50">
         <div className="bg-dash flex items-center justify-center rounded-lg px-6">
           <GiMoneyStack size={50} />
         </div>
         <div className="flex flex-col space-y-2 justify-center flex-1 text-transaction">
-          <div className="flex justify-between text-zinc-700 font-semibold text-lg">
+          <div className="flex flex-col sm:flex-row justify-between text-zinc-700 font-semibold text-lg">
             <h1 >{goal.title}</h1>
             <h1>{percentage.toFixed(2)}% concluído</h1>
           </div>
-          <div className="h-4 rounded-lg w-full bg-slate-400 flex items-center">
+          <div className="h-4 rounded-lg w-full bg-slate-400 hidden sm:flex items-center">
             <div className={`bg-green-500 h-4 rounded-lg `} style={{ width: `${Math.max(percentage, 1).toFixed(2)}%`}}>
             </div>
           </div>
-          <div className="flex justify-between whitespace-nowrap">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:whitespace-nowrap">
             <p>
               Valor atual: {toBRL(currentValue)}
             </p>
@@ -163,11 +163,10 @@ export default function GoalsItem(goal: GoalStates) {
           </div>
         </div>
         <div className="flex flex-col justify-center space-y-2">
-          <div className='rounded-md border-2 border-zinc-400 text-transaction'>
+          <div className='rounded-md border-2 border-zinc-400 text-transaction flex items-center justify-center'>
             <TbFilePencil color='black' size={25}  onClick={() => setEditGoalDialogOpen(true)} />
-
           </div>
-          <div className='rounded-md border-2 border-zinc-400 text-transaction'>
+          <div className='rounded-md border-2 border-zinc-400 text-transaction flex items-center justify-center'>
             <TbTrashFilled color='black' size={25} onClick={() => setAlerDialogOpen(true)} />
           </div>
         </div>

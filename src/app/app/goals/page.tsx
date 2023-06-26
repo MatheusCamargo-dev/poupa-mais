@@ -111,7 +111,7 @@ export default function Goals() {
                 </button>
               </div>
             </div>
-            <div className="flex mt-5 space-x-4">
+            <div className="flex mt-5 sm:space-x-4 flex-col sm:flex-row">
               <div className="bg-dash rounded-lg text-white flex flex-col">
                 <BarChartJs goals={goals}/>
               </div>
