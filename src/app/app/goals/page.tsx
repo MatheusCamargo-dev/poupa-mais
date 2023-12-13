@@ -182,6 +182,7 @@ export default function Goals() {
                       onValueChange={(value) => {
                         value && setValue('interestRate', Number(value.replace(',', '.')))
                       }}
+                      groupSeparator="."
 
                     />
                     {errors.interestRate && (
