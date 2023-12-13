@@ -224,6 +224,7 @@ export default function GoalsItem(goal: GoalStates) {
                       onValueChange={(value) => {
                         value && setValue('interestRate', Number(value.replace(',', '.')))
                       }}
+                      groupSeparator="."
 
                     />
                     {errors.interestRate && (
